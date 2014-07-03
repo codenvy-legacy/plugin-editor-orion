@@ -75,6 +75,7 @@
                     <excludes>
                         <!-- CodeMirror - MIT License -->
                         <exclude>**/com/codenvy/ide/editor/orion/public/orion/**</exclude>
+                        <exclude>**/com/codenvy/ide/editor/orion/public/orion-6.0/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
