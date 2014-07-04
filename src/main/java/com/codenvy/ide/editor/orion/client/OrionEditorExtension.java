@@ -33,7 +33,7 @@ import com.google.gwt.dom.client.Node;
 public class OrionEditorExtension {
 
     /** The editor type key. */
-    private static final String          ORION_EDITOR_KEY = "orion";
+    public static final String           ORION_EDITOR_KEY = "orion";
 
     private final NotificationManager    notificationManager;
     private final ModuleHolder           moduleHolder;
