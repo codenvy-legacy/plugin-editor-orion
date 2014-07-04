@@ -31,9 +31,13 @@ import com.codenvy.ide.text.RegionImpl;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
@@ -212,9 +216,34 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     }
 
     @Override
+    public Region getSelectedRange() {
+        final OrionSelectionOverlay selection = this.editorOverlay.getSelection();
+
+        final int start = selection.getStart();
+        final int end = selection.getEnd();
+
+        if (start < 0 || end > this.editorOverlay.getModel().getCharCount() || start > end) {
+            throw new RuntimeException("Invalid selection");
+        }
+        return new RegionImpl(start, end - start);
+    }
+
+    @Override
+    public int getTabSize() {
+        return this.editorOverlay.getTextView().getOptions().getTabSize();
+    }
+
+    @Override
+    public void setTabSize(int tabSize) {
+        this.editorOverlay.getTextView().getOptions().setTabSize(tabSize);
+    }
+
+    @Override
     public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
         if (!changeHandlerAdded) {
-            this.editorOverlay.getTextView().addEventListener("ModelChanged", new OrionTextViewOverlay.EventHandlerNoParameter() {
+            changeHandlerAdded = true;
+            final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
+            textView.addEventListener(OrionEventContants.MODEL_CHANGED_EVENT, new OrionTextViewOverlay.EventHandlerNoParameter() {
 
                 @Override
                 public void onEvent() {
@@ -232,7 +261,9 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @Override
     public HandlerRegistration addCursorActivityHandler(CursorActivityHandler handler) {
         if (!cursorHandlerAdded) {
-            this.editorOverlay.getTextView().addEventListener("Selection", new OrionTextViewOverlay.EventHandlerNoParameter() {
+            cursorHandlerAdded = true;
+            final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
+            textView.addEventListener(OrionEventContants.SELECTION_EVENT, new OrionTextViewOverlay.EventHandlerNoParameter() {
 
                 @Override
                 public void onEvent() {
@@ -248,15 +279,42 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     }
 
     @Override
-    public Region getSelectedRange() {
-        final OrionSelectionOverlay selection = this.editorOverlay.getSelection();
+    public HandlerRegistration addFocusHandler(FocusHandler handler) {
+        if (!focusHandlerAdded) {
+            focusHandlerAdded = true;
+            final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
+            textView.addEventListener(OrionEventContants.FOCUS_EVENT, new OrionTextViewOverlay.EventHandlerNoParameter() {
 
-        final int start = selection.getStart();
-        final int end = selection.getEnd();
-
-        if (start < 0 || end > this.editorOverlay.getModel().getCharCount() || start > end) {
-            throw new RuntimeException("Invalid selection");
+                @Override
+                public void onEvent() {
+                    fireFocusEvent();
+                }
+            });
         }
-        return new RegionImpl(start, end - start);
+        return addHandler(handler, FocusEvent.getType());
+    }
+
+    private void fireFocusEvent() {
+        DomEvent.fireNativeEvent(Document.get().createFocusEvent(), this);
+    }
+
+    @Override
+    public HandlerRegistration addBlurHandler(BlurHandler handler) {
+        if (!blurHandlerAdded) {
+            blurHandlerAdded = true;
+            final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
+            textView.addEventListener(OrionEventContants.BLUR_EVENT, new OrionTextViewOverlay.EventHandlerNoParameter() {
+
+                @Override
+                public void onEvent() {
+                    fireBlurEvent();
+                }
+            });
+        }
+        return addHandler(handler, BlurEvent.getType());
+    }
+
+    private void fireBlurEvent() {
+        DomEvent.fireNativeEvent(Document.get().createBlurEvent(), this);
     }
 }

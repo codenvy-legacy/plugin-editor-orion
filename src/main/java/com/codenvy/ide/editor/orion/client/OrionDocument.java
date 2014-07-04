@@ -79,6 +79,11 @@ public class OrionDocument implements EmbeddedDocument {
     }
 
     @Override
+    public int getLineCount() {
+        return this.textViewOverlay.getModel().getLineCount();
+    }
+
+    @Override
     public HandlerRegistration addCursorHandler(final CursorActivityHandler handler) {
         return this.hasCursorActivityHandlers.addCursorActivityHandler(handler);
     }

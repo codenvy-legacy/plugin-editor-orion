@@ -36,4 +36,44 @@ public class OrionTextViewOptionsOverlay extends JavaScriptObject {
     public final native void setWrapMode(final boolean newValue) /*-{
         this.wrapMode = newValue;
     }-*/;
+
+    public final native int getWrapOffset() /*-{
+        return this.wrapOffset;
+    }-*/;
+
+    public final native void setWrapOffset(final int newValue) /*-{
+        this.wrapOffset = newValue;
+    }-*/;
+
+    public final native boolean getTabMode() /*-{
+        return this.tabMode;
+    }-*/;
+
+    public final native void setTabMode(final boolean newValue) /*-{
+        this.tabMode = newValue;
+    }-*/;
+
+    public final native boolean getExpandTab() /*-{
+        return this.expandTab;
+    }-*/;
+
+    public final native void setExpandTab(final boolean newValue) /*-{
+        this.expandTab = newValue;
+    }-*/;
+
+    public final native int getTabSize() /*-{
+        return this.tabSize;
+    }-*/;
+
+    public final native void setTabSize(final int newValue) /*-{
+        this.tabSize = newValue;
+    }-*/;
+
+    public final native boolean getOverwriteMode() /*-{
+        return this.overwriteMode;
+    }-*/;
+
+    public final native void setOverwriteMode(final boolean newValue) /*-{
+        this.overwriteMode = newValue;
+    }-*/;
 }
