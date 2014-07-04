@@ -18,6 +18,8 @@ import com.codenvy.ide.api.preferences.PreferencesManager;
 import com.codenvy.ide.editor.common.client.events.CursorActivityEvent;
 import com.codenvy.ide.editor.common.client.events.CursorActivityHandler;
 import com.codenvy.ide.editor.common.client.events.HasCursorActivityHandlers;
+import com.codenvy.ide.editor.common.client.keymap.KeymapChangeEvent;
+import com.codenvy.ide.editor.common.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.editor.common.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.editor.common.client.requirejs.ModuleHolder;
 import com.codenvy.ide.editor.common.client.texteditor.EditorWidget;
@@ -48,6 +50,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Orion implementation for {@link EditorWidget}.
@@ -84,6 +87,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                              final KeyModeInstances keyModeInstances,
                              final NotificationManager notificationManager,
                              final PreferencesManager preferencesManager,
+                             final EventBus eventBus,
                              @Assisted final String editorMode,
                              @Assisted final com.codenvy.ide.text.Document document) {
         this.panel.setSize("100%", "100%");
@@ -115,7 +119,15 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                 changeKeyMode();
             }
         });
+
         setupKeymode();
+        eventBus.addHandler(KeymapChangeEvent.TYPE, new KeymapChangeHandler() {
+
+            @Override
+            public void onKeymapChanged(final KeymapChangeEvent event) {
+                setupKeymode();
+            }
+        });
     }
 
     @Override
