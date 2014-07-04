@@ -43,6 +43,9 @@ import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.dom.client.HasScrollHandlers;
+import com.google.gwt.event.dom.client.ScrollEvent;
+import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
@@ -57,7 +60,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * 
  * @author "Mickaël Leduque"
  */
-public class OrionEditorWidget extends Composite implements EditorWidget, HasChangeHandlers, HasCursorActivityHandlers {
+public class OrionEditorWidget extends Composite implements EditorWidget, HasChangeHandlers, HasCursorActivityHandlers, HasScrollHandlers {
 
     static {
         OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
@@ -338,6 +341,27 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     private void fireBlurEvent() {
         DomEvent.fireNativeEvent(Document.get().createBlurEvent(), this);
+    }
+
+
+    @Override
+    public HandlerRegistration addScrollHandler(final ScrollHandler handler) {
+        if (!scrollHandlerAdded) {
+            scrollHandlerAdded = true;
+            final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
+            textView.addEventListener(OrionEventContants.SCROLL_EVENT, new OrionTextViewOverlay.EventHandlerNoParameter() {
+
+                @Override
+                public void onEvent() {
+                    fireScrollEvent();
+                }
+            });
+        }
+        return addHandler(handler, ScrollEvent.getType());
+    }
+
+    private void fireScrollEvent() {
+        DomEvent.fireNativeEvent(Document.get().createScrollEvent(), this);
     }
 
     private void setupKeymode() {
