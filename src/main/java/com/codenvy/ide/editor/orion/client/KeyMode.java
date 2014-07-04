@@ -10,12 +10,15 @@
  *******************************************************************************/
 package com.codenvy.ide.editor.orion.client;
 
+import com.codenvy.ide.editor.common.client.keymap.Keymap;
+import com.google.gwt.core.shared.GWT;
+
 /**
  * Enum for keymaps supported by Orion.
  * 
  * @author "Mickaël Leduque"
  */
-public enum KeyMode {
+public enum KeyMode implements Keymap {
 
     DEFAULT(0, "default"),
     EMACS(1, "emacs"),
@@ -53,5 +56,25 @@ public enum KeyMode {
             }
         }
         throw new IllegalArgumentException("Unknown keymode index");
+    }
+
+    @Override
+    public String getKey() {
+        return this.orionKey;
+    }
+
+    @Override
+    public String getDisplay() {
+        KeymodeDisplayConstants constants = GWT.create(KeymodeDisplayConstants.class);
+        switch (this) {
+            case EMACS:
+                return constants.emacs();
+            case VI:
+                return constants.vi();
+            case DEFAULT:
+                return constants.defaultKeymap();
+            default:
+                throw new IllegalArgumentException("Unknown keymode enum");
+        }
     }
 }
