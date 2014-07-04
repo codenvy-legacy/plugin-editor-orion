@@ -66,24 +66,23 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
     }
 
-    private static final String           KEY_MODE_SWITCH    = "keymode_switch";
+    private static final String       KEY_MODE_SWITCH    = "keymode_switch";
 
-    private final SimplePanel             panel              = new SimplePanel();
-    private final OrionEditorOverlay      editorOverlay;
-    private String                        modeName;
-    private final KeyModeInstances        keyModeInstances;
-    private KeyMode                       currentKeyMode     = KeyMode.DEFAULT;
-    private final NotificationManager     notificationManager;
-    private final PreferencesManager      preferencesManager;
+    private final SimplePanel         panel              = new SimplePanel();
+    private final OrionEditorOverlay  editorOverlay;
+    private String                    modeName;
+    private final KeyModeInstances    keyModeInstances;
+    private KeyMode                   currentKeyMode     = KeyMode.DEFAULT;
+    private final NotificationManager notificationManager;
+    private final PreferencesManager  preferencesManager;
 
-    private com.codenvy.ide.text.Document document;
-    private EmbeddedDocument              embeddedDocument;
+    private EmbeddedDocument          embeddedDocument;
 
-    private boolean                       changeHandlerAdded = false;
-    private boolean                       focusHandlerAdded  = false;
-    private boolean                       blurHandlerAdded   = false;
-    private boolean                       scrollHandlerAdded = false;
-    private boolean                       cursorHandlerAdded = false;
+    private boolean                   changeHandlerAdded = false;
+    private boolean                   focusHandlerAdded  = false;
+    private boolean                   blurHandlerAdded   = false;
+    private boolean                   scrollHandlerAdded = false;
+    private boolean                   cursorHandlerAdded = false;
 
     @AssistedInject
     public OrionEditorWidget(final ModuleHolder moduleHolder,
