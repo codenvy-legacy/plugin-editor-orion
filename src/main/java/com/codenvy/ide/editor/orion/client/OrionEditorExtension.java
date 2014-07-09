@@ -55,6 +55,8 @@ public class OrionEditorExtension {
         this.orionTextEditorFactory = orionTextEditorFactory;
 
         injectOrion();
+        // no need to delay
+        KeyMode.init();
     }
 
     private void injectOrion() {

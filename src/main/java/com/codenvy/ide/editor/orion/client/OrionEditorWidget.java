@@ -11,13 +11,11 @@
 package com.codenvy.ide.editor.orion.client;
 
 
-import com.codenvy.ide.api.notification.Notification;
-import com.codenvy.ide.api.notification.Notification.Type;
-import com.codenvy.ide.api.notification.NotificationManager;
 import com.codenvy.ide.api.preferences.PreferencesManager;
 import com.codenvy.ide.editor.common.client.events.CursorActivityEvent;
 import com.codenvy.ide.editor.common.client.events.CursorActivityHandler;
 import com.codenvy.ide.editor.common.client.events.HasCursorActivityHandlers;
+import com.codenvy.ide.editor.common.client.keymap.Keymap;
 import com.codenvy.ide.editor.common.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.editor.common.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.editor.common.client.keymap.KeymapPrefReader;
@@ -25,7 +23,6 @@ import com.codenvy.ide.editor.common.client.requirejs.ModuleHolder;
 import com.codenvy.ide.editor.common.client.texteditor.EditorWidget;
 import com.codenvy.ide.editor.common.client.texteditor.EmbeddedDocument;
 import com.codenvy.ide.editor.orion.client.jso.OrionEditorOverlay;
-import com.codenvy.ide.editor.orion.client.jso.OrionKeyBindingOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
@@ -66,36 +63,29 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
     }
 
-    private static final String       KEY_MODE_SWITCH    = "keymode_switch";
+    private final SimplePanel        panel              = new SimplePanel();
+    private final OrionEditorOverlay editorOverlay;
+    private String                   modeName;
+    private final KeyModeInstances   keyModeInstances;
+    private final PreferencesManager preferencesManager;
 
-    private final SimplePanel         panel              = new SimplePanel();
-    private final OrionEditorOverlay  editorOverlay;
-    private String                    modeName;
-    private final KeyModeInstances    keyModeInstances;
-    private KeyMode                   currentKeyMode     = KeyMode.DEFAULT;
-    private final NotificationManager notificationManager;
-    private final PreferencesManager  preferencesManager;
+    private EmbeddedDocument         embeddedDocument;
 
-    private EmbeddedDocument          embeddedDocument;
-
-    private boolean                   changeHandlerAdded = false;
-    private boolean                   focusHandlerAdded  = false;
-    private boolean                   blurHandlerAdded   = false;
-    private boolean                   scrollHandlerAdded = false;
-    private boolean                   cursorHandlerAdded = false;
+    private boolean                  changeHandlerAdded = false;
+    private boolean                  focusHandlerAdded  = false;
+    private boolean                  blurHandlerAdded   = false;
+    private boolean                  scrollHandlerAdded = false;
+    private boolean                  cursorHandlerAdded = false;
 
     @AssistedInject
     public OrionEditorWidget(final ModuleHolder moduleHolder,
                              final KeyModeInstances keyModeInstances,
-                             final NotificationManager notificationManager,
                              final PreferencesManager preferencesManager,
                              final EventBus eventBus,
-                             @Assisted final String editorMode,
-                             @Assisted final com.codenvy.ide.text.Document document) {
+                             @Assisted final String editorMode) {
         this.panel.setSize("100%", "100%");
         initWidget(this.panel);
 
-        this.notificationManager = notificationManager;
         this.preferencesManager = preferencesManager;
 
         JavaScriptObject orionEditorModule = moduleHolder.getModule("OrionEditor");
@@ -108,19 +98,6 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         final OrionTextViewOverlay textView = this.editorOverlay.getTextView();
         this.keyModeInstances.add(KeyMode.VI, OrionKeyModeOverlay.getViKeyMode(moduleHolder.getModule("OrionVi"), textView));
         this.keyModeInstances.add(KeyMode.EMACS, OrionKeyModeOverlay.getEmacsKeyMode(moduleHolder.getModule("OrionEmacs"), textView));
-
-        final OrionKeyModeOverlay defaultKeyMode = OrionKeyModeOverlay.getDefaultKeyMode(textView);
-        OrionKeyBindingOverlay keyBinding = OrionKeyBindingOverlay.createKeyStroke("K", true, true, true,
-                                                                                   false, "keydown",
-                                                                                   moduleHolder.getModule("OrionKeyBinding"));
-        defaultKeyMode.setKeyBinding(keyBinding, KEY_MODE_SWITCH);
-        textView.setAction(KEY_MODE_SWITCH, new Action() {
-
-            @Override
-            public void onAction() {
-                changeKeyMode();
-            }
-        });
 
         setupKeymode();
         eventBus.addHandler(KeymapChangeEvent.TYPE, new KeymapChangeHandler() {
@@ -199,30 +176,16 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         this.editorOverlay.setDirty(false);
     }
 
-    private void changeKeyMode() {
-        KeyMode next = KeyMode.fromIndex((currentKeyMode.getIndex() + 1) % 4);
-        Log.info(OrionEditorWidget.class, "Setting editor keymap: " + next.getOrionKey());
-        notificationManager.showNotification(new Notification("Changed key binding: " + next.getOrionKey(), Type.INFO));
-
-        this.currentKeyMode = next;
-
-        resetKeyModes(); // remove all keymodes except default
-
-        selectKeyMode(next);
-    }
-
-    private void selectKeyMode(KeyMode keymode) {
-        switch (keymode) {
-            case DEFAULT:
-                break;
-            case VI:
-                this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.VI));
-                break;
-            case EMACS:
-                this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.EMACS));
-                break;
-            default:
-                throw new RuntimeException("Unknown keymode type: " + keymode);
+    private void selectKeyMode(Keymap keymap) {
+        resetKeyModes();
+        if (keymap == null || KeyMode.DEFAULT.equals(keymap)) {
+            return;
+        } else if (KeyMode.EMACS.equals(keymap)) {
+            this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.EMACS));
+        } else if (KeyMode.VI.equals(keymap)) {
+            this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.VI));
+        } else {
+            throw new RuntimeException("Unknown keymap type: " + keymap);
         }
     }
 
@@ -366,13 +329,13 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private void setupKeymode() {
         final String propertyValue = KeymapPrefReader.readPref(this.preferencesManager,
                                                                OrionEditorExtension.ORION_EDITOR_KEY);
-        KeyMode keymode;
+        Keymap keymap;
         try {
-            keymode = KeyMode.fromOrionKey(propertyValue);
+            keymap = Keymap.fromKey(propertyValue);
         } catch (final IllegalArgumentException e) {
             Log.error(OrionEditorWidget.class, "Unknown value in keymap preference.", e);
             return;
         }
-        selectKeyMode(keymode);
+        selectKeyMode(keymap);
     }
 }

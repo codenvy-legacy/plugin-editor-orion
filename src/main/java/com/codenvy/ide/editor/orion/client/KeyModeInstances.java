@@ -13,6 +13,7 @@ package com.codenvy.ide.editor.orion.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.codenvy.ide.editor.common.client.keymap.Keymap;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 
 /**
@@ -22,13 +23,13 @@ import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
  */
 public class KeyModeInstances {
 
-    private Map<KeyMode, OrionKeyModeOverlay> instances = new HashMap<>();
+    private Map<Keymap, OrionKeyModeOverlay> instances = new HashMap<>();
 
-    public void add(final KeyMode key, final OrionKeyModeOverlay instance) {
+    public void add(final Keymap key, final OrionKeyModeOverlay instance) {
         this.instances.put(key, instance);
     }
 
-    public OrionKeyModeOverlay getInstance(final KeyMode keyMode) {
-        return instances.get(keyMode);
+    public OrionKeyModeOverlay getInstance(final Keymap keymap) {
+        return instances.get(keymap);
     }
 }

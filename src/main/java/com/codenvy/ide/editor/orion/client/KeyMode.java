@@ -10,71 +10,28 @@
  *******************************************************************************/
 package com.codenvy.ide.editor.orion.client;
 
+import com.codenvy.ide.core.editor.EditorType;
 import com.codenvy.ide.editor.common.client.keymap.Keymap;
 import com.google.gwt.core.shared.GWT;
 
 /**
- * Enum for keymaps supported by Orion.
+ * Keymaps supported by Orion.
  * 
  * @author "Mickaël Leduque"
  */
-public enum KeyMode implements Keymap {
+public class KeyMode {
 
-    DEFAULT(0, "default"),
-    EMACS(1, "emacs"),
-    VI(2, "vi");
 
-    private String orionKey;
-    private int    index;
+    public static Keymap DEFAULT;
+    public static Keymap EMACS;
+    public static Keymap VI;
 
-    private KeyMode(final int index, final String key) {
-        this.index = index;
-        this.orionKey = key;
-    }
 
-    public String getOrionKey() {
-        return this.orionKey;
-    }
-
-    public int getIndex() {
-        return this.index;
-    }
-
-    public static KeyMode fromOrionKey(final String key) {
-        for (KeyMode value : values()) {
-            if (value.orionKey.equals(key)) {
-                return value;
-            }
-        }
-        throw new IllegalArgumentException("Unknown keymode code");
-    }
-
-    public static KeyMode fromIndex(final int index) {
-        for (KeyMode value : values()) {
-            if (value.index == index) {
-                return value;
-            }
-        }
-        throw new IllegalArgumentException("Unknown keymode index");
-    }
-
-    @Override
-    public String getKey() {
-        return this.orionKey;
-    }
-
-    @Override
-    public String getDisplay() {
+    public final static void init() {
         KeymodeDisplayConstants constants = GWT.create(KeymodeDisplayConstants.class);
-        switch (this) {
-            case EMACS:
-                return constants.emacs();
-            case VI:
-                return constants.vi();
-            case DEFAULT:
-                return constants.defaultKeymap();
-            default:
-                throw new IllegalArgumentException("Unknown keymode enum");
-        }
+        EditorType orionEditor = EditorType.fromKey(OrionEditorExtension.ORION_EDITOR_KEY);
+        DEFAULT = Keymap.newKeymap("orion_default", constants.defaultKeymap(), orionEditor);
+        EMACS = Keymap.newKeymap("Orion_emacs", constants.emacs(), orionEditor);
+        VI = Keymap.newKeymap("Orion_vim", constants.vi(), orionEditor);
     }
 }
