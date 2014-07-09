@@ -11,7 +11,7 @@
 package com.codenvy.ide.editor.orion.client;
 
 import com.codenvy.ide.core.editor.EditorType;
-import com.codenvy.ide.editor.common.client.keymap.Keymap;
+import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.google.gwt.core.shared.GWT;
 
 /**

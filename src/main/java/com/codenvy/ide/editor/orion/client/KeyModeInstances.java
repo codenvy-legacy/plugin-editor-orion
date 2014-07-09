@@ -13,8 +13,8 @@ package com.codenvy.ide.editor.orion.client;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.codenvy.ide.editor.common.client.keymap.Keymap;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
+import com.codenvy.ide.jseditor.client.keymap.Keymap;
 
 /**
  * An instance repository for keymode instances.
