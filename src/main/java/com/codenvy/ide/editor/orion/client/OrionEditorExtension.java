@@ -140,6 +140,16 @@ public class OrionEditorExtension {
             public CodenvyTextEditor getEditor() {
                 return orionTextEditorFactory.createTextEditor();
             }
+
+            @Override
+            public String getId() {
+                return ORION_EDITOR_KEY;
+            }
+
+            @Override
+            public String getDescription() {
+                return "Orion Editor";
+            }
         });
     }
 
