@@ -11,9 +11,9 @@
 package com.codenvy.ide.editor.orion.client;
 
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
-import com.codenvy.ide.jseditor.client.texteditor.EmbeddedDocument;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
@@ -86,5 +86,10 @@ public class OrionDocument implements EmbeddedDocument {
     @Override
     public HandlerRegistration addCursorHandler(final CursorActivityHandler handler) {
         return this.hasCursorActivityHandlers.addCursorActivityHandler(handler);
+    }
+
+    @Override
+    public String getContents() {
+        return this.textViewOverlay.getModel().getText();
     }
 }

@@ -12,16 +12,18 @@ package com.codenvy.ide.editor.orion.client;
 
 import javax.inject.Inject;
 
-import com.codenvy.ide.api.editor.CodenvyTextEditor;
-import com.codenvy.ide.api.editor.TextEditorProvider;
+import com.codenvy.ide.api.editor.EditorPartPresenter;
 import com.codenvy.ide.api.extension.Extension;
 import com.codenvy.ide.api.notification.Notification;
 import com.codenvy.ide.api.notification.Notification.Type;
 import com.codenvy.ide.api.notification.NotificationManager;
-import com.codenvy.ide.core.editor.EditorType;
-import com.codenvy.ide.core.editor.EditorTypeRegistry;
+import com.codenvy.ide.jseditor.client.defaulteditor.EditorBuilder;
+import com.codenvy.ide.jseditor.client.editorconfig.DefaultEmbeddedTextEditorConf;
+import com.codenvy.ide.jseditor.client.editortype.EditorType;
+import com.codenvy.ide.jseditor.client.editortype.EditorTypeRegistry;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.requirejs.RequireJsLoader;
+import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
@@ -60,25 +62,9 @@ public class OrionEditorExtension {
     }
 
     private void injectOrion() {
+        // styler scripts are loaded on-demand by orion
         final String[] scripts = new String[]{
                 "orion-6.0/built-editor-amd",
-                "orion/editor/stylers/text_x-java-source/syntax",
-                "orion/editor/stylers/application_javascript/syntax",
-                "orion/editor/stylers/application_json/syntax",
-                "orion/editor/stylers/application_schema_json/syntax",
-                "orion/editor/stylers/application_x-ejs/syntax",
-                "orion/editor/stylers/application_xml/syntax",
-                "orion/editor/stylers/lib/syntax",
-                "orion/editor/stylers/text_css/syntax",
-                "orion/editor/stylers/text_html/syntax",
-                "orion/editor/stylers/text_x-arduino/syntax",
-                "orion/editor/stylers/text_x-c__src/syntax",
-                "orion/editor/stylers/text_x-csrc/syntax",
-                "orion/editor/stylers/text_x-lua/syntax",
-                "orion/editor/stylers/text_x-php/syntax",
-                "orion/editor/stylers/text_x-python/syntax",
-                "orion/editor/stylers/text_x-ruby/syntax",
-                "orion/editor/stylers/text_x-yaml/syntax",
                 "orion/emacs",
                 "orion/vi",
         };
@@ -134,21 +120,14 @@ public class OrionEditorExtension {
     }
 
     private void registerEditor() {
-        this.editorTypeRegistry.registerEditorType(EditorType.fromKey(ORION_EDITOR_KEY), "Orion", new TextEditorProvider() {
+        Log.info(OrionEditorExtension.class, "Registering Orion editor type.");
+        this.editorTypeRegistry.registerEditorType(EditorType.fromKey(ORION_EDITOR_KEY), "Orion", new EditorBuilder() {
 
             @Override
-            public CodenvyTextEditor getEditor() {
-                return orionTextEditorFactory.createTextEditor();
-            }
-
-            @Override
-            public String getId() {
-                return ORION_EDITOR_KEY;
-            }
-
-            @Override
-            public String getDescription() {
-                return "Orion Editor";
+            public EditorPartPresenter buildEditor() {
+                final EmbeddedTextEditorPresenter editor = orionTextEditorFactory.createTextEditor();
+                editor.initialize(new DefaultEmbeddedTextEditorConf(), notificationManager);
+                return editor;
             }
         });
     }

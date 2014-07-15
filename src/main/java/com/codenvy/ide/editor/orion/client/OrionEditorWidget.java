@@ -17,6 +17,7 @@ import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
@@ -26,10 +27,10 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
-import com.codenvy.ide.jseditor.client.texteditor.EmbeddedDocument;
 import com.codenvy.ide.text.Region;
 import com.codenvy.ide.text.RegionImpl;
 import com.codenvy.ide.util.loging.Log;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -46,6 +47,8 @@ import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.assistedinject.Assisted;
@@ -62,20 +65,23 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     static {
         OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
     }
+    private static final OrionEditorWidgetUiBinder UIBINDER           = GWT.create(OrionEditorWidgetUiBinder.class);
 
-    private final SimplePanel        panel              = new SimplePanel();
-    private final OrionEditorOverlay editorOverlay;
-    private String                   modeName;
-    private final KeyModeInstances   keyModeInstances;
-    private final PreferencesManager preferencesManager;
+    @UiField
+    SimplePanel                                    panel;
 
-    private EmbeddedDocument         embeddedDocument;
+    private final OrionEditorOverlay               editorOverlay;
+    private String                                 modeName;
+    private final KeyModeInstances                 keyModeInstances;
+    private final PreferencesManager               preferencesManager;
 
-    private boolean                  changeHandlerAdded = false;
-    private boolean                  focusHandlerAdded  = false;
-    private boolean                  blurHandlerAdded   = false;
-    private boolean                  scrollHandlerAdded = false;
-    private boolean                  cursorHandlerAdded = false;
+    private EmbeddedDocument                       embeddedDocument;
+
+    private boolean                                changeHandlerAdded = false;
+    private boolean                                focusHandlerAdded  = false;
+    private boolean                                blurHandlerAdded   = false;
+    private boolean                                scrollHandlerAdded = false;
+    private boolean                                cursorHandlerAdded = false;
 
     @AssistedInject
     public OrionEditorWidget(final ModuleHolder moduleHolder,
@@ -83,8 +89,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                              final PreferencesManager preferencesManager,
                              final EventBus eventBus,
                              @Assisted final String editorMode) {
-        this.panel.setSize("100%", "100%");
-        initWidget(this.panel);
+        initWidget(UIBINDER.createAndBindUi(this));
 
         this.preferencesManager = preferencesManager;
 
@@ -337,5 +342,8 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
             return;
         }
         selectKeyMode(keymap);
+    }
+
+    interface OrionEditorWidgetUiBinder extends UiBinder<SimplePanel, OrionEditorWidget> {
     }
 }

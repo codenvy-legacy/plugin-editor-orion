@@ -143,6 +143,10 @@ public class OrionTextViewOverlay extends JavaScriptObject {
         this.update();
     }-*/;
 
+    public final native void resize() /*-{
+        this.resize();
+    }-*/;
+
     // events
 
     public final native void addEventListener(String eventType, EventHandlerNoParameter handler, boolean useCapture) /*-{
