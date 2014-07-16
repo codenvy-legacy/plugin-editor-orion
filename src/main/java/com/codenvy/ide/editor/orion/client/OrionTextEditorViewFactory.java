@@ -12,6 +12,7 @@ package com.codenvy.ide.editor.orion.client;
 
 import javax.inject.Inject;
 
+import com.codenvy.ide.jseditor.client.JsEditorConstants;
 import com.codenvy.ide.jseditor.client.filetype.FileTypeIdentifier;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidgetFactory;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPartView;
@@ -24,10 +25,12 @@ public class OrionTextEditorViewFactory implements EmbeddedTextEditorViewFactory
     private EditorWidgetFactory<OrionEditorWidget> widgetFactory;
     @Inject
     private FileTypeIdentifier                     fileTypeIdentifier;
+    @Inject
+    private JsEditorConstants                      constants;
 
 
     @Override
     public EmbeddedTextEditorPartView createTextEditorPartView() {
-        return new EmbeddedTextEditorPartViewImpl<OrionEditorWidget>(this.widgetFactory, this.fileTypeIdentifier);
+        return new EmbeddedTextEditorPartViewImpl<OrionEditorWidget>(this.widgetFactory, this.fileTypeIdentifier, constants);
     }
 }
