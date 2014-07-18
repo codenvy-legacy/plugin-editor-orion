@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.codenvy.ide.editor.orion.client;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.inject.Inject;
 
 import com.codenvy.ide.api.editor.EditorPartPresenter;
@@ -34,8 +37,11 @@ import com.google.gwt.dom.client.Node;
 @Extension(title = "Orion Editor.", version = "1.0.0")
 public class OrionEditorExtension {
 
+    /** The logger. */
+    private static final Logger LOG = Logger.getLogger(OrionEditorExtension.class.getSimpleName());
+
     /** The editor type key. */
-    public static final String           ORION_EDITOR_KEY = "orion";
+    public static final String ORION_EDITOR_KEY = "orion";
 
     private final NotificationManager    notificationManager;
     private final ModuleHolder           moduleHolder;
@@ -77,7 +83,7 @@ public class OrionEditorExtension {
 
             @Override
             public void onFailure(final Throwable e) {
-                Log.error(OrionEditorExtension.class, "Unable to inject Orion", e);
+                LOG.log(Level.SEVERE, "Unable to inject Orion", e);
                 initializationFailed("Unable to inject Orion");
             }
         }, scripts, new String[0]);
@@ -106,7 +112,7 @@ public class OrionEditorExtension {
 
             @Override
             public void onFailure(final Throwable reason) {
-                Log.error(OrionEditorExtension.class, "Unable to initialize Orion ", reason);
+                LOG.log(Level.SEVERE, "Unable to initialize Orion ", reason);
                 initializationFailed("Unable to initialize Orion.");
             }
 
@@ -115,8 +121,8 @@ public class OrionEditorExtension {
                 registerEditor();
             }
         },
-                                     new String[]{"orion/editor/edit", "orion/editor/emacs", "orion/editor/vi", "orion/keyBinding"},
-                                     new String[]{"OrionEditor", "OrionEmacs", "OrionVi", "OrionKeyBinding"});
+         new String[]{"orion/editor/edit", "orion/editor/emacs", "orion/editor/vi", "orion/keyBinding"},
+         new String[]{"OrionEditor", "OrionEmacs", "OrionVi", "OrionKeyBinding"});
     }
 
     private void registerEditor() {

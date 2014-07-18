@@ -11,6 +11,9 @@
 package com.codenvy.ide.editor.orion.client;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.codenvy.ide.api.preferences.PreferencesManager;
 import com.codenvy.ide.editor.orion.client.jso.OrionEditorOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
@@ -29,7 +32,6 @@ import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
 import com.codenvy.ide.text.Region;
 import com.codenvy.ide.text.RegionImpl;
-import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
@@ -65,7 +67,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     static {
         OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
     }
-    private static final OrionEditorWidgetUiBinder UIBINDER           = GWT.create(OrionEditorWidgetUiBinder.class);
+    /** The UI binder instance. */
+    private static final OrionEditorWidgetUiBinder UIBINDER = GWT.create(OrionEditorWidgetUiBinder.class);
+
+    /** The logger. */
+    private static final Logger LOG = Logger.getLogger(OrionEditorWidget.class.getSimpleName());
 
     @UiField
     SimplePanel                                    panel;
@@ -149,7 +155,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         if (modeName.equals("javascript")) {
             mode = "application/javascript";
         }
-        Log.info(OrionEditorWidget.class, "Requested mode: " + modeName + " kept " + mode);
+        LOG.fine("Requested mode: " + modeName + " kept " + mode);
 
         this.modeName = mode;
         // editorOverlay.setOption("mode", modeName);
@@ -338,7 +344,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         try {
             keymap = Keymap.fromKey(propertyValue);
         } catch (final IllegalArgumentException e) {
-            Log.error(OrionEditorWidget.class, "Unknown value in keymap preference.", e);
+            LOG.log(Level.WARNING, "Unknown value in keymap preference.", e);
             return;
         }
         selectKeyMode(keymap);
