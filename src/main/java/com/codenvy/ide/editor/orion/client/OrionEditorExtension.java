@@ -27,7 +27,6 @@ import com.codenvy.ide.jseditor.client.editortype.EditorTypeRegistry;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.requirejs.RequireJsLoader;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
-import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -126,7 +125,7 @@ public class OrionEditorExtension {
     }
 
     private void registerEditor() {
-        Log.info(OrionEditorExtension.class, "Registering Orion editor type.");
+        LOG.info("Registering Orion editor type.");
         this.editorTypeRegistry.registerEditorType(EditorType.fromKey(ORION_EDITOR_KEY), "Orion", new EditorBuilder() {
 
             @Override
