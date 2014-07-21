@@ -35,6 +35,7 @@ import com.codenvy.ide.text.RegionImpl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -49,6 +50,7 @@ import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -76,10 +78,15 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @UiField
     SimplePanel                                    panel;
 
+    /** The instance of the orion editor native element style. */
+    @UiField
+    EditorElementStyle                             editorElementStyle;
+
     private final OrionEditorOverlay               editorOverlay;
     private String                                 modeName;
     private final KeyModeInstances                 keyModeInstances;
     private final PreferencesManager               preferencesManager;
+    private final JavaScriptObject                 orionEditorModule;
 
     private EmbeddedDocument                       embeddedDocument;
 
@@ -99,10 +106,12 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
         this.preferencesManager = preferencesManager;
 
-        JavaScriptObject orionEditorModule = moduleHolder.getModule("OrionEditor");
+        this.orionEditorModule = moduleHolder.getModule("OrionEditor");
 
         setMode(editorMode);
 
+        panel.getElement().setId("orion-parent-" + Document.get().createUniqueId());
+        panel.getElement().addClassName(this.editorElementStyle.editorParent());
         this.editorOverlay = OrionEditorOverlay.createEditor(panel.getElement(), getConfiguration(), orionEditorModule);
 
         this.keyModeInstances = keyModeInstances;
@@ -146,19 +155,12 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @Override
     public void setMode(String modeName) {
         String mode = modeName;
-        if (modeName.equals("clike")) {
+        if (modeName.equals("text/x-java")) {
             mode = "text/x-java-source";
-        }
-        if (modeName.equals("xml")) {
-            mode = "application/xml";
-        }
-        if (modeName.equals("javascript")) {
-            mode = "application/javascript";
         }
         LOG.fine("Requested mode: " + modeName + " kept " + mode);
 
         this.modeName = mode;
-        // editorOverlay.setOption("mode", modeName);
     }
 
     public String getMode() {
@@ -350,6 +352,37 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         selectKeyMode(keymap);
     }
 
+    @Override
+    protected void onLoad() {
+
+        // fix for native editor height
+        if (panel.getElement().getChildCount() > 0) {
+            final Element child = panel.getElement().getFirstChildElement();
+            child.setId("orion-editor-" + Document.get().createUniqueId());
+            child.getStyle().clearHeight();
+            child.getStyle().clearPosition();
+
+        } else {
+            LOG.severe("Orion insertion failed.");
+        }
+    }
+
+    /**
+     * UI binder interface for this component.
+     * 
+     * @author "Mickaël Leduque"
+     */
     interface OrionEditorWidgetUiBinder extends UiBinder<SimplePanel, OrionEditorWidget> {
+    }
+
+    /**
+     * CSS style for the orion native editor element.
+     * 
+     * @author "Mickaël Leduque"
+     */
+    public interface EditorElementStyle extends CssResource {
+
+        @ClassName("editor-parent")
+        String editorParent();
     }
 }

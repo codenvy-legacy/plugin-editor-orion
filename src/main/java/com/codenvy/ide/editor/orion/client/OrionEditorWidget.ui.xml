@@ -27,6 +27,14 @@
         }
     </ui:style>
 
+    <!-- used in the widget -->
+    <ui:style field="editorElementStyle" type="com.codenvy.ide.editor.orion.client.OrionEditorWidget.EditorElementStyle">
+        .editor-parent {
+            display: -webkit-flex;
+            display: flex;
+        }
+    </ui:style>
+
     <g:SimplePanel ui:field="panel" addStyleNames="{style.editor-container}" />
 
 </ui:UiBinder>
