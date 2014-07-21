@@ -48,6 +48,7 @@ import com.google.gwt.event.dom.client.HasScrollHandlers;
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.resources.client.CssResource;
@@ -144,6 +145,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
         json.put("theme", new JSONObject(OrionTextThemeOverlay.getDefautTheme()));
         json.put("contentType", new JSONString(this.modeName));
+        json.put("noComputeSize", JSONBoolean.getInstance(true));
 
         return json.getJavaScriptObject();
     }
@@ -360,7 +362,6 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
             final Element child = panel.getElement().getFirstChildElement();
             child.setId("orion-editor-" + Document.get().createUniqueId());
             child.getStyle().clearHeight();
-            child.getStyle().clearPosition();
 
         } else {
             LOG.severe("Orion insertion failed.");
