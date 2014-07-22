@@ -138,6 +138,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @Override
     public void setValue(String newValue) {
         this.editorOverlay.setText(newValue);
+        this.editorOverlay.getUndoStock().reset();
     }
 
     private JavaScriptObject getConfiguration() {
