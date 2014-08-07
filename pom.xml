@@ -87,9 +87,10 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <!-- CodeMirror - MIT License -->
+                        <!-- Orion - EPL License -->
                         <exclude>**/com/codenvy/ide/editor/orion/public/orion/**</exclude>
                         <exclude>**/com/codenvy/ide/editor/orion/public/orion-6.0/**</exclude>
+                        <exclude>**/com/codenvy/ide/editor/orion/public/built-editor-compat.css</exclude>
                     </excludes>
                 </configuration>
             </plugin>

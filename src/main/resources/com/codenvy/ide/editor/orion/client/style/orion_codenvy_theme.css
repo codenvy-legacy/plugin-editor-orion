@@ -1,0 +1,79 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ *******************************************************************************/
+
+ @external *;
+
+.orionCodenvy {
+    font-family: editorFontFamily;
+    font-size: 13px;
+    color: editorDefaultFontColor
+}
+.orionCodenvy.textview {
+    background-color: editorBackgroundColor;
+}
+.orionCodenvy .ruler.annotations {
+    background-color: editorBackgroundColor;
+}
+.orionCodenvy .ruler.lines {
+    background-color: editorBackgroundColor;
+}
+.orionCodenvy .ruler.folding {
+    background-color: editorBackgroundColor;
+}
+.orionCodenvy .ruler.overview {
+    background-color: editorBackgroundColor;
+}
+.orionCodenvy.textviewBlockCursor {
+    background-color: editorCursorColor;
+}
+.orionCodenvy .rulerLines {
+    /* duplicated from LineNumerRenderer.css -> .lineNumber */
+    font-family: "DejaVu Sans Mono", alternativeFontFamily;
+    font-size: 12px;
+    color: editorGutterLineNumberColor;
+}
+.orionCodenvy .textviewLeftRuler {
+    border-right: 1px dotted editorGutterSeparatorColor;
+}
+.orionCodenvy .rulerLines.even {
+}
+.orionCodenvy .rulerLines.odd {
+}
+.orionCodenvy .annotationLine.currentLine {
+    background-color: editorCurrentLineColor !important;
+}
+.orionCodenvy .entity-name-tag {
+    color: tag;
+}
+.orionCodenvy .entity-other-attribute-name {
+    color: attribute;
+}
+.orionCodenvy .string-quoted {
+}
+.orionCodenvy .meta.annotation.currentLine {
+    background-color: editorCurrentLineColor !important;
+}
+.orionCodenvy .keyword {
+    color: keyword;
+    font-weight: normal;
+}
+.orionCodenvy .string {
+    color: string;
+}
+.orionCodenvy .comment {
+    color: comment;
+}
+.orionCodenvy .comment.block.documentation {
+    color: comment;
+}
+.orionCodenvy .keyword.other.documentation.markup {
+    color: comment;
+}
