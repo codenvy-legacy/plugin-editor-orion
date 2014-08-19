@@ -23,6 +23,7 @@ import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
+import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
@@ -93,6 +94,8 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private boolean                                blurHandlerAdded   = false;
     private boolean                                scrollHandlerAdded = false;
     private boolean                                cursorHandlerAdded = false;
+
+    private Keymap                                 keymap;
 
     @AssistedInject
     public OrionEditorWidget(final ModuleHolder moduleHolder,
@@ -198,8 +201,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         } else if (KeyMode.VI.equals(keymap)) {
             this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.VI));
         } else {
+            this.keymap = null;
             throw new RuntimeException("Unknown keymap type: " + keymap);
         }
+        this.keymap = keymap;
     }
 
     private void resetKeyModes() {
@@ -350,6 +355,16 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
             return;
         }
         selectKeyMode(keymap);
+    }
+
+    @Override
+    public EditorType getEditorType() {
+        return EditorType.fromKey(OrionEditorExtension.ORION_EDITOR_KEY);
+    }
+
+    @Override
+    public Keymap getKeymap() {
+        return this.keymap;
     }
 
     @Override
