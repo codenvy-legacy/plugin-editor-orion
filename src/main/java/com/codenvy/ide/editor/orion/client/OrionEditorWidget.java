@@ -67,9 +67,6 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public class OrionEditorWidget extends Composite implements EditorWidget, HasChangeHandlers, HasCursorActivityHandlers, HasScrollHandlers {
 
-    static {
-        OrionTextThemeOverlay.setDefaultTheme("nimbus", "orion/editor/themes/nimbus.css");
-    }
     /** The UI binder instance. */
     private static final OrionEditorWidgetUiBinder UIBINDER = GWT.create(OrionEditorWidgetUiBinder.class);
 

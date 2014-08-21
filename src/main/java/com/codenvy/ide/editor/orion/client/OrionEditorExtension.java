@@ -20,6 +20,8 @@ import com.codenvy.ide.api.extension.Extension;
 import com.codenvy.ide.api.notification.Notification;
 import com.codenvy.ide.api.notification.Notification.Type;
 import com.codenvy.ide.api.notification.NotificationManager;
+import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
+import com.codenvy.ide.editor.orion.client.style.OrionResource;
 import com.codenvy.ide.jseditor.client.defaulteditor.EditorBuilder;
 import com.codenvy.ide.jseditor.client.editorconfig.DefaultEmbeddedTextEditorConf;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
@@ -49,17 +51,21 @@ public class OrionEditorExtension {
 
     private final OrionTextEditorFactory orionTextEditorFactory;
 
+    private final OrionResource          orionResource;
+
     @Inject
     public OrionEditorExtension(final EditorTypeRegistry editorTypeRegistry,
                                 final ModuleHolder moduleHolder,
                                 final NotificationManager notificationManager,
                                 final RequireJsLoader requireJsLoader,
-                                final OrionTextEditorFactory orionTextEditorFactory) {
+                                final OrionTextEditorFactory orionTextEditorFactory,
+                                final OrionResource orionResource) {
         this.notificationManager = notificationManager;
         this.moduleHolder = moduleHolder;
         this.editorTypeRegistry = editorTypeRegistry;
         this.requireJsLoader = requireJsLoader;
         this.orionTextEditorFactory = orionTextEditorFactory;
+        this.orionResource = orionResource;
 
         injectOrion();
         // no need to delay
@@ -87,7 +93,7 @@ public class OrionEditorExtension {
             }
         }, scripts, new String[0]);
 
-        injectCssLink(GWT.getModuleBaseForStaticFiles() + "orion-6.0/built-editor.css");
+        injectCssLink(GWT.getModuleBaseForStaticFiles() + "built-editor-compat.css");
     }
 
     private static void injectCssLink(final String url) {
@@ -117,11 +123,16 @@ public class OrionEditorExtension {
 
             @Override
             public void onSuccess(final Void result) {
-                registerEditor();
+                endConfiguration();
             }
         },
          new String[]{"orion/editor/edit", "orion/editor/emacs", "orion/editor/vi", "orion/keyBinding"},
          new String[]{"OrionEditor", "OrionEmacs", "OrionVi", "OrionKeyBinding"});
+    }
+
+    private void endConfiguration() {
+        registerEditor();
+        defineDefaultTheme();
     }
 
     private void registerEditor() {
@@ -135,6 +146,12 @@ public class OrionEditorExtension {
                 return editor;
             }
         });
+    }
+
+    private void defineDefaultTheme() {
+        // The codenvy theme uses both an orion css file and a CssResource
+        this.orionResource.editorStyle().ensureInjected();
+        OrionTextThemeOverlay.setDefaultTheme("orionCodenvy", "orion-codenvy.css");
     }
 
     private void initializationFailed(final String errorMessage) {
