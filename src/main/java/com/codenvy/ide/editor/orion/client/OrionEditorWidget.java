@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.codenvy.ide.api.preferences.PreferencesManager;
+import com.codenvy.ide.api.text.Region;
+import com.codenvy.ide.api.text.RegionImpl;
 import com.codenvy.ide.editor.orion.client.jso.OrionEditorOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
@@ -30,8 +32,6 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
-import com.codenvy.ide.text.Region;
-import com.codenvy.ide.text.RegionImpl;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
