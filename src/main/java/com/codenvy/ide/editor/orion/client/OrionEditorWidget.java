@@ -27,6 +27,9 @@ import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
+import com.codenvy.ide.jseditor.client.events.HasScrollHandlers;
+import com.codenvy.ide.jseditor.client.events.ScrollEvent;
+import com.codenvy.ide.jseditor.client.events.ScrollHandler;
 import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
@@ -45,9 +48,6 @@ import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
-import com.google.gwt.event.dom.client.HasScrollHandlers;
-import com.google.gwt.event.dom.client.ScrollEvent;
-import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONObject;
@@ -337,7 +337,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                 }
             });
         }
-        return addHandler(handler, ScrollEvent.getType());
+        return addHandler(handler, ScrollEvent.TYPE);
     }
 
     private void fireScrollEvent() {
