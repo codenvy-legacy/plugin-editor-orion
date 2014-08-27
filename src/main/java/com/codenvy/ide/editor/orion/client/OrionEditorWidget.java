@@ -233,6 +233,20 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         return new RegionImpl(start, end - start);
     }
 
+    public void setSelectedRange(final Region selection, final boolean show) {
+        this.editorOverlay.setSelection(selection.getOffset(), selection.getLength(), show);
+    }
+
+    public void setDisplayRange(final Region range) {
+        // show the line at the head of the range
+        final int headOffset = range.getOffset() + range.getLength();
+        if (range.getLength() < 0) {
+            this.editorOverlay.getTextView().setTopIndex(headOffset);
+        } else {
+            this.editorOverlay.getTextView().setBottomIndex(headOffset);
+        }
+    }
+
     @Override
     public int getTabSize() {
         return this.editorOverlay.getTextView().getOptions().getTabSize();

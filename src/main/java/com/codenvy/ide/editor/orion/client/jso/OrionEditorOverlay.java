@@ -46,6 +46,45 @@ public class OrionEditorOverlay extends JavaScriptObject {
         return this.getSelection();
     }-*/;
 
+    /**
+     * Sets the selection.
+     * @param start offset of the start of range
+     * @param end offset of the end of range (can be before the start)
+     */
+    public final native void setSelection(int start, int end) /*-{
+        this.setSelection(start, end);
+    }-*/;
+
+    /**
+     * Sets the selection.
+     * @param start offset of the start of range
+     * @param end offset of the end of range (can be before the start)
+     * @param show scroll to show the range iff the value is true
+     */
+    public final native void setSelection(int start, int end, boolean show) /*-{
+        this.setSelection(start, end, show);
+    }-*/;
+
+    /**
+     * Sets the selection.
+     * @param start offset of the start of range
+     * @param end offset of the end of range (can be before the start)
+     * @param show additional percentage ([0,1] that must also be shown
+     */
+    public final native void setSelection(int start, int end, double show) /*-{
+        this.setSelection(start, end, show);
+    }-*/;
+
+    /**
+     * Sets the selection.
+     * @param start offset of the start of range
+     * @param end offset of the end of range (can be before the start)
+     * @param options an option object
+     */
+    public final native void setSelection(int start, int end, OrionTextViewShowOptionsOverlay options) /*-{
+        this.setSelection(start, end, show);
+    }-*/;
+
     public final native boolean isDirty() /*-{
         return this.isDirty();
     }-*/;

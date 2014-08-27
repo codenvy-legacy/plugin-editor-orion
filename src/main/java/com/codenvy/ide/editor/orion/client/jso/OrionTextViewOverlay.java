@@ -176,4 +176,28 @@ public class OrionTextViewOverlay extends JavaScriptObject {
     public interface SimpleCallBack {
         void onFinished();
     }
+
+    public final native void setTopIndex(int topLine) /*-{
+        this.setTopIndex(topLine);
+    }-*/;
+
+    public final native void setBottomIndex(int bottomLine) /*-{
+        this.setBottomIndex(bottomLine);
+    }-*/;
+
+    public final native int getTopIndex() /*-{
+        return this.getTopIndex();
+    }-*/;
+
+    public final native int getBottomIndex() /*-{
+        return this.getBottomIndex();
+    }-*/;
+
+    public final native int getTopIndex(boolean fullyVisible) /*-{
+        return this.getTopIndex(fullyVisible);
+    }-*/;
+
+    public final native int getBottomIndex(boolean fullyVisible) /*-{
+        return this.getBottomIndex(fullyVisible);
+    }-*/;
 }
