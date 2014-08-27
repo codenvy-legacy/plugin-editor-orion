@@ -355,7 +355,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     }
 
     private void fireScrollEvent() {
-        DomEvent.fireNativeEvent(Document.get().createScrollEvent(), this);
+        fireEvent(new ScrollEvent());
     }
 
     private void setupKeymode() {
