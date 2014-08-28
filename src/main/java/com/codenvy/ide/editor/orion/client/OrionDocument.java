@@ -10,10 +10,12 @@
  *******************************************************************************/
 package com.codenvy.ide.editor.orion.client;
 
+import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
+import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
@@ -25,12 +27,15 @@ public class OrionDocument implements EmbeddedDocument {
 
     private final OrionTextViewOverlay textViewOverlay;
 
+    private final OrionPositionConverter positionConverter;
+    
     private HasCursorActivityHandlers  hasCursorActivityHandlers;
 
     public OrionDocument(final OrionTextViewOverlay textViewOverlay,
                          final HasCursorActivityHandlers hasCursorActivityHandlers) {
         this.textViewOverlay = textViewOverlay;
         this.hasCursorActivityHandlers = hasCursorActivityHandlers;
+        this.positionConverter = new OrionPositionConverter();
     }
 
     @Override
@@ -91,5 +96,36 @@ public class OrionDocument implements EmbeddedDocument {
     @Override
     public String getContents() {
         return this.textViewOverlay.getModel().getText();
+    }
+
+    public PositionConverter getPositionConverter() {
+        return this.positionConverter;
+    }
+
+    private class OrionPositionConverter implements PositionConverter {
+
+        @Override
+        public PixelCoordinates textToPixel(TextPosition textPosition) {
+            final int textOffset = getIndexFromPosition(textPosition);
+            return offsetToPixel(textOffset);
+        }
+
+        @Override
+        public PixelCoordinates offsetToPixel(int textOffset) {
+            OrionPixelPositionOverlay location = textViewOverlay.getLocationAtOffset(textOffset);
+            return new PixelCoordinates(location.getX(), location.getY());
+        }
+
+        @Override
+        public TextPosition pixelToText(PixelCoordinates coordinates) {
+            int offset = pixelToOffset(coordinates);
+            return getPositionFromIndex(offset);
+        }
+
+        @Override
+        public int pixelToOffset(PixelCoordinates coordinates) {
+            return textViewOverlay.getOffsetAtLocation(coordinates.getX(),
+                                                                    coordinates.getY());
+        }
     }
 }

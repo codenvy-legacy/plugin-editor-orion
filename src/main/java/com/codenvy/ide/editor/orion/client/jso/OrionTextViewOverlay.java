@@ -200,4 +200,28 @@ public class OrionTextViewOverlay extends JavaScriptObject {
     public final native int getBottomIndex(boolean fullyVisible) /*-{
         return this.getBottomIndex(fullyVisible);
     }-*/;
+
+    public final native int getLinePixel(int lineIndex) /*-{
+        return this.getLinePixel(lineIndex);
+    }-*/;
+
+    /**
+     * Returns the {x, y} pixel location of the top-left corner of the character bounding box at the specified offset
+     * in the document. The pixel location is relative to the document. 
+     * @param offset the text offset
+     * @return the pixel location
+     */
+    public final native OrionPixelPositionOverlay getLocationAtOffset(int offset) /*-{
+        return this.getLocationAtOffset(offset);
+    }-*/;
+
+    /**
+     * Returns the character offset nearest to the given pixel location. The pixel location is relative to the document. 
+     * @param x the horizontal pixel coordinate
+     * @param y the vertical pixel coordinate
+     * @return the text offset
+     */
+    public final native int getOffsetAtLocation(int x, int y) /*-{
+        return this.getOffsetAtLocation(x, y);
+    }-*/;
 }
