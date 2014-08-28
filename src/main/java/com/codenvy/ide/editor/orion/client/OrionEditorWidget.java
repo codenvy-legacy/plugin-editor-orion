@@ -34,6 +34,7 @@ import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
+import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
 import com.google.gwt.core.client.GWT;
@@ -87,7 +88,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private final PreferencesManager               preferencesManager;
     private final JavaScriptObject                 orionEditorModule;
 
-    private EmbeddedDocument                       embeddedDocument;
+    private OrionDocument                       embeddedDocument;
 
     private boolean                                changeHandlerAdded = false;
     private boolean                                focusHandlerAdded  = false;
@@ -379,6 +380,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @Override
     public Keymap getKeymap() {
         return this.keymap;
+    }
+
+    public PositionConverter getPositionConverter() {
+        return this.getPositionConverter();
     }
 
     @Override
