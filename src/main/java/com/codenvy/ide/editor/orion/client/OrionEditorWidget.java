@@ -386,6 +386,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         return this.getPositionConverter();
     }
 
+    public void setFocus() {
+        this.editorOverlay.focus();
+    }
+
     @Override
     protected void onLoad() {
 
