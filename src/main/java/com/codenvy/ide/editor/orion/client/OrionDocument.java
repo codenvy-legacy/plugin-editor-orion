@@ -13,6 +13,7 @@ package com.codenvy.ide.editor.orion.client;
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.document.DocumentHandle;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
@@ -24,7 +25,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
  *
  * @author "Mickaël Leduque"
  */
-public class OrionDocument implements EmbeddedDocument {
+public class OrionDocument implements EmbeddedDocument, DocumentHandle {
 
     private final OrionTextViewOverlay textViewOverlay;
 
@@ -133,4 +134,15 @@ public class OrionDocument implements EmbeddedDocument {
     public void replace(final Region region, final String text) {
         this.textViewOverlay.getModel().setText(text, region.getOffset(), region.getLength());
     }
+
+
+    public DocumentHandle getDocumentHandle() {
+        return this;
+    }
+
+    @Override
+    public boolean isSameAs(final DocumentHandle document) {
+        return (this.equals(document));
+    }
+
 }
