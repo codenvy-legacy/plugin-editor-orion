@@ -64,7 +64,7 @@ import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Orion implementation for {@link EditorWidget}.
- * 
+ *
  * @author "Mickaël Leduque"
  */
 public class OrionEditorWidget extends Composite implements EditorWidget, HasChangeHandlers, HasCursorActivityHandlers, HasScrollHandlers {
@@ -390,6 +390,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         this.editorOverlay.focus();
     }
 
+    public void showMessage(final String message) {
+        this.editorOverlay.reportStatus(message);
+    }
+
     @Override
     protected void onLoad() {
 
@@ -406,7 +410,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     /**
      * UI binder interface for this component.
-     * 
+     *
      * @author "Mickaël Leduque"
      */
     interface OrionEditorWidgetUiBinder extends UiBinder<SimplePanel, OrionEditorWidget> {
@@ -414,7 +418,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     /**
      * CSS style for the orion native editor element.
-     * 
+     *
      * @author "Mickaël Leduque"
      */
     public interface EditorElementStyle extends CssResource {
