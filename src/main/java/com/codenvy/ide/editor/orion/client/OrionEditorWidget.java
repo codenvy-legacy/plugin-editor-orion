@@ -22,7 +22,6 @@ import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
-import com.codenvy.ide.jseditor.client.codeassist.CompletionProposal;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
