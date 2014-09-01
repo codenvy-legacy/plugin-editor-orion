@@ -13,7 +13,6 @@ package com.codenvy.ide.editor.orion.client;
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
-import com.codenvy.ide.jseditor.client.document.DocumentHandle;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
@@ -22,7 +21,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
  * The implementation of {@link EmbeddedDocument} for Orion.
- * 
+ *
  * @author "Mickaël Leduque"
  */
 public class OrionDocument implements EmbeddedDocument {
@@ -30,8 +29,8 @@ public class OrionDocument implements EmbeddedDocument {
     private final OrionTextViewOverlay textViewOverlay;
 
     private final OrionPositionConverter positionConverter;
-    
-    private HasCursorActivityHandlers  hasCursorActivityHandlers;
+
+    private final HasCursorActivityHandlers  hasCursorActivityHandlers;
 
     public OrionDocument(final OrionTextViewOverlay textViewOverlay,
                          final HasCursorActivityHandlers hasCursorActivityHandlers) {
@@ -114,13 +113,13 @@ public class OrionDocument implements EmbeddedDocument {
 
         @Override
         public PixelCoordinates offsetToPixel(int textOffset) {
-            OrionPixelPositionOverlay location = textViewOverlay.getLocationAtOffset(textOffset);
+            final OrionPixelPositionOverlay location = textViewOverlay.getLocationAtOffset(textOffset);
             return new PixelCoordinates(location.getX(), location.getY());
         }
 
         @Override
         public TextPosition pixelToText(PixelCoordinates coordinates) {
-            int offset = pixelToOffset(coordinates);
+            final int offset = pixelToOffset(coordinates);
             return getPositionFromIndex(offset);
         }
 
