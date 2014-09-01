@@ -13,6 +13,8 @@ package com.codenvy.ide.editor.orion.client;
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.document.DocumentEventBus;
+import com.codenvy.ide.jseditor.client.document.DocumentHandle;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
@@ -24,13 +26,15 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
  *
  * @author "Mickaël Leduque"
  */
-public class OrionDocument implements EmbeddedDocument {
+public class OrionDocument implements EmbeddedDocument, DocumentHandle {
 
     private final OrionTextViewOverlay textViewOverlay;
 
     private final OrionPositionConverter positionConverter;
 
     private final HasCursorActivityHandlers  hasCursorActivityHandlers;
+
+    private final DocumentEventBus eventBus = new DocumentEventBus();
 
     public OrionDocument(final OrionTextViewOverlay textViewOverlay,
                          final HasCursorActivityHandlers hasCursorActivityHandlers) {
@@ -132,5 +136,27 @@ public class OrionDocument implements EmbeddedDocument {
 
     public void replace(final Region region, final String text) {
         this.textViewOverlay.getModel().setText(text, region.getOffset(), region.getLength());
+    }
+
+
+    public DocumentHandle getDocumentHandle() {
+        return this;
+    }
+
+    @Override
+    public boolean isSameAs(final DocumentHandle document) {
+        return (this.equals(document));
+    }
+
+    public DocumentEventBus getDocEventBus() {
+        return this.eventBus;
+    }
+
+    public EmbeddedDocument getDocument() {
+        return this;
+    }
+
+    public int getContentsCharCount() {
+        return this.textViewOverlay.getModel().getCharCount();
     }
 }
