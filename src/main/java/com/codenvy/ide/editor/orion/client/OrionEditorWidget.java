@@ -11,6 +11,7 @@
 package com.codenvy.ide.editor.orion.client;
 
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.codeassist.CompletionProposal;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
@@ -392,6 +394,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     public void showMessage(final String message) {
         this.editorOverlay.reportStatus(message);
+    }
+
+    public void showCompletionsProposals(final List<CompletionProposal> proposals) {
+        // do nothing at the moment
     }
 
     @Override
