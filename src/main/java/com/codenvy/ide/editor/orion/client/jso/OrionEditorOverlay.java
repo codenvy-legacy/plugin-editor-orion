@@ -101,4 +101,31 @@ public class OrionEditorOverlay extends JavaScriptObject {
         var editor = orionEditor(options);
         return editor;
     }-*/;
+
+    /**
+     * Report the message to the user.
+     * @param message the message
+     */
+    public final native void reportStatus(String message) /*-{
+        this.type filter text(message);
+    }-*/;
+
+    /**
+     * Report the message to the user.
+     * @param message the message
+     * @param type either normal or "progress" or "error";
+     */
+    public final native void reportStatus(String message, String type) /*-{
+        this.type filter text(message, type);
+    }-*/;
+
+    /**
+     * Report the message to the user.
+     * @param message the message
+     * @param type either normal or "progress" or "error"
+     * @param accessible if true, a screen reader will read this message
+     */
+    public final native void reportStatus(String message, String type, boolean accessible) /*-{
+        this.type filter text(message, type, accessible);
+    }-*/;
 }
