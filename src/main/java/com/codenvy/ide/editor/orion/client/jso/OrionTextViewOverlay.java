@@ -165,6 +165,10 @@ public class OrionTextViewOverlay extends JavaScriptObject {
         addEventListener(type, handler, false);
     }
 
+    public final <T extends OrionEventOverlay> void addEventListener(String type, EventHandler<T> handler) {
+        addEventListener(type, handler, false);
+    }
+
     public interface EventHandlerNoParameter {
         void onEvent();
     }
