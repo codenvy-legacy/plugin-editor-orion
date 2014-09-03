@@ -97,7 +97,7 @@ public class OrionEditorExtension {
     }
 
     private static void injectCssLink(final String url) {
-        LinkElement link = Document.get().createLinkElement();
+        final LinkElement link = Document.get().createLinkElement();
         link.setRel("stylesheet");
         link.setHref(url);
         nativeAttachToHead(link);
@@ -105,7 +105,7 @@ public class OrionEditorExtension {
 
     /**
      * Attach an element to document head.
-     * 
+     *
      * @param scriptElement the element to attach
      */
     private static native void nativeAttachToHead(Node element) /*-{
@@ -136,7 +136,7 @@ public class OrionEditorExtension {
     }
 
     private void registerEditor() {
-        LOG.info("Registering Orion editor type.");
+        LOG.fine("Registering Orion editor type.");
         this.editorTypeRegistry.registerEditorType(EditorType.fromKey(ORION_EDITOR_KEY), "Orion", new EditorBuilder() {
 
             @Override
