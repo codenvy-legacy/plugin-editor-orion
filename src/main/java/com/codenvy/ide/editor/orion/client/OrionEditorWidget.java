@@ -24,6 +24,7 @@ import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
 import com.codenvy.ide.jseditor.client.codeassist.CompletionProposal;
+import com.codenvy.ide.jseditor.client.codeassist.CompletionsSource;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
@@ -32,6 +33,7 @@ import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.events.HasScrollHandlers;
 import com.codenvy.ide.jseditor.client.events.ScrollEvent;
 import com.codenvy.ide.jseditor.client.events.ScrollHandler;
+import com.codenvy.ide.jseditor.client.keymap.Keybinding;
 import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
@@ -397,7 +399,17 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     }
 
     public void showCompletionsProposals(final List<CompletionProposal> proposals) {
+    }
+
+    @Override
+    public void showCompletionProposals(final CompletionsSource completionsSource) {
         // do nothing at the moment
+    }
+
+    @Override
+    public void addKeybinding(final Keybinding keybinding) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override

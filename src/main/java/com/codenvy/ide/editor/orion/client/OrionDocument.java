@@ -11,11 +11,15 @@
 package com.codenvy.ide.editor.orion.client;
 
 import com.codenvy.ide.api.text.Region;
+import com.codenvy.ide.editor.orion.client.jso.OrionModelChangedEventOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay.EventHandler;
+import com.codenvy.ide.jseditor.client.document.DocumentEventBus;
 import com.codenvy.ide.jseditor.client.document.DocumentHandle;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
+import com.codenvy.ide.jseditor.client.events.DocumentChangeEvent;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.google.web.bindery.event.shared.HandlerRegistration;
@@ -33,11 +37,31 @@ public class OrionDocument implements EmbeddedDocument, DocumentHandle {
 
     private final HasCursorActivityHandlers  hasCursorActivityHandlers;
 
+    private final DocumentEventBus eventBus = new DocumentEventBus();
+
     public OrionDocument(final OrionTextViewOverlay textViewOverlay,
                          final HasCursorActivityHandlers hasCursorActivityHandlers) {
         this.textViewOverlay = textViewOverlay;
         this.hasCursorActivityHandlers = hasCursorActivityHandlers;
         this.positionConverter = new OrionPositionConverter();
+
+        this.textViewOverlay.addEventListener(OrionEventContants.MODEL_CHANGED_EVENT,
+                                              new EventHandler<OrionModelChangedEventOverlay>() {
+            @Override
+            public void onEvent(final OrionModelChangedEventOverlay parameter) {
+                fireDocumentChangeEvent(parameter);
+            }
+        });
+    }
+
+    private void fireDocumentChangeEvent(final OrionModelChangedEventOverlay param) {
+        final int startOffset = param.getStart();
+        final int addedChars = param.getAddedCharCount();
+        final int removedChars = param.getRemovedCharCount();
+        final String newText = this.textViewOverlay.getModel().getText(startOffset, startOffset + addedChars);
+
+        final DocumentChangeEvent event = new DocumentChangeEvent(this, startOffset, removedChars, newText);
+        eventBus.fireEvent(event);
     }
 
     @Override
@@ -145,4 +169,15 @@ public class OrionDocument implements EmbeddedDocument, DocumentHandle {
         return (this.equals(document));
     }
 
+    public DocumentEventBus getDocEventBus() {
+        return this.eventBus;
+    }
+
+    public EmbeddedDocument getDocument() {
+        return this;
+    }
+
+    public int getContentsCharCount() {
+        return this.textViewOverlay.getModel().getCharCount();
+    }
 }
