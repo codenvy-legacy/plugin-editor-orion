@@ -40,6 +40,7 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
+import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -426,9 +427,36 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         }
     }
 
+
+    @Override
+    public void addGutterItem(int line, String gutterId, elemental.dom.Element element) {
+        // not (yet) handled in orion editor
+    }
+
+    @Override
+    public void removeGutterItem(int line, String gutterId) {
+        // not (yet) handled in orion editor
+    }
+
+    @Override
+    public elemental.dom.Element getGutterItem(int line, String gutterId) {
+        // not (yet) handled in orion editor
+        return null;
+    }
+
+    @Override
+    public void clearGutter(String gutterId) {
+        // not (yet) handled in orion editor
+    }
+
+    public MarkerRegistration addMarker(final TextRange range, final String className) {
+        // currently not implemented
+        return null;
+    }
+
     /**
      * UI binder interface for this component.
-     *
+     * 
      * @author "Mickaël Leduque"
      */
     interface OrionEditorWidgetUiBinder extends UiBinder<SimplePanel, OrionEditorWidget> {
@@ -436,7 +464,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     /**
      * CSS style for the orion native editor element.
-     *
+     * 
      * @author "Mickaël Leduque"
      */
     public interface EditorElementStyle extends CssResource {
