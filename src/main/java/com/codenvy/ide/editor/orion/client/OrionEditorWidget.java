@@ -36,6 +36,7 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
+import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -425,5 +426,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
         @ClassName("editor-parent")
         String editorParent();
+    }
+
+    public MarkerRegistration addMarker(final TextRange range, final String className) {
+        // currently not implemented
+        return null;
     }
 }
