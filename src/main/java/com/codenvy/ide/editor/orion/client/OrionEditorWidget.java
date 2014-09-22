@@ -454,9 +454,14 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         return null;
     }
 
+    @Override
+    public void addGutterItem(int line, String gutterId, elemental.dom.Element element, LineNumberingChangeCallback lineCallback) {
+        // currently not implemented
+    }
+
     /**
      * UI binder interface for this component.
-     * 
+     *
      * @author "Mickaël Leduque"
      */
     interface OrionEditorWidgetUiBinder extends UiBinder<SimplePanel, OrionEditorWidget> {
@@ -464,7 +469,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     /**
      * CSS style for the orion native editor element.
-     * 
+     *
      * @author "Mickaël Leduque"
      */
     public interface EditorElementStyle extends CssResource {
