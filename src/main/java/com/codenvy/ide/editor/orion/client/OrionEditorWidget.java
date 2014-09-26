@@ -37,8 +37,8 @@ import com.codenvy.ide.jseditor.client.keymap.Keybinding;
 import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
-import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
+import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
@@ -92,6 +92,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private final KeyModeInstances                 keyModeInstances;
     private final PreferencesManager               preferencesManager;
     private final JavaScriptObject                 orionEditorModule;
+    private final KeymapPrefReader keymapPrefReader;
 
     private OrionDocument                       embeddedDocument;
 
@@ -108,10 +109,12 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                              final KeyModeInstances keyModeInstances,
                              final PreferencesManager preferencesManager,
                              final EventBus eventBus,
+                             final KeymapPrefReader keymapPrefReader,
                              @Assisted final String editorMode) {
         initWidget(UIBINDER.createAndBindUi(this));
 
         this.preferencesManager = preferencesManager;
+        this.keymapPrefReader = keymapPrefReader;
 
         this.orionEditorModule = moduleHolder.getModule("OrionEditor");
 
@@ -365,8 +368,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     }
 
     private void setupKeymode() {
-        final String propertyValue = KeymapPrefReader.readPref(this.preferencesManager,
-                                                               OrionEditorExtension.ORION_EDITOR_KEY);
+        final String propertyValue = this.keymapPrefReader.readPref(OrionEditorExtension.ORION_EDITOR_KEY);
         Keymap keymap;
         try {
             keymap = Keymap.fromKey(propertyValue);
