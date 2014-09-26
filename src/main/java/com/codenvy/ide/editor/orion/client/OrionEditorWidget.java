@@ -399,6 +399,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         this.editorOverlay.reportStatus(message);
     }
 
+    public void resize() {
+
+    }
+
     @Override
     protected void onLoad() {
 
