@@ -37,6 +37,7 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
+import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
@@ -195,17 +196,21 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     private void selectKeyMode(Keymap keymap) {
         resetKeyModes();
-        if (keymap == null || KeyMode.DEFAULT.equals(keymap)) {
-            return;
-        } else if (KeyMode.EMACS.equals(keymap)) {
+        Keymap usedKeymap = keymap;
+        if (usedKeymap == null) {
+            usedKeymap = KeyMode.DEFAULT;
+        }
+        if (KeyMode.DEFAULT.equals(usedKeymap)) {
+            // nothing to do
+        } else if (KeyMode.EMACS.equals(usedKeymap)) {
             this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.EMACS));
-        } else if (KeyMode.VI.equals(keymap)) {
+        } else if (KeyMode.VI.equals(usedKeymap)) {
             this.editorOverlay.getTextView().addKeyMode(keyModeInstances.getInstance(KeyMode.VI));
         } else {
-            this.keymap = null;
-            throw new RuntimeException("Unknown keymap type: " + keymap);
+            usedKeymap = KeyMode.DEFAULT;
+            Log.error(OrionEditorWidget.class, "Unknown keymap type: " + keymap + " - changing to defaut one.");
         }
-        this.keymap = keymap;
+        this.keymap = usedKeymap;
     }
 
     private void resetKeyModes() {
