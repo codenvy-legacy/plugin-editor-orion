@@ -399,10 +399,6 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         this.editorOverlay.reportStatus(message);
     }
 
-    public void resize() {
-
-    }
-
     @Override
     protected void onLoad() {
 
@@ -415,6 +411,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         } else {
             LOG.severe("Orion insertion failed.");
         }
+    }
+
+    @Override
+    public void onResize() {
+        // TODO implements editor resize
     }
 
     /**
