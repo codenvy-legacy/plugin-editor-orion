@@ -413,9 +413,10 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         }
     }
 
-    @Override
     public void onResize() {
-        // TODO implements editor resize
+    	// redraw text and rulers
+    	// maybe just redrawing the text would be enough
+        this.editorOverlay.getTextView().redraw();
     }
 
     /**
