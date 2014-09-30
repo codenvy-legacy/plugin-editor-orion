@@ -38,7 +38,7 @@ public class OrionEditorOverlay extends JavaScriptObject {
         return this.getModel();
     }-*/;
 
-    public final native OrionUndoStackOverlay getUndoStock() /*-{
+    public final native OrionUndoStackOverlay getUndoStack() /*-{
         return this.getUndoStack();
     }-*/;
 
