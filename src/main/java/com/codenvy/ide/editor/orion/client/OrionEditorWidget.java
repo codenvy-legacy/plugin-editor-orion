@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import com.codenvy.ide.api.preferences.PreferencesManager;
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.api.text.RegionImpl;
+import com.codenvy.ide.api.texteditor.HandlesUndoRedo;
 import com.codenvy.ide.editor.orion.client.jso.OrionEditorOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
@@ -89,6 +90,9 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private final PreferencesManager               preferencesManager;
     private final JavaScriptObject                 orionEditorModule;
 
+    /** Component that handles undo/redo. */
+    private final HandlesUndoRedo undoRedo;
+
     private OrionDocument                       embeddedDocument;
 
     private boolean                                changeHandlerAdded = false;
@@ -130,6 +134,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
                 setupKeymode();
             }
         });
+        this.undoRedo = new OrionUndoRedo(this.editorOverlay.getUndoStack());
     }
 
     @Override
@@ -417,6 +422,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     	// redraw text and rulers
     	// maybe just redrawing the text would be enough
         this.editorOverlay.getTextView().redraw();
+    }
+
+    @Override
+    public HandlesUndoRedo getUndoRedo() {
+        return this.undoRedo;
     }
 
     /**
