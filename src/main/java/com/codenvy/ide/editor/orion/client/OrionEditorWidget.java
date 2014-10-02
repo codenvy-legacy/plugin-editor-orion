@@ -384,7 +384,7 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     @Override
     public EditorType getEditorType() {
-        return EditorType.fromKey(OrionEditorExtension.ORION_EDITOR_KEY);
+        return EditorType.getInstance(OrionEditorExtension.ORION_EDITOR_KEY);
     }
 
     @Override
