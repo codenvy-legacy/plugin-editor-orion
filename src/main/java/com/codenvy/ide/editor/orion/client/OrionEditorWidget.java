@@ -30,6 +30,7 @@ import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.events.HasScrollHandlers;
 import com.codenvy.ide.jseditor.client.events.ScrollEvent;
 import com.codenvy.ide.jseditor.client.events.ScrollHandler;
+import com.codenvy.ide.jseditor.client.keymap.Keybinding;
 import com.codenvy.ide.jseditor.client.keymap.Keymap;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeEvent;
 import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
@@ -38,6 +39,7 @@ import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
+import com.codenvy.ide.jseditor.client.texteditor.HasGutter.LineNumberingChangeCallback;
 import com.codenvy.ide.jseditor.client.texteditor.HasTextMarkers.MarkerRegistration;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
@@ -424,11 +426,19 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
         this.editorOverlay.getTextView().redraw();
     }
 
-    @Override
     public HandlesUndoRedo getUndoRedo() {
         return this.undoRedo;
     }
 
+    public void addGutterItem(final int line, String gutterId, final elemental.dom.Element element,
+                              final LineNumberingChangeCallback lineCallback) {
+        // not (yet) handled in orion editor
+    }
+
+    public void addKeybinding(final Keybinding keybinding) {
+        // not (yet) handled in orion editor
+
+    }
     public void addGutterItem(final int line, final String gutterId, final elemental.dom.Element element) {
         // not (yet) handled in orion editor
     }
