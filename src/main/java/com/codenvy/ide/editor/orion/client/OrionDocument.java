@@ -19,6 +19,7 @@ import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
+import com.codenvy.ide.jseditor.client.text.TextPosition;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
