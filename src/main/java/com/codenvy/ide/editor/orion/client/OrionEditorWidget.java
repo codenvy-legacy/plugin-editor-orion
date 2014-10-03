@@ -37,7 +37,9 @@ import com.codenvy.ide.jseditor.client.keymap.KeymapChangeHandler;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
+import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
+import com.codenvy.ide.jseditor.client.texteditor.HasTextMarkers.MarkerRegistration;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -429,6 +431,28 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @Override
     public HandlesUndoRedo getUndoRedo() {
         return this.undoRedo;
+    }
+
+    public void addGutterItem(final int line, final String gutterId, final elemental.dom.Element element) {
+        // not (yet) handled in orion editor
+    }
+
+    public void removeGutterItem(final int line, final String gutterId) {
+        // not (yet) handled in orion editor
+    }
+
+    public elemental.dom.Element getGutterItem(final int line, final String gutterId) {
+        // not (yet) handled in orion editor
+        return null;
+    }
+
+    public void clearGutter(final String gutterId) {
+        // not (yet) handled in orion editor
+    }
+
+    public MarkerRegistration addMarker(final TextRange range, final String className) {
+        // currently not implemented
+        return null;
     }
 
     /**
