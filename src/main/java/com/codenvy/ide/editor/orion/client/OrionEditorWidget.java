@@ -14,7 +14,6 @@ package com.codenvy.ide.editor.orion.client;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.codenvy.ide.api.preferences.PreferencesManager;
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.api.text.RegionImpl;
 import com.codenvy.ide.api.texteditor.HandlesUndoRedo;
@@ -89,7 +88,6 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     private final OrionEditorOverlay               editorOverlay;
     private String                                 modeName;
     private final KeyModeInstances                 keyModeInstances;
-    private final PreferencesManager               preferencesManager;
     private final JavaScriptObject                 orionEditorModule;
     private final KeymapPrefReader keymapPrefReader;
 
@@ -109,13 +107,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     @AssistedInject
     public OrionEditorWidget(final ModuleHolder moduleHolder,
                              final KeyModeInstances keyModeInstances,
-                             final PreferencesManager preferencesManager,
                              final EventBus eventBus,
                              final KeymapPrefReader keymapPrefReader,
                              @Assisted final String editorMode) {
         initWidget(UIBINDER.createAndBindUi(this));
 
-        this.preferencesManager = preferencesManager;
         this.keymapPrefReader = keymapPrefReader;
 
         this.orionEditorModule = moduleHolder.getModule("OrionEditor");
