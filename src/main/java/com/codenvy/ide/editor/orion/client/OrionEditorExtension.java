@@ -23,7 +23,7 @@ import com.codenvy.ide.api.notification.NotificationManager;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.style.OrionResource;
 import com.codenvy.ide.jseditor.client.defaulteditor.EditorBuilder;
-import com.codenvy.ide.jseditor.client.editorconfig.DefaultEmbeddedTextEditorConf;
+import com.codenvy.ide.jseditor.client.editorconfig.DefaultTextEditorConfiguration;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.editortype.EditorTypeRegistry;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
@@ -142,7 +142,7 @@ public class OrionEditorExtension {
             @Override
             public EditorPartPresenter buildEditor() {
                 final EmbeddedTextEditorPresenter editor = orionTextEditorFactory.createTextEditor();
-                editor.initialize(new DefaultEmbeddedTextEditorConf(), notificationManager);
+                editor.initialize(new DefaultTextEditorConfiguration(), notificationManager);
                 return editor;
             }
         });
