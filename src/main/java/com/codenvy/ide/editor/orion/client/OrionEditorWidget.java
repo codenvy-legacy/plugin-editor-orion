@@ -11,6 +11,7 @@
 package com.codenvy.ide.editor.orion.client;
 
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ import com.codenvy.ide.editor.orion.client.jso.OrionKeyModeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextThemeOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
+import com.codenvy.ide.jseditor.client.codeassist.CompletionProposal;
+import com.codenvy.ide.jseditor.client.codeassist.CompletionsSource;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
@@ -39,8 +42,6 @@ import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
-import com.codenvy.ide.jseditor.client.texteditor.HasGutter.LineNumberingChangeCallback;
-import com.codenvy.ide.jseditor.client.texteditor.HasTextMarkers.MarkerRegistration;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -459,6 +460,14 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
     public MarkerRegistration addMarker(final TextRange range, final String className) {
         // currently not implemented
         return null;
+    }
+
+    public void showCompletionsProposals(final List<CompletionProposal> proposals) {
+        // currently not implemented
+    }
+
+    public void showCompletionProposals(final CompletionsSource completionsSource) {
+        // currently not implemented
     }
 
     /**

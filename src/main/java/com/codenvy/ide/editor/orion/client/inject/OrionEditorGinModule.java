@@ -12,6 +12,7 @@ package com.codenvy.ide.editor.orion.client.inject;
 
 import com.codenvy.ide.api.extension.ExtensionGinModule;
 import com.codenvy.ide.editor.orion.client.OrionEditorWidget;
+import com.codenvy.ide.editor.orion.client.OrionTextEditorViewFactory;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidgetFactory;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
@@ -25,5 +26,6 @@ public class OrionEditorGinModule extends AbstractGinModule {
         // Bind the Orion EditorWidget factory
         install(new GinFactoryModuleBuilder().build(new TypeLiteral<EditorWidgetFactory<OrionEditorWidget>>() {
         }));
+        bind(OrionTextEditorViewFactory.class);
     }
 }
