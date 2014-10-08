@@ -228,4 +228,12 @@ public class OrionTextViewOverlay extends JavaScriptObject {
     public final native int getOffsetAtLocation(int x, int y) /*-{
         return this.getOffsetAtLocation(x, y);
     }-*/;
+
+    /**
+     * Returns the annotation model.
+     * @return the annotation model
+     */
+    public final native OrionAnnotationModelOverlay getAnnotationModel() /*-{
+        return this.getAnnotationModel();
+    }-*/;
 }
