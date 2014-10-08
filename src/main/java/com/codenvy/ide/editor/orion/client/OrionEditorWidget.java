@@ -42,6 +42,7 @@ import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
+import com.codenvy.ide.jseditor.client.texteditor.LineStyler;
 import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -468,6 +469,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     public void showCompletionProposals(final CompletionsSource completionsSource) {
         // currently not implemented
+    }
+
+    @Override
+    public LineStyler getLineStyler() {
+        return null;
     }
 
     /**
