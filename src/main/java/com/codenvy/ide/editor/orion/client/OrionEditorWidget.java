@@ -29,6 +29,7 @@ import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.events.CursorActivityEvent;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
+import com.codenvy.ide.jseditor.client.events.GutterClickHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.events.HasScrollHandlers;
 import com.codenvy.ide.jseditor.client.events.ScrollEvent;
@@ -473,6 +474,11 @@ public class OrionEditorWidget extends Composite implements EditorWidget, HasCha
 
     @Override
     public LineStyler getLineStyler() {
+        return null;
+    }
+
+    @Override
+    public HandlerRegistration addGutterClickHandler(final GutterClickHandler handler) {
         return null;
     }
 
