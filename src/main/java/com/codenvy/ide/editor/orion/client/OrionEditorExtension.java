@@ -35,7 +35,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.dom.client.Node;
 
-@Extension(title = "Orion Editor.", version = "1.0.0")
+@Extension(title = "Orion Editor", version = "1.0.0")
 public class OrionEditorExtension {
 
     /** The logger. */
