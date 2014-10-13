@@ -42,6 +42,7 @@ import com.codenvy.ide.jseditor.client.position.PositionConverter;
 import com.codenvy.ide.jseditor.client.prefmodel.KeymapPrefReader;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.text.TextRange;
+import com.codenvy.ide.jseditor.client.texteditor.CompositeEditorWidget;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
 import com.codenvy.ide.jseditor.client.texteditor.LineStyler;
 import com.codenvy.ide.util.loging.Log;
@@ -64,7 +65,6 @@ import com.google.gwt.json.client.JSONString;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
@@ -75,7 +75,7 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @author "Mickaël Leduque"
  */
-public class OrionEditorWidget extends Composite implements EditorWidget, HasChangeHandlers, HasCursorActivityHandlers, HasScrollHandlers {
+public class OrionEditorWidget extends CompositeEditorWidget implements HasChangeHandlers, HasCursorActivityHandlers, HasScrollHandlers {
 
     /** The UI binder instance. */
     private static final OrionEditorWidgetUiBinder UIBINDER = GWT.create(OrionEditorWidgetUiBinder.class);
