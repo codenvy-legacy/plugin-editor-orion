@@ -18,7 +18,9 @@ import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
 import com.codenvy.ide.jseditor.client.events.CursorActivityHandler;
 import com.codenvy.ide.jseditor.client.events.HasCursorActivityHandlers;
 import com.codenvy.ide.jseditor.client.position.PositionConverter;
+import com.codenvy.ide.jseditor.client.text.LinearRange;
 import com.codenvy.ide.jseditor.client.text.TextPosition;
+import com.codenvy.ide.jseditor.client.text.TextRange;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
@@ -138,5 +140,24 @@ public class OrionDocument extends AbstractEmbeddedDocument {
 
     public int getContentsCharCount() {
         return this.textViewOverlay.getModel().getCharCount();
+    }
+
+    @Override
+    public String getLineContent(final int line) {
+        return this.textViewOverlay.getModel().getLine(line);
+    }
+
+    @Override
+    public TextRange getTextRangeForLine(final int line) {
+        final int startOffset = this.textViewOverlay.getModel().getLineStart(line);
+        final int endOffset = this.textViewOverlay.getModel().getLineEnd(line);
+        final int length = endOffset - startOffset;
+        return new TextRange(new TextPosition(line, 0), new TextPosition(line, length - 1));
+    }
+
+    @Override
+    public LinearRange getLinearRangeForLine(final int line) {
+        return LinearRange.createWithStart(this.textViewOverlay.getModel().getLineStart(line))
+                          .andEnd(textViewOverlay.getModel().getLineEnd(line));
     }
 }
