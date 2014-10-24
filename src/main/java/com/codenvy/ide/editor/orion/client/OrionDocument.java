@@ -12,6 +12,7 @@ package com.codenvy.ide.editor.orion.client;
 
 import com.codenvy.ide.api.text.Region;
 import com.codenvy.ide.editor.orion.client.jso.OrionPixelPositionOverlay;
+import com.codenvy.ide.editor.orion.client.jso.OrionSelectionOverlay;
 import com.codenvy.ide.editor.orion.client.jso.OrionTextViewOverlay;
 import com.codenvy.ide.jseditor.client.document.AbstractEmbeddedDocument;
 import com.codenvy.ide.jseditor.client.document.EmbeddedDocument;
@@ -88,6 +89,10 @@ public class OrionDocument extends AbstractEmbeddedDocument {
         return getPositionFromIndex(offset);
     }
 
+    public int getCursorOffset() {
+        return this.textViewOverlay.getCaretOffset();
+    }
+
     @Override
     public int getLineCount() {
         return this.textViewOverlay.getModel().getLineCount();
@@ -101,6 +106,18 @@ public class OrionDocument extends AbstractEmbeddedDocument {
     @Override
     public String getContents() {
         return this.textViewOverlay.getModel().getText();
+    }
+
+    @Override
+    public String getContentRange(final int offset, final int length) {
+        return this.textViewOverlay.getModel().getText(offset, offset + length);
+    }
+
+    @Override
+    public String getContentRange(final TextRange range) {
+        final int startOffset = getIndexFromPosition(range.getFrom());
+        final int endOffset = getIndexFromPosition(range.getTo());
+        return this.textViewOverlay.getModel().getText(startOffset, endOffset);
     }
 
     public PositionConverter getPositionConverter() {
@@ -159,5 +176,24 @@ public class OrionDocument extends AbstractEmbeddedDocument {
     public LinearRange getLinearRangeForLine(final int line) {
         return LinearRange.createWithStart(this.textViewOverlay.getModel().getLineStart(line))
                           .andEnd(textViewOverlay.getModel().getLineEnd(line));
+    }
+
+    @Override
+    public TextRange getSelectedTextRange() {
+        final OrionSelectionOverlay selection = this.textViewOverlay.getSelection();
+        final int start = selection.getStart();
+        final TextPosition startPosition = getPositionFromIndex(start);
+        final int end = selection.getEnd();
+        final TextPosition endPosition = getPositionFromIndex(end);
+        return new TextRange(startPosition, endPosition);
+    }
+
+    @Override
+    public LinearRange getSelectedLinearRange() {
+        final OrionSelectionOverlay selection = this.textViewOverlay.getSelection();
+
+        final int start = selection.getStart();
+        final int end = selection.getEnd();
+        return LinearRange.createWithStart(start).andEnd(end);
     }
 }
