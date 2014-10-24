@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import com.codenvy.ide.api.editor.EditorPartPresenter;
 import com.codenvy.ide.api.extension.Extension;
 import com.codenvy.ide.api.notification.Notification;
 import com.codenvy.ide.api.notification.Notification.Type;
@@ -28,6 +27,7 @@ import com.codenvy.ide.jseditor.client.editortype.EditorType;
 import com.codenvy.ide.jseditor.client.editortype.EditorTypeRegistry;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.requirejs.RequireJsLoader;
+import com.codenvy.ide.jseditor.client.texteditor.ConfigurableTextEditor;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
@@ -109,7 +109,7 @@ public class OrionEditorExtension {
      * @param scriptElement the element to attach
      */
     private static native void nativeAttachToHead(Node element) /*-{
-        $doc.getElementsByTagName("head")[0].appendChild(element);
+    $doc.getElementsByTagName("head")[0].appendChild(element);
     }-*/;
 
     private void requireOrion() {
@@ -140,7 +140,7 @@ public class OrionEditorExtension {
         this.editorTypeRegistry.registerEditorType(EditorType.fromKey(ORION_EDITOR_KEY), "Orion", new EditorBuilder() {
 
             @Override
-            public EditorPartPresenter buildEditor() {
+            public ConfigurableTextEditor buildEditor() {
                 final EmbeddedTextEditorPresenter editor = orionTextEditorFactory.createTextEditor();
                 editor.initialize(new DefaultTextEditorConfiguration(), notificationManager);
                 return editor;
