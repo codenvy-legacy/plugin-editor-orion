@@ -79,7 +79,7 @@ public class OrionEditorExtension {
     private void injectOrion() {
         // styler scripts are loaded on-demand by orion
         final String[] scripts = new String[]{
-                "orion-6.0/built-editor-amd",
+                "orion-7.0/built-editor-amd",
                 "orion/emacs",
                 "orion/vi",
         };

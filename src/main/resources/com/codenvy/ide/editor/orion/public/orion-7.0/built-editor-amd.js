@@ -1,5 +1,4 @@
-/* orion editor */ 
-/*******************************************************************************
+/* orion editor */ /*******************************************************************************
  * @license
  * Copyright (c) 2014 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
@@ -10,8 +9,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/config", [ //$NON-NLS-0$
 ], function() {
 	return {
@@ -30,8 +28,7 @@ define("orion/editor/config", [ //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
  
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/shim", [], function() { //$NON-NLS-0$
 
 	/**
@@ -66,9 +63,9 @@ define("orion/editor/shim", [], function() { //$NON-NLS-0$
 	}
 	if (!Object.keys) {
 		Object.keys = function(o) {
-			var result = [];
+			var hop = Object.prototype.hasOwnProperty, result = [];
 			for (var p in o) {
-				if (o.hasOwnProperty(p)) {
+				if (hop.call(o, p)) {
 					result.push(p);
 				}
 			}
@@ -353,7 +350,7 @@ define("orion/editor/shim", [], function() { //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define */
+/*eslint-env browser, amd*/
 define('orion/editor/i18n',{
 	load: function(name, parentRequire, onLoad, config) {
 		if (parentRequire.specified && parentRequire.specified("orion/bootstrap")) { //$NON-NLS-0$
@@ -367,6 +364,7 @@ define('orion/editor/i18n',{
 		}
 	}
 });
+
 
 /*******************************************************************************
  * @license
@@ -383,7 +381,7 @@ define('orion/editor/i18n',{
 
 //NLS_CHARSET=UTF-8
 
-/*global define*/
+/*eslint-env browser, amd*/
 
 define('orion/editor/nls/root/messages',{
 	"multipleAnnotations": "Multiple annotations:", //$NON-NLS-1$ //$NON-NLS-0$
@@ -567,7 +565,7 @@ define('orion/editor/nls/root/messages',{
 	"regex": "/.*/", //$NON-NLS-1$ //$NON-NLS-0$
 	"wholeWord": "\\b", //$NON-NLS-1$ //$NON-NLS-0$
 	"caseInsensitiveTooltip": "Toggle Case Insensitive", //$NON-NLS-1$ //$NON-NLS-0$
-	"regexTooltip": "Toogle Regex", //$NON-NLS-1$ //$NON-NLS-0$
+	"regexTooltip": "Toggle Regex", //$NON-NLS-1$ //$NON-NLS-0$
 	"wholeWordTooltip": "Toggle Whole Word", //$NON-NLS-1$ //$NON-NLS-0$
 	"closeTooltip": "Close", //$NON-NLS-1$ //$NON-NLS-0$
 
@@ -590,7 +588,7 @@ define('orion/editor/nls/root/messages',{
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
+/*eslint-env browser, amd*/
 
 define('orion/editor/nls/messages',['orion/editor/i18n!orion/editor/nls/messages', 'orion/editor/nls/root/messages'], function(bundle, root) {
 	var result = {
@@ -606,6 +604,7 @@ define('orion/editor/nls/messages',['orion/editor/i18n!orion/editor/nls/messages
 	return result;
 });
 
+
 /*******************************************************************************
  * Copyright (c) 2010, 2012 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
@@ -618,7 +617,7 @@ define('orion/editor/nls/messages',['orion/editor/i18n!orion/editor/nls/messages
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
  
-/*global define */
+/*eslint-env browser, amd*/
 define("orion/editor/eventTarget", [], function() { //$NON-NLS-0$
 	/** 
 	 * Constructs a new EventTarget object.
@@ -765,8 +764,7 @@ define("orion/editor/eventTarget", [], function() { //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-/*jslint browser:true regexp:false*/
+/*eslint-env browser, amd*/
 /**
  * @name orion.regex
  * @class Utilities for dealing with regular expressions.
@@ -825,7 +823,7 @@ define("orion/regex", [], function() { //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-/*global define navigator document*/
+/*eslint-env browser, amd*/
 define('orion/util',[],function() {
 
 	var userAgent = navigator.userAgent;
@@ -901,8 +899,7 @@ define('orion/util',[],function() {
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
  
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/textModel", ['orion/editor/eventTarget', 'orion/regex', 'orion/util'], function(mEventTarget, mRegex, util) { //$NON-NLS-2$  //$NON-NLS-1$ //$NON-NLS-0$
 
 	/**
@@ -1528,8 +1525,7 @@ define("orion/editor/textModel", ['orion/editor/eventTarget', 'orion/regex', 'or
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/keyBinding", ['orion/util'], function(util) { //$NON-NLS-1$ //$NON-NLS-0$
 
     /**
@@ -1728,8 +1724,7 @@ define("orion/keyBinding", ['orion/util'], function(util) { //$NON-NLS-1$ //$NON
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
  
-/*global define window */
-
+/*eslint-env browser, amd*/
 define("orion/editor/keyModes", [ //$NON-NLS-0$
 		"orion/keyBinding", //$NON-NLS-0$
 		"orion/util" //$NON-NLS-0$
@@ -2009,7 +2004,7 @@ define("orion/editor/keyModes", [ //$NON-NLS-0$
 
 /*******************************************************************************
  * @license
- * Copyright (c) 2013 IBM Corporation and others.
+ * Copyright (c) 2013,2014 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
  * available under the terms of the Eclipse Public License v1.0 
  * (http://www.eclipse.org/legal/epl-v10.html), and the Eclipse Distribution 
@@ -2019,8 +2014,7 @@ define("orion/editor/keyModes", [ //$NON-NLS-0$
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
  
-/*globals define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/textTheme", //$NON-NLS-0$
 [
 	'require', //$NON-NLS-0$
@@ -2132,86 +2126,41 @@ define("orion/editor/textTheme", //$NON-NLS-0$
 		onThemeChanged: function(themeChangedEvent) {
 			return this.dispatchEvent(themeChangedEvent);
 		},
-		/**
-		 * @private
-		 */
 		buildStyleSheet: function(themeClass, settings) {
-			
-			var result = [];
-			result.push("");
-			
-			result.push("." + themeClass + " {"); //$NON-NLS-1$ //$NON-NLS-0$
-			if (settings.fontFamily) {
-				result.push("\tfont-family: " + settings.fontFamily + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			if (settings.fontSize) {
-				result.push("\tfont-size: " + settings.fontSize + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			if (settings.fontSize) {			
-				result.push("\tcolor: " + settings.text + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			result.push("}"); //$NON-NLS-0$
-			
-			//From textview.css
-			result.push("." + themeClass + ".textview {"); //$NON-NLS-1$ //$NON-NLS-0$
-			if (settings.background) {		
-				result.push("\tbackground-color: " + settings.background + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			
-			result.push("}"); //$NON-NLS-0$
-			
-			result.push("." + themeClass + " .textviewLeftRuler {"); //$NON-NLS-1$ //$NON-NLS-0$
-			
-			if(settings.leftRuler){
-				result.push("\tborder-right: 1px solid " + settings.leftRuler + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			
-			result.push("}"); //$NON-NLS-0$
-			
-			result.push("." + themeClass + " .textviewRightRuler {"); //$NON-NLS-1$ //$NON-NLS-0$
-			
-			if(settings.rightRuler){
-				result.push("\tborder-left: 1px solid " + settings.rightRuler + ";"); //$NON-NLS-1$ //$NON-NLS-0$
-			}
-			
-			result.push("}"); //$NON-NLS-0$
-			
-			
-			function defineRule(className, value, isBackground) {
-				if (value) {
-					result.push("." + themeClass + " ." + className + " {"); //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-					result.push("\t" + (isBackground ? "background-color" : "color") + ": " + value + ";"); //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+			var convertCSSname = function(name) {
+				return name.replace(this._capitalRegEx, function(match) {
+					return "-" + match; //$NON-NLS-0$
+				}.bind(this)).toLowerCase();
+			}.bind(this);
+
+			var parseStyles = function(object, ancestors, className, isTopLevel, result) {
+				var localResult = [];
+				var keys = Object.keys(object);
+				keys.forEach(function(key) {
+					var value = object[key];
+					if (typeof(value) === "string") { //$NON-NLS-0$
+						localResult.push("\t" + convertCSSname(key) + ": " + value + ";"); //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+					} else {
+						parseStyles(
+							value,
+							className === key ? ancestors : ancestors + (isTopLevel ? " ." : ".") + key, //$NON-NLS-1$ //$NON-NLS-0$
+							className,
+							false,
+							result);
+					}
+				});
+				if (localResult.length) {
+					result.push(ancestors + (isTopLevel ? ".textview" : "") + " {"); //$NON-NLS-0$
+					result.push.apply(result, localResult);
 					result.push("}"); //$NON-NLS-0$
 				}
-			}
-			
-			//From rulers.css
-			defineRule("ruler.annotations", settings.annotationRuler, true); //$NON-NLS-0$
-			defineRule("ruler.lines", settings.annotationRuler, true); //$NON-NLS-0$
-			defineRule("ruler.folding", settings.annotationRuler, true); //$NON-NLS-0$
-			defineRule("ruler.overview", settings.overviewRuler, true); //$NON-NLS-0$
-			defineRule("rulerLines", settings.lineNumber, false); //$NON-NLS-0$
-			defineRule("rulerLines.even", settings.lineNumberEven, false); //$NON-NLS-0$
-			defineRule("rulerLines.odd", settings.lineNumberOdd, false); //$NON-NLS-0$
-			
-			//From annotations.css
-			defineRule("annotationLine.currentLine", settings.currentLine, true); //$NON-NLS-0$
-			
-			//From textstyler.css
-			defineRule("entity-name-tag", settings.keyword, false); //$NON-NLS-0$
-			defineRule("entity-other-attribute-name", settings.attribute, false); //$NON-NLS-0$
-			defineRule("string-quoted", settings.string, false); //$NON-NLS-0$
-			defineRule("meta.annotation.currentLine", settings.currentLine, true); //$NON-NLS-0$
-			defineRule("keyword", settings.keyword, false); //$NON-NLS-0$
-			defineRule("string", settings.string, false); //$NON-NLS-0$\
-			defineRule("constant", settings.constant, false); //$NON-NLS-0$
-			defineRule("comment", settings.comment, false); //$NON-NLS-0$
-			defineRule("comment.block.documentation", settings.comment, false); //$NON-NLS-0$
-			defineRule("keyword.other.documentation.markup", settings.comment, false); //$NON-NLS-0$
-			defineRule("keyword.other.documentation.markup", settings.comment, false); //$NON-NLS-0$
+			};
 
+			var result = [""];
+			parseStyles(settings.styles, "." + themeClass, settings.className, true, result); //$NON-NLS-0$
 			return result.join("\n"); //$NON-NLS-0$
 		},
+
 		/**
 		 * @private
 		 */
@@ -2271,7 +2220,8 @@ define("orion/editor/textTheme", //$NON-NLS-0$
 					self._createStyle(className, cssText, callback, false);
 				});
 			}
-		}
+		},
+		_capitalRegEx: /[A-Z]/g
 	};
 	mEventTarget.EventTarget.addMixin(TextTheme.prototype);
 	
@@ -2291,8 +2241,7 @@ define("orion/editor/textTheme", //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
  
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/util", [], function() { //$NON-NLS-0$
 	
 	/** @private */
@@ -2325,6 +2274,26 @@ define("orion/editor/util", [], function() { //$NON-NLS-0$
 			return false;
 		}
 		return topNode === node || (topNode.compareDocumentPosition(node) & 16) !== 0;
+	}
+	/** @private */
+	function getNodeStyle(node, prop, defaultValue) {
+		var value;
+		if (node) {
+			value = node.style[prop];
+			if (!value) {
+				if (node.currentStyle) {
+					var index = 0, p = prop;
+					while ((index = p.indexOf("-", index)) !== -1) { //$NON-NLS-0$
+						p = p.substring(0, index) + p.substring(index + 1, index + 2).toUpperCase() + p.substring(index + 2);
+					}
+					value = node.currentStyle[p];
+				} else {
+					var css = node.ownerDocument.defaultView.getComputedStyle(node, null);
+					value = css ? css.getPropertyValue(prop) : null;
+				}
+			}
+		}
+		return value || defaultValue;
 	}
 
 	/**
@@ -2395,6 +2364,7 @@ define("orion/editor/util", [], function() { //$NON-NLS-0$
 
 	return {
 		contains: contains,
+		getNodeStyle: getNodeStyle,
 		addEventListener: addEventListener,
 		removeEventListener: removeEventListener,
 		Animation: Animation
@@ -2415,8 +2385,7 @@ define("orion/editor/util", [], function() { //$NON-NLS-0$
  *		Mihai Sucan (Mozilla Foundation) - fix for Bug#334583 Bug#348471 Bug#349485 Bug#350595 Bug#360726 Bug#361180 Bug#362835 Bug#362428 Bug#362286 Bug#354270 Bug#361474 Bug#363945 Bug#366312 Bug#370584
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/textView", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/editor/textModel', //$NON-NLS-0$
@@ -2430,6 +2399,9 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 	/** @private */
 	function getWindow(document) {
 		return document.defaultView || document.parentWindow;
+	}
+	function newArray(length) {
+		return new Array(length);
 	}
 	var addHandler = textUtil.addEventListener;
 	var removeHandler = textUtil.removeEventListener;
@@ -3134,7 +3106,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var rects, newRects, rect, i;
 			if (!element._rectsCache) {
 				rects = element.getClientRects();
-				newRects = new Array(rects.length);
+				newRects = newArray(rects.length);
 				for (i = 0; i<rects.length; i++) {
 					rect = newRects[i] = new TextRect(rects[i]);
 					rect.left -= parentRect.left;
@@ -3738,7 +3710,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				}
 			}
 			var offsetInLine = result - lineStart;
-			c = lineText.charCodeAt(offsetInLine);
+			var c = lineText.charCodeAt(offsetInLine);
 			// Handle Unicode surrogates
 			if (0xDC00 <= c && c <= 0xDFFF) {
 				if (offsetInLine > 0) {
@@ -3846,7 +3818,6 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		 * @param {Number} [index=length] the ruler index.
 		 */
 		addRuler: function (ruler, index) {
-			ruler.setView(this);
 			var rulers = this._rulers;
 			if (index !== undefined) {
 				var i, sideIndex;
@@ -3861,6 +3832,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				rulers.push(ruler);
 			}
 			this._createRuler(ruler, index);
+			ruler.setView(this);
 			this._update();
 		},
 		computeSize: function() {
@@ -3919,7 +3891,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		 * @see orion.editor.TextView#setTopPixel
 		 */
 		convert: function(rect, from, to) {
-			if (!this._clientDiv) { return; }
+			if (!this._clientDiv) { return rect; }
 			var scroll = this._getScroll();
 			var viewPad = this._getViewPadding();
 			var viewRect = this._viewDiv.getBoundingClientRect();
@@ -4753,6 +4725,18 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		onMouseOut: function(mouseEvent) {
 			return this.dispatchEvent(mouseEvent);
 		},
+		onTouchStart: function(touchEvent) {
+			return this.dispatchEvent(touchEvent);
+		},
+		onTouchMove: function(touchEvent) {
+			return this.dispatchEvent(touchEvent);
+		},
+		onTouchEnd: function(touchEvent) {
+			return this.dispatchEvent(touchEvent);
+		},
+		onOptions: function(optionsEvent) {
+			return this.dispatchEvent(optionsEvent);
+		},
 		/**
 		 * @class This is the event sent when the selection changes in the text view.
 		 * <p>
@@ -4937,6 +4921,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 					}
 				}
 			}
+			this.dispatchEvent({type: "Redraw", startLine: startLine, endLine: endLine, ruler: ruler}); //$NON-NLS-0$
 			this._queueUpdate();
 		},
 		/**
@@ -5119,8 +5104,8 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		 * @param {orion.editor.TextModel} model the text model of the view.
 		 */
 		setModel: function(model) {
-			if (!model) { return; }
 			if (model === this._model) { return; }
+			model = model || new mTextModel.TextModel();
 			this._model.removeEventListener("preChanging", this._modelListener.onChanging); //$NON-NLS-0$
 			this._model.removeEventListener("postChanged", this._modelListener.onChanged); //$NON-NLS-0$
 			var oldLineCount = this._model.getLineCount();
@@ -5174,6 +5159,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 					this["_" + option] = clone(newValue); //$NON-NLS-0$
 				}
 			}
+			this.onOptions({type: "Options", options: options}); //$NON-NLS-0$
 		},
 		/**
 		 * @class This object describes the selection show options.
@@ -5300,13 +5286,15 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		 * </p>
 		 *
 		 * @param {Number} topIndex the index of the top line.
+		 * @param {Function} [callback] if callback is specified and <code>scrollAnimation</code> is not zero, view scrolling is animated and
+		 *					the callback is called when the animation is done. Otherwise, callback is callback right away.
 		 *
 		 * @see orion.editor.TextView#getBottomIndex
 		 * @see orion.editor.TextView#getTopIndex
 		 */
-		setTopIndex: function(topIndex) {
+		setTopIndex: function(topIndex, callback) {
 			if (!this._clientDiv) { return; }
-			this._scrollView(0, this._getLinePixel(Math.max(0, topIndex)) - this._getScroll().y);
+			this._scrollViewAnimated(0, this._getLinePixel(Math.max(0, topIndex)) - this._getScroll().y, callback);
 		},
 		/**
 		 * Sets the top pixel.
@@ -5317,14 +5305,16 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		 * </p>
 		 *
 		 * @param {Number} pixel the top pixel.
+		 * @param {Function} [callback] if callback is specified and <code>scrollAnimation</code> is not zero, view scrolling is animated and
+		 *					the callback is called when the animation is done. Otherwise, callback is callback right away.
 		 *
 		 * @see orion.editor.TextView#getBottomPixel
 		 * @see orion.editor.TextView#getTopPixel
 		 * @see orion.editor.TextView#convert
 		 */
-		setTopPixel: function(pixel) {
+		setTopPixel: function(pixel, callback) {
 			if (!this._clientDiv) { return; }
-			this._scrollView(0, Math.max(0, pixel) - this._getScroll().y);
+			this._scrollViewAnimated(0, Math.max(0, pixel) - this._getScroll().y, callback);
 		},
 		/**
 		 * Scrolls the selection into view if needed.
@@ -5402,6 +5392,8 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			if (util.isFirefox < 13 && e.which === 1) {
 				this._clientDiv.contentEditable = true;
 				(this._overlayDiv || this._clientDiv).draggable = false;
+			}
+			if (util.isFirefox && e.which === 1) {
 				
 				/*
 				* Bug in Firefox.  For some reason, Firefox stops showing the caret
@@ -5414,7 +5406,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				this._ignoreBlur = false;
 			}
 		},
-		_handleBlur: function (e) {
+		_handleBlur: function () {
 			this._cancelCheckSelection();
 			if (this._ignoreBlur) { return; }
 			this._commitIME();
@@ -5647,7 +5639,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			if (e.preventDefault) { e.preventDefault(); }
 			return false;
 		},
-		_handleFocus: function (e) {
+		_handleFocus: function () {
 			this._hasFocus = true;
 			if (util.isIOS && this._lastTouchOffset !== undefined) {
 				this.setCaretOffset(this._lastTouchOffset, true);
@@ -5990,8 +5982,13 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			if (this._animation) { return; }
 			var inClient = this._isClientDiv(e);
 			if (this.isListening("MouseMove")) { //$NON-NLS-0$
-				if (inClient){
-					this.onMouseMove(this._createMouseEvent("MouseMove", e)); //$NON-NLS-0$
+				if (inClient || this._isMouseDown){
+					var mouseEvent = this._createMouseEvent("MouseMove", e); //$NON-NLS-0$
+					this.onMouseMove(mouseEvent);
+					if (mouseEvent.defaultPrevented) {
+						e.preventDefault();
+						return;
+					}
 				}
 			}
 			if (this._dropTarget) {
@@ -6097,11 +6094,30 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				}
 			};
 		},
+		_createTouchEvent: function(type, e) {
+			var pt = e.touches.length ? this.convert({x: e.touches[0].clientX, y: e.touches[0].clientY}, "page", "document") : {}; //$NON-NLS-1$ //$NON-NLS-0$
+			return {
+				type: type,
+				event: e,
+				touchCount: e.touches.length,
+				x: pt.x,
+				y: pt.y,
+				preventDefault: function() {
+					this.defaultPrevented = true;
+				}
+			};
+		},
 		_handleMouseUp: function (e) {
 			var left = e.which ? e.button === 0 : e.button === 1;
 			if (this.isListening("MouseUp")) { //$NON-NLS-0$
 				if (this._isClientDiv(e) || (left && this._isMouseDown)) {
-					this.onMouseUp(this._createMouseEvent("MouseUp", e)); //$NON-NLS-0$
+					var mouseEvent = this._createMouseEvent("MouseUp", e); //$NON-NLS-0$
+					this.onMouseUp(mouseEvent);
+					if (mouseEvent.defaultPrevented) {
+						e.preventDefault();
+						this._isMouseDown = false;
+						return;
+					}
 				}
 			}
 			if (this._linksVisible) {
@@ -6146,6 +6162,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			}
 		},
 		_handleMouseWheel: function (e) {
+			if (this._noScroll) return;
 			var lineHeight = this._getLineHeight();
 			var pixelX = 0, pixelY = 0;
 			// Note: On the Mac the correct behaviour is to scroll by pixel.
@@ -6262,7 +6279,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				return false;
 			}
 		},
-		_handleResize: function (e) {
+		_handleResize: function () {
 			var newWidth = this._rootDiv.clientWidth;
 			var newHeight = this._rootDiv.clientHeight;
 			if (this._rootWidth !== newWidth || this._rootHeight !== newHeight) {
@@ -6296,6 +6313,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				} else {
 					this._update();
 				}
+				this.dispatchEvent({type: "Resize"}); //$NON-NLS-0$
 			}
 		},
 		_handleRulerEvent: function (e) {
@@ -6456,7 +6474,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				}
 			}, 100);
 		},
-		_handleSelectionChange: function (e) {
+		_handleSelectionChange: function () {
 			if (this._imeOffset !== -1) {
 				return;
 			}
@@ -6529,6 +6547,17 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			e.preventDefault();
 		},
 		_handleTouchStart: function (e) {
+			if (this.isListening("TouchStart")) { //$NON-NLS-0$
+				var touchEvent = this._createTouchEvent("TouchStart", e); //$NON-NLS-0$
+				this.onTouchStart(touchEvent);
+				if (touchEvent.defaultPrevented) {
+					e.preventDefault();
+					return;
+				}
+				if (this._noScroll) {
+					return;
+				}
+			}
 			this._commitIME();
 			var window = this._getWindow();
 			if (this._touchScrollTimer) {
@@ -6560,6 +6589,17 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			}
 		},
 		_handleTouchMove: function (e) {
+			if (this.isListening("TouchMove")) { //$NON-NLS-0$
+				var touchEvent = this._createTouchEvent("TouchMove", e); //$NON-NLS-0$
+				this.onTouchMove(touchEvent);
+				if (touchEvent.defaultPrevented) {
+					e.preventDefault();
+					return;
+				}
+				if (this._noScroll) {
+					return;
+				}
+			}
 			var touches = e.touches;
 			if (touches.length === 1) {
 				var touch = touches[0];
@@ -6605,6 +6645,17 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			}
 		},
 		_handleTouchEnd: function (e) {
+			if (this.isListening("TouchEnd")) { //$NON-NLS-0$
+				var touchEvent = this._createTouchEvent("TouchEnd", e); //$NON-NLS-0$
+				this.onTouchEnd(touchEvent);
+				if (touchEvent.defaultPrevented) {
+					e.preventDefault();
+					return;
+				}
+				if (this._noScroll) {
+					return;
+				}
+			}
 			var touches = e.touches;
 			if (touches.length === 0) {
 				this._touching = false;
@@ -6810,6 +6861,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			return true;
 		},
 		_doEnter: function (args) {
+			if (this._singleMode) return true;
 			var model = this._model;
 			var selection = this._getSelection();
 			this._doContent(model.getLineDelimiter()); 
@@ -7061,7 +7113,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var lineCount = model.getLineCount();
 			var clientHeight = this._getClientHeight();
 			var lineHeight = this._getLineHeight();
-			var verticalMaximum = lineCount * lineHeight;
+			var verticalMaximum = this._lineHeight ? this._scrollHeight : lineCount * lineHeight;
 			var verticalScrollOffset = this._getScroll().y;
 			var pixel;
 			switch (type) {
@@ -7085,7 +7137,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			}
 			return true;
 		},
-		_doSelectAll: function (args) {
+		_doSelectAll: function () {
 			var model = this._model;
 			var selection = this._getSelection();
 			selection.setCaret(0);
@@ -7093,7 +7145,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			this._setSelection(selection, false);
 			return true;
 		},
-		_doTab: function (args) {
+		_doTab: function () {
 			if (!this._tabMode || this._readonly) { return; }
 			var text = "\t"; //$NON-NLS-0$
 			if (this._expandTab) {
@@ -7102,25 +7154,25 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				var lineIndex = model.getLineAtOffset(caret);
 				var lineStart = model.getLineStart(lineIndex);
 				var spaces = this._tabSize - ((caret - lineStart) % this._tabSize);
-				text = (new Array(spaces + 1)).join(" "); //$NON-NLS-0$
+				text = (newArray(spaces + 1)).join(" "); //$NON-NLS-0$
 			}
 			this._doContent(text);
 			return true;
 		},
-		_doShiftTab: function (args) {
+		_doShiftTab: function () {
 			if (!this._tabMode || this._readonly) { return; }
 			return true;
 		},
-		_doOverwriteMode: function (args) {
+		_doOverwriteMode: function () {
 			if (this._readonly) { return; }
 			this.setOptions({overwriteMode: !this.getOptions("overwriteMode")}); //$NON-NLS-0$
 			return true;
 		},
-		_doTabMode: function (args) {
+		_doTabMode: function () {
 			this._tabMode = !this._tabMode;
 			return true;
 		},
-		_doWrapMode: function (args) {
+		_doWrapMode: function () {
 			this.setOptions({wrapMode: !this.getOptions("wrapMode")}); //$NON-NLS-0$
 			return true;
 		},
@@ -7286,7 +7338,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var rect1 = div1.getBoundingClientRect();
 			var rect2 = div2.getBoundingClientRect();
 			var scrollWidth = 0;
-			if (!this._singleMode) {
+			if (!this._singleMode && !this._noScroll) {
 				div1.style.overflow = 'hidden'; //$NON-NLS-0$
 				div2.style.height = "200px"; //$NON-NLS-0$
 				var w1 = div1.clientWidth;
@@ -7301,21 +7353,24 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				right: rect1.right - rect2.right,
 				bottom: rect1.bottom - rect2.bottom
 			};
-			var wrapWidth = 0, marginWidth = 0;
+			var wrapWidth = 0, marginWidth = 0, charWidth = 0;
 			if (!invalid) {
+				div1 = util.createElement(document, "div"); //$NON-NLS-0$
+				div1.style.position = "fixed"; //$NON-NLS-0$
+				div1.style.left = "-1000px"; //$NON-NLS-0$
+				parent.appendChild(div1);
+				div1.innerHTML = newArray(2).join("a"); //$NON-NLS-0$
+				rect1 = div1.getBoundingClientRect();
+				charWidth = Math.ceil(rect1.right - rect1.left);
 				if (this._wrapOffset || this._marginOffset) {
-					div1 = util.createElement(document, "div"); //$NON-NLS-0$
-					div1.style.position = "fixed"; //$NON-NLS-0$
-					div1.style.left = "-1000px"; //$NON-NLS-0$
-					div1.innerHTML = new Array(this._wrapOffset + 1 + (util.isWebkit ? 0 : 1)).join(" "); //$NON-NLS-0$
-					parent.appendChild(div1);
+					div1.innerHTML = newArray(this._wrapOffset + 1 + (util.isWebkit ? 0 : 1)).join(" "); //$NON-NLS-0$
 					rect1 = div1.getBoundingClientRect();
 					wrapWidth = Math.ceil(rect1.right - rect1.left);
-					div1.innerHTML = new Array(this._marginOffset + 1).join(" "); //$NON-NLS-0$
+					div1.innerHTML = newArray(this._marginOffset + 1).join(" "); //$NON-NLS-0$
 					rect2 = div1.getBoundingClientRect();
 					marginWidth = Math.ceil(rect2.right - rect2.left);
-					parent.removeChild(div1);
 				}
+				parent.removeChild(div1);
 			}
 			return {
 				lineHeight: lineHeight,
@@ -7325,6 +7380,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				scrollWidth: scrollWidth,
 				wrapWidth: wrapWidth,
 				marginWidth: marginWidth,
+				charWidth: charWidth,
 				invalid: invalid
 			};
 		},
@@ -7422,23 +7478,23 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				"deleteWordNext": {defaultHandler: function(data) {return self._doDelete(merge(data,{unit:"word"}));}, actionDescription: {name: messages.deleteWordNext}}, //$NON-NLS-1$ //$NON-NLS-0$
 				"deleteLineStart": {defaultHandler: function(data) {return self._doBackspace(merge(data,{unit: "line"}));}, actionDescription: {name: messages.deleteLineStart}}, //$NON-NLS-1$ //$NON-NLS-0$
 				"deleteLineEnd": {defaultHandler: function(data) {return self._doDelete(merge(data,{unit: "line"}));}, actionDescription: {name: messages.deleteLineEnd}}, //$NON-NLS-1$ //$NON-NLS-0$
-				"tab": {defaultHandler: function(data) {return self._doTab();}, actionDescription: {name: messages.tab}}, //$NON-NLS-0$
-				"shiftTab": {defaultHandler: function(data) {return self._doShiftTab();}, actionDescription: {name: messages.shiftTab}}, //$NON-NLS-0$
-				"enter": {defaultHandler: function(data) {return self._doEnter();}, actionDescription: {name: messages.enter}}, //$NON-NLS-0$
+				"tab": {defaultHandler: function(data) {return self._doTab(merge(data,{}));}, actionDescription: {name: messages.tab}}, //$NON-NLS-0$
+				"shiftTab": {defaultHandler: function(data) {return self._doShiftTab(merge(data,{}));}, actionDescription: {name: messages.shiftTab}}, //$NON-NLS-0$
+				"enter": {defaultHandler: function(data) {return self._doEnter(merge(data,{}));}, actionDescription: {name: messages.enter}}, //$NON-NLS-0$
 				"enterNoCursor": {defaultHandler: function(data) {return self._doEnter(merge(data,{noCursor:true}));}, actionDescription: {name: messages.enterNoCursor}}, //$NON-NLS-0$
-				"selectAll": {defaultHandler: function(data) {return self._doSelectAll();}, actionDescription: {name: messages.selectAll}}, //$NON-NLS-0$
-				"copy": {defaultHandler: function(data) {return self._doCopy();}, actionDescription: {name: messages.copy}}, //$NON-NLS-0$
-				"cut": {defaultHandler: function(data) {return self._doCut();}, actionDescription: {name: messages.cut}}, //$NON-NLS-0$
-				"paste": {defaultHandler: function(data) {return self._doPaste();}, actionDescription: {name: messages.paste}}, //$NON-NLS-0$
+				"selectAll": {defaultHandler: function(data) {return self._doSelectAll(merge(data,{}));}, actionDescription: {name: messages.selectAll}}, //$NON-NLS-0$
+				"copy": {defaultHandler: function(data) {return self._doCopy(merge(data,{}));}, actionDescription: {name: messages.copy}}, //$NON-NLS-0$
+				"cut": {defaultHandler: function(data) {return self._doCut(merge(data,{}));}, actionDescription: {name: messages.cut}}, //$NON-NLS-0$
+				"paste": {defaultHandler: function(data) {return self._doPaste(merge(data,{}));}, actionDescription: {name: messages.paste}}, //$NON-NLS-0$
 				
 				"uppercase": {defaultHandler: function(data) {return self._doCase(merge(data,{type: "upper"}));}, actionDescription: {name: messages.uppercase}}, //$NON-NLS-1$ //$NON-NLS-0$
 				"lowercase": {defaultHandler: function(data) {return self._doCase(merge(data,{type: "lower"}));}, actionDescription: {name: messages.lowercase}}, //$NON-NLS-1$ //$NON-NLS-0$
 				"capitalize": {defaultHandler: function(data) {return self._doCase(merge(data,{unit: "word", type: "capitalize"}));}, actionDescription: {name: messages.capitalize}}, //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 				"reversecase": {defaultHandler: function(data) {return self._doCase(merge(data,{type: "reverse"}));}, actionDescription: {name: messages.reversecase}}, //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 				
-				"toggleOverwriteMode": {defaultHandler: function(data) {return self._doOverwriteMode();}, actionDescription: {name: messages.toggleOverwriteMode}}, //$NON-NLS-0$
-				"toggleTabMode": {defaultHandler: function(data) {return self._doTabMode();}, actionDescription: {name: messages.toggleTabMode}}, //$NON-NLS-0$
-				"toggleWrapMode": {defaultHandler: function(data) {return self._doWrapMode();}, actionDescription: {name: messages.toggleWrapMode}} //$NON-NLS-0$
+				"toggleOverwriteMode": {defaultHandler: function(data) {return self._doOverwriteMode(merge(data,{}));}, actionDescription: {name: messages.toggleOverwriteMode}}, //$NON-NLS-0$
+				"toggleTabMode": {defaultHandler: function(data) {return self._doTabMode(merge(data,{}));}, actionDescription: {name: messages.toggleTabMode}}, //$NON-NLS-0$
+				"toggleWrapMode": {defaultHandler: function(data) {return self._doWrapMode(merge(data,{}));}, actionDescription: {name: messages.toggleWrapMode}} //$NON-NLS-0$
 			};
 		},
 		_createRulerParent: function(document, className) {
@@ -7464,8 +7520,10 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			if (rulerParent !== this._marginDiv || this._marginOffset) {
 				rulerParent.style.display = "block"; //$NON-NLS-0$
 			}
+			rulerParent.rulerWidth = undefined;
 			var div = util.createElement(rulerParent.ownerDocument, "div"); //$NON-NLS-0$
 			div._ruler = ruler;
+			ruler.node = div;
 			div.rulerChanged = true;
 			div.style.position = "relative"; //$NON-NLS-0$
 			div.style.cssFloat = "left"; //$NON-NLS-0$
@@ -7518,7 +7576,11 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var rightDiv = this._createRulerParent(document, "textviewRightRuler"); //$NON-NLS-0$
 			this._rightDiv = rightDiv;
 			rightDiv.style.right = "0px"; //$NON-NLS-0$
-				
+
+			var innerRightDiv = this._createRulerParent(document, "textviewInnerRightRuler"); //$NON-NLS-0$
+			this._innerRightDiv = innerRightDiv;
+			innerRightDiv.style.zIndex = "1"; //$NON-NLS-0$
+
 			var scrollDiv = util.createElement(document, "div"); //$NON-NLS-0$
 			this._scrollDiv = scrollDiv;
 			scrollDiv.style.margin = "0px"; //$NON-NLS-0$
@@ -7652,6 +7714,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				tabSize: {value: 8, update: this._setTabSize},
 				expandTab: {value: false, update: null},
 				singleMode: {value: false, update: this._setSingleMode},
+				noScroll: {value: false, update: this._setNoScroll},
 				overwriteMode: { value: false, update: this._setOverwriteMode },
 				blockCursorVisible: { value: false, update: this._setBlockCursor},
 				marginOffset: {value: 0, update: this._setMarginOffset},
@@ -7673,6 +7736,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 						if (rulerParent.children.length === 0 && (rulerParent !== this._marginDiv || !this._marginOffset)) {
 							rulerParent.style.display = "none"; //$NON-NLS-0$
 						}
+						rulerParent.rulerWidth = undefined;
 						break;
 					}
 					div = div.nextSibling;
@@ -7695,6 +7759,10 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				window.clearTimeout(this._updateTimer);
 				this._updateTimer = null;
 			}
+			if (this._calculateLHTimer) {
+				window.clearTimeout(this._calculateLHTimer);
+				this._calculateLHTimer = null;
+			}
 			
 			var rootDiv = this._rootDiv;
 			rootDiv.parentNode.removeChild(rootDiv);
@@ -7713,6 +7781,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			this._overlayDiv = null;
 			this._leftDiv = null;
 			this._rightDiv = null;
+			this._innerRightDiv = null;
 			this._marginDiv = null;
 			this._cursorDiv = null;
 			this._vScrollDiv = null;
@@ -7781,12 +7850,21 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var viewPad = this._getViewPadding();
 			return Math.max(0, this._viewDiv.clientHeight - viewPad.top - viewPad.bottom);
 		},
+		_getInnerRightWidth: function() {
+			var innerRightWidth = this._innerRightDiv.rulerWidth;
+			if (innerRightWidth === undefined) {
+				var innerRightRect = this._innerRightDiv.getBoundingClientRect();
+				this._innerRightDiv.rulerWidth = innerRightWidth = innerRightRect.right - innerRightRect.left;
+			}
+			return innerRightWidth;
+		},
 		_getClientWidth: function() {
 			var viewPad = this._getViewPadding();
-			return Math.max(0, this._viewDiv.clientWidth - viewPad.left - viewPad.right);
+			var innerRightWidth = this._getInnerRightWidth();
+			return Math.max(0, this._viewDiv.clientWidth - viewPad.left - viewPad.right - innerRightWidth);
 		},
 		_getClipboardText: function (event, handler) {
-			var delimiter = this._model.getLineDelimiter();
+			var delimiter = this._singleMode ? "" : this._model.getLineDelimiter();
 			var clipboadText, text;
 			// IE
 			var window = this._getWindow();
@@ -7996,6 +8074,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			switch (ruler.getLocation()) {
 				case "left": return this._leftDiv; //$NON-NLS-0$
 				case "right": return this._rightDiv; //$NON-NLS-0$
+				case "innerRight": return this._innerRightDiv; //$NON-NLS-0$
 				case "margin": return this._marginDiv; //$NON-NLS-0$
 			}
 			return null;
@@ -8038,7 +8117,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			this._model.addEventListener("postChanged", this._modelListener.onChanged); //$NON-NLS-0$
 			
 			this._themeListener = {
-				onChanged: function(themeChangedEvent) {
+				onChanged: function() {
 					self._setThemeClass(self._themeClass);
 				}
 			};
@@ -8053,7 +8132,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			handlers.push({target: window, type: "resize", handler: function(e) { return self._handleResize(e ? e : window.event);}}); //$NON-NLS-0$
 			handlers.push({target: clientDiv, type: "blur", handler: function(e) { return self._handleBlur(e ? e : window.event);}}); //$NON-NLS-0$
 			handlers.push({target: clientDiv, type: "focus", handler: function(e) { return self._handleFocus(e ? e : window.event);}}); //$NON-NLS-0$
-			handlers.push({target: viewDiv, type: "focus", handler: function(e) { clientDiv.focus(); }}); //$NON-NLS-0$
+			handlers.push({target: viewDiv, type: "focus", handler: function() { clientDiv.focus(); }}); //$NON-NLS-0$
 			handlers.push({target: viewDiv, type: "scroll", handler: function(e) { return self._handleScroll(e ? e : window.event);}}); //$NON-NLS-0$
 			handlers.push({target: clientDiv, type: "textInput", handler: function(e) { return self._handleTextInput(e ? e : window.event); }}); //$NON-NLS-0$
 			handlers.push({target: clientDiv, type: "keydown", handler: function(e) { return self._handleKeyDown(e ? e : window.event);}}); //$NON-NLS-0$
@@ -8117,6 +8196,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 
 			this._hookRulerEvents(this._leftDiv, handlers);
 			this._hookRulerEvents(this._rightDiv, handlers);
+			this._hookRulerEvents(this._innerRightDiv, handlers);
 			this._hookRulerEvents(this._marginDiv, handlers);
 			
 			for (var i=0; i<handlers.length; i++) {
@@ -8154,7 +8234,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			if (typeof(parent) === "string") { //$NON-NLS-0$
 				parent = (options.document || document).getElementById(parent);
 			}
-			if (!parent) { throw "no parent"; } //$NON-NLS-0$
+			if (!parent) { throw new Error("no parent"); } //$NON-NLS-0$
 			options.parent = parent;
 			options.model = options.model || new mTextModel.TextModel();
 			var defaultOptions = this._defaultOptions();
@@ -8315,7 +8395,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				child = this._getLineNext(child);
 			}
 			if (this._lineHeight) {
-				var args = [startLine, removedLineCount].concat(new Array(addedLineCount));
+				var args = [startLine, removedLineCount].concat(newArray(addedLineCount));
 				Array.prototype.splice.apply(this._lineHeight, args);
 			}
 			if (!this._wrapMode) {
@@ -8348,7 +8428,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 						this._lineHeight[i] = undefined;
 					}
 				} else {
-					this._lineHeight = new Array(this._model.getLineCount());
+					this._lineHeight = newArray(this._model.getLineCount());
 				}
 				this._calculateLineHeightTimer();
 			} else {
@@ -8928,6 +9008,11 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			this._updateOverflow();
 			this._updateStyle(init);
 		},
+		_setNoScroll: function (noScroll, init) {
+			this._noScroll = noScroll;
+			this._updateOverflow();
+			this._updateStyle(init);
+		},
 		_setTabSize: function (tabSize, init) {
 			this._tabSize = tabSize;
 			this._customTabSize = undefined;
@@ -9371,6 +9456,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				// Update rulers
 				this._updateRuler(this._leftDiv, topIndex, lineEnd, rootHeight);
 				this._updateRuler(this._rightDiv, topIndex, lineEnd, rootHeight);
+				this._updateRuler(this._innerRightDiv, topIndex, lineEnd, rootHeight);
 				this._updateRuler(this._marginDiv, topIndex, lineEnd, rootHeight);
 				
 				leftWidth = 0;
@@ -9391,7 +9477,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				scrollDiv.style.height = scrollHeight + "px"; //$NON-NLS-0$
 				
 				clientWidth = this._getClientWidth();
-				if (!this._singleMode && !this._wrapMode) {
+				if (!this._singleMode && !this._wrapMode && !this._noScroll) {
 					var clientHeightNoScroll = clientHeight, clientHeightScroll = clientHeight;
 					var oldHScroll = viewDiv.style.overflowX === "scroll"; //$NON-NLS-0$
 					if (oldHScroll) {
@@ -9435,7 +9521,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 						width = this._metrics.wrapWidth;
 					}
 				} else {
-					width = Math.max(this._maxLineWidth, width);
+					width = Math.max(this._maxLineWidth + this._getInnerRightWidth(), width);
 				}
 				/*
 				* Except by IE 8 and earlier, all other browsers are not allocating enough space for the right padding 
@@ -9449,7 +9535,14 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 				}
 				/* Get the left scroll after setting the width of the scrollDiv as this can change the horizontal scroll offset. */
 				scroll = this._getScroll(false);
+
+				var innerRightDiv = this._innerRightDiv;
+				if (innerRightDiv) {
+					innerRightDiv.style.right = rightWidth + (viewDiv.style.overflowY === "scroll" ? this._metrics.scrollWidth : 0) + "px"; //$NON-NLS-1$ //$NON-NLS-0$
+					innerRightDiv.style.bottom = (viewDiv.style.overflowX === "scroll" ? scrollbarWidth : 0) + "px"; //$NON-NLS-1$ //$NON-NLS-0$
+				}
 			}
+			this._scrollHeight = scrollHeight;
 			if (this._vScrollDiv) {
 				var trackHeight = clientHeight - 8;
 				var thumbHeight = Math.max(15, Math.ceil(Math.min(1, trackHeight / (scrollHeight + viewPad.top + viewPad.bottom)) * trackHeight));
@@ -9550,7 +9643,9 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 		},
 		_updateOverflow: function() {
 			var viewDiv = this._viewDiv;
-			if (this._wrapMode) {
+			if (this._noScroll) {
+				viewDiv.style.overflow = "hidden"; //$NON-NLS-0$
+			} else if (this._wrapMode) {
 				viewDiv.style.overflowX = "hidden"; //$NON-NLS-0$
 				viewDiv.style.overflowY = "scroll"; //$NON-NLS-0$
 			} else {
@@ -9565,15 +9660,21 @@ define("orion/editor/textView", [ //$NON-NLS-0$
 			var div = divRuler.firstChild;
 			while (div) {
 				var ruler = div._ruler;
-				var offset = lineHeight;
 				var overview = ruler.getOverview();
+				if (div.rulerChanged) {
+					applyStyle(ruler.getRulerStyle(), div);
+					divRuler.rulerWidth = undefined;
+				}
+				if (overview === "fixed") { //$NON-NLS-0$
+					div.rulerChanged = false;
+					div = div.nextSibling;
+					continue;
+				}
+				var offset = lineHeight;
 				if (overview === "page") { offset += this._topIndexY; } //$NON-NLS-0$
 				div.style.top = -offset + "px"; //$NON-NLS-0$
 				div.style.height = (rootHeight + offset) + "px"; //$NON-NLS-0$
 				
-				if (div.rulerChanged) {
-					applyStyle(ruler.getRulerStyle(), div);
-				}
 				
 				var widthDiv;
 				var child = div.firstChild;
@@ -9760,8 +9861,7 @@ define("orion/editor/textView", [ //$NON-NLS-0$
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/projectionTextModel", ['orion/editor/textModel', 'orion/editor/eventTarget'], function(mTextModel, mEventTarget) { //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 
 	/**
@@ -10359,8 +10459,7 @@ define("orion/editor/projectionTextModel", ['orion/editor/textModel', 'orion/edi
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/annotations", ['i18n!orion/editor/nls/messages', 'orion/editor/eventTarget'], function(messages, mEventTarget) { //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 	
 	/**
@@ -11317,7 +11416,7 @@ define("orion/editor/annotations", ['i18n!orion/editor/nls/messages', 'orion/edi
 
 /*******************************************************************************
  * @license
- * Copyright (c) 2010, 2012 IBM Corporation and others.
+ * Copyright (c) 2010, 2014 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
  * available under the terms of the Eclipse Public License v1.0 
  * (http://www.eclipse.org/legal/epl-v10.html), and the Eclipse Distribution 
@@ -11326,16 +11425,14 @@ define("orion/editor/annotations", ['i18n!orion/editor/nls/messages', 'orion/edi
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define Node */
-
+/*eslint-env browser, amd, node*/
 define("orion/editor/tooltip", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/editor/textView', //$NON-NLS-0$
-	'orion/editor/textModel', //$NON-NLS-0$
 	'orion/editor/projectionTextModel', //$NON-NLS-0$
 	'orion/editor/util', //$NON-NLS-0$
 	'orion/util' //$NON-NLS-0$
-], function(messages, mTextView, mTextModel, mProjectionTextModel, textUtil, util) {
+], function(messages, mTextView, mProjectionTextModel, textUtil, util) {
 
 	/** @private */
 	function Tooltip (view) {
@@ -11505,14 +11602,19 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 		show: function(autoHide) {
 			if (!this._target) { return; }
 			var info = this._target.getTooltipInfo();
+
 			if (!info) { return; }
 			var tooltipDiv = this._tooltipDiv, tooltipContents = this._tooltipContents;
 			tooltipDiv.style.left = tooltipDiv.style.right = tooltipDiv.style.width = tooltipDiv.style.height = 
 				tooltipContents.style.width = tooltipContents.style.height = "auto"; //$NON-NLS-0$
+			var tooltipDoc = tooltipDiv.ownerDocument;
+			var documentElement = tooltipDoc.documentElement;
+			
 			var contents = info.contents;
 			if (contents instanceof Array) {
-				contents = this._getAnnotationContents(contents);
+				contents = this._getAnnotationContents(contents);			
 			}
+			
 			if (typeof contents === "string") { //$NON-NLS-0$
 				tooltipContents.innerHTML = contents;
 			} else if (this._isNode(contents)) {
@@ -11545,10 +11647,29 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 				tooltipContents.style.width = size.width + "px"; //$NON-NLS-0$
 				tooltipContents.style.height = size.height + "px"; //$NON-NLS-0$
 				contentsView.resize();
-			} else {
+			} else if (!info.deferredInfo) {
 				return;
 			}
-			var documentElement = tooltipDiv.ownerDocument.documentElement;
+			
+			var deferredInfo = info.deferredInfo;
+			if (deferredInfo) {
+				var self = this;
+				deferredInfo.forEach(function(tipSection) {
+					tipSection.promise.then(function (data) {
+						if (data) {
+							if (data.content) {
+								self._renderContent(tooltipDoc, tooltipContents, data, tipSection);
+							}
+
+							// Ensure that the tooltip is visible
+							tooltipDiv.style.visibility = "visible"; //$NON-NLS-0$
+						}
+					}, function(err) {
+						console.error("Problem computing hover tooltip", err);
+					});
+				});
+			}
+			
 			if (info.anchor === "right") { //$NON-NLS-0$
 				var right = documentElement.clientWidth - info.x;
 				tooltipDiv.style.right = right + "px"; //$NON-NLS-0$
@@ -11566,7 +11687,12 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 			tooltipDiv.style.top = top + "px"; //$NON-NLS-0$
 			tooltipDiv.style.maxHeight = (documentElement.clientHeight - top - 10) + "px"; //$NON-NLS-0$
 			tooltipDiv.style.opacity = "1"; //$NON-NLS-0$
-			tooltipDiv.style.visibility = "visible"; //$NON-NLS-0$
+			
+			// Delay the showing of a tootip with no 'static' contents
+			if (contents) {
+				tooltipDiv.style.visibility = "visible"; //$NON-NLS-0$
+			}
+			
 			if (autoHide) {
 				var self = this;
 				var window = this._getWindow();
@@ -11582,6 +11708,53 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 						self._hide();
 					}, self._fadeDelay / 10);
 				}, self._autoHideDelay);
+			}
+		},
+		_renderContent: function(tooltipDoc, tooltipContents, data, tipSection) {
+		    var sectionDiv = null;
+		    var divResult = null;
+
+			// render the title, if any
+			if (data.title) {
+				sectionDiv = util.createElement(tooltipDoc, "div"); //$NON-NLS-0$
+				sectionDiv.innerHTML = tipSection.renderMarkDown(data.title);
+				tooltipContents.appendChild(sectionDiv);
+			}
+							
+			switch(data.type) {
+				case 'markdown': {
+					if (data.content) {
+						divResult = util.createElement(tooltipDoc, "div"); //$NON-NLS-0$
+						divResult.innerHTML = tipSection.renderMarkDown(data.content);
+						sectionDiv.appendChild(divResult);
+					}
+					break;
+				}
+				case 'proposal': {
+						var params = data.content;
+						sectionDiv = util.createElement(tooltipDoc, "button"); //$NON-NLS-0$
+						sectionDiv.textContent = params.label;
+						tooltipContents.appendChild(sectionDiv);
+						
+						var self = this;
+						sectionDiv.addEventListener("click", function() {
+							self._view.setText(params.text, params.start, params.end);
+							self._hide();
+						});
+					break;
+				}
+				default: {
+					if (data.title) {
+						sectionDiv = util.createElement(tooltipDoc, "div"); //$NON-NLS-0$
+						sectionDiv.textContent = data.title;
+					}
+					if (data.content) {
+						tooltipContents.appendChild(sectionDiv);
+						divResult = util.createElement(tooltipDoc, "div"); //$NON-NLS-0$
+						divResult.appendChild(tooltipDoc.createTextNode(data.content));
+						sectionDiv.appendChild(divResult);
+					}
+				}
 			}
 		},
 		_getAnnotationContents: function(annotations) {
@@ -11680,23 +11853,7 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 			}
 		},
 		_getNodeStyle: function(node, prop, defaultValue) {
-			var value;
-			if (node) {
-				value = node.style[prop];
-				if (!value) {
-					if (node.currentStyle) {
-						var index = 0, p = prop;
-						while ((index = p.indexOf("-", index)) !== -1) { //$NON-NLS-0$
-							p = p.substring(0, index) + p.substring(index + 1, index + 2).toUpperCase() + p.substring(index + 2);
-						}
-						value = node.currentStyle[p];
-					} else {
-						var css = node.ownerDocument.defaultView.getComputedStyle(node, null);
-						value = css ? css.getPropertyValue(prop) : null;
-					}
-				}
-			}
-			return value || defaultValue;
+			return textUtil.getNodeStyle(node, prop, defaultValue);
 		},
 		_isNode: function (obj) {
 			return typeof Node === "object" ? obj instanceof Node : //$NON-NLS-0$
@@ -11704,6 +11861,78 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
 		}
 	};
 	return {Tooltip: Tooltip};
+});
+
+/*******************************************************************************
+ * @license
+ * Copyright (c) 2013 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials are made 
+ * available under the terms of the Eclipse Public License v1.0 
+ * (http://www.eclipse.org/legal/epl-v10.html), and the Eclipse Distribution 
+ * License v1.0 (http://www.eclipse.org/org/documents/edl-v10.html). 
+ * 
+ * Contributors: IBM Corporation - initial API and implementation
+ ******************************************************************************/
+/*eslint-env browser, amd*/
+define('orion/objects',[], function() {
+	function mixin(target/*, source..*/) {
+		var hasOwnProperty = Object.prototype.hasOwnProperty;
+		for (var j = 1, len = arguments.length; j < len; j++) {
+			var source = arguments[j];
+			for (var key in source) {
+				if (hasOwnProperty.call(source, key)) {
+					target[key] = source[key];
+				}
+			}
+		}
+		return target;
+	}
+
+	/**
+	 * @name orion.objects
+	 * @class Object-oriented helpers.
+	 */
+	return {
+		/**
+		 * Creates a shallow clone of the given <code>object</code>.
+		 * @name orion.objects.clone
+		 * @function
+		 * @static
+		 * @param {Object|Array} object The object to clone. Must be a "normal" Object or Array. Other built-ins,
+		 * host objects, primitives, etc, will not work.
+		 * @returns {Object|Array} A clone of <code>object</code>.
+		 */
+		clone: function(object) {
+			if (Array.isArray(object)) {
+				return Array.prototype.slice.call(object);
+			}
+			var clone = Object.create(Object.getPrototypeOf(object));
+			mixin(clone, object);
+			return clone;
+		},
+		/**
+		 * Mixes all <code>source</code>'s own enumerable properties into <code>target</code>. Multiple source objects
+		 * can be passed as varags.
+		 * @name orion.objects.mixin
+		 * @function
+		 * @static
+		 * @param {Object} target
+		 * @param {Object} source
+		 */
+		mixin: mixin,
+		/**
+		 * Wraps an object into an Array if necessary.
+		 * @name orion.objects.toArray
+		 * @function
+		 * @static
+		 * @param {Object} obj An object.
+		 * @returns {Array} Returns <code>obj</code> unchanged, if <code>obj</code> is an Array. Otherwise returns a 1-element Array
+		 * whose sole element is <code>obj</code>.
+		 */
+		toArray: function(o) {
+			return Array.isArray(o) ? o : [o];
+		}
+	};
 });
 
 /*******************************************************************************
@@ -11717,9 +11946,81 @@ define("orion/editor/tooltip", [ //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
+/*eslint-env browser, amd*/
+define("orion/editor/rulers", [
+	'i18n!orion/editor/nls/messages',
+	'orion/editor/textView',
+	'orion/editor/annotations',
+	'orion/editor/tooltip', 
+	'orion/objects',
+	'orion/editor/util',
+	'orion/util'
+], function(messages, mTextView, mAnnotations, mTooltip, objects, textUtil, util) {
 
-define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/annotations', 'orion/editor/tooltip', 'orion/util'], function(messages, mAnnotations, mTooltip, util) { //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+	function BaseRuler (rulerLocation, rulerOverview, rulerStyle) {
+		this._location = rulerLocation || "left"; //$NON-NLS-0$
+		this._overview = rulerOverview || "page"; //$NON-NLS-0$
+		this._rulerStyle = rulerStyle;
+		this._view = null;
+	}
+	BaseRuler.prototype = /** @lends orion.editor.BaseRuler.prototype */ {
+		/**
+		 * Returns the ruler location.
+		 *
+		 * @returns {String} the ruler location, which is either "left" or "right" or "margin".
+		 *
+		 * @see orion.editor.Ruler#getOverview
+		 */
+		getLocation: function() {
+			return this._location;
+		},
+		/**
+		 * Returns the ruler overview type.
+		 *
+		 * @returns {String} the overview type, which is either "page" or "document" or "fixed".
+		 *
+		 * @see orion.editor.Ruler#getLocation
+		 */
+		getOverview: function() {
+			return this._overview;
+		},
+		/**
+		 * Returns the style information for the ruler.
+		 *
+		 * @returns {orion.editor.Style} the style information.
+		 */
+		getRulerStyle: function() {
+			return this._rulerStyle;
+		},
+		/**
+		 * Returns the text view.
+		 *
+		 * @returns {orion.editor.TextView} the text view.
+		 *
+		 * @see orion.editor.Ruler#setView
+		 */
+		getView: function() {
+			return this._view;
+		},
+		/**
+		 * Sets the view for the ruler.
+		 * <p>
+		 * This method is called by the text view when the ruler
+		 * is added to the view.
+		 * </p>
+		 *
+		 * @param {orion.editor.TextView} view the text view.
+		 */
+		setView: function (view) {
+			if (this._onTextModelChanged && this._view) {
+				this._view.removeEventListener("ModelChanged", this._listener.onTextModelChanged); //$NON-NLS-0$
+			}
+			this._view = view;
+			if (this._onTextModelChanged && this._view) {
+				this._view.addEventListener("ModelChanged", this._listener.onTextModelChanged); //$NON-NLS-0$
+			}
+		},
+	};
 
 	/**
 	 * Constructs a new ruler. 
@@ -11757,10 +12058,7 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 	 * @borrows orion.editor.AnnotationTypeList#removeAnnotationType as #removeAnnotationType
 	 */
 	function Ruler (annotationModel, rulerLocation, rulerOverview, rulerStyle) {
-		this._location = rulerLocation || "left"; //$NON-NLS-0$
-		this._overview = rulerOverview || "page"; //$NON-NLS-0$
-		this._rulerStyle = rulerStyle;
-		this._view = null;
+		BaseRuler.call(this, rulerLocation, rulerOverview, rulerStyle);
 		var self = this;
 		this._listener = {
 			onTextModelChanged: function(e) {
@@ -11772,7 +12070,7 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 		};
 		this.setAnnotationModel(annotationModel);
 	}
-	Ruler.prototype = /** @lends orion.editor.Ruler.prototype */ {
+	Ruler.prototype = objects.mixin(new BaseRuler(), /** @lends orion.editor.Ruler.prototype */ {
 		/**
 		 * Returns the annotations for a given line range merging multiple
 		 * annotations when necessary.
@@ -11837,44 +12135,6 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 			return this._annotationModel;
 		},
 		/**
-		 * Returns the ruler location.
-		 *
-		 * @returns {String} the ruler location, which is either "left" or "right".
-		 *
-		 * @see orion.editor.Ruler#getOverview
-		 */
-		getLocation: function() {
-			return this._location;
-		},
-		/**
-		 * Returns the ruler overview type.
-		 *
-		 * @returns {String} the overview type, which is either "page" or "document".
-		 *
-		 * @see orion.editor.Ruler#getLocation
-		 */
-		getOverview: function() {
-			return this._overview;
-		},
-		/**
-		 * Returns the style information for the ruler.
-		 *
-		 * @returns {orion.editor.Style} the style information.
-		 */
-		getRulerStyle: function() {
-			return this._rulerStyle;
-		},
-		/**
-		 * Returns the text view.
-		 *
-		 * @returns {orion.editor.TextView} the text view.
-		 *
-		 * @see orion.editor.Ruler#setView
-		 */
-		getView: function() {
-			return this._view;
-		},
-		/**
 		 * Returns the widest annotation which determines the width of the ruler.
 		 * <p>
 		 * If the ruler does not have a fixed width it should provide the widest
@@ -11930,24 +12190,6 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 		 */
 		setMultiAnnotationOverlay: function(annotation) {
 			this._multiAnnotationOverlay = annotation;
-		},
-		/**
-		 * Sets the view for the ruler.
-		 * <p>
-		 * This method is called by the text view when the ruler
-		 * is added to the view.
-		 * </p>
-		 *
-		 * @param {orion.editor.TextView} view the text view.
-		 */
-		setView: function (view) {
-			if (this._onTextModelChanged && this._view) {
-				this._view.removeEventListener("ModelChanged", this._listener.onTextModelChanged); //$NON-NLS-0$
-			}
-			this._view = view;
-			if (this._onTextModelChanged && this._view) {
-				this._view.addEventListener("ModelChanged", this._listener.onTextModelChanged); //$NON-NLS-0$
-			}
 		},
 		/**
 		 * This event is sent when the user clicks a line annotation.
@@ -12236,7 +12478,7 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 			}
 			annotationModel.replaceAnnotations(null, add);
 		}
-	};
+	});
 	mAnnotations.AnnotationTypeList.addMixin(Ruler.prototype);
 
 	/**
@@ -12269,7 +12511,7 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 		var result = Ruler.prototype.getAnnotations.call(this, startLine, endLine);
 		var model = this._view.getModel();
 		for (var lineIndex = startLine; lineIndex < endLine; lineIndex++) {
-			var style = lineIndex & 1 ? this._oddStyle : this._evenStyle;
+			var style = (lineIndex - this._firstLine) & 1 ? this._oddStyle : this._evenStyle;
 			var mapLine = lineIndex;
 			if (model.getBaseModel) {
 				var lineStart = model.getLineStart(mapLine);
@@ -12509,12 +12751,254 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
 		}
 	};
 	
+
+	/**
+	 * Constructs a new zoom ruler. 
+	 *
+	 * @param {String} [rulerLocation="left"] the location for the ruler.
+	 * @param {orion.editor.Style} [rulerStyle=undefined] the style for the ruler.
+	 *
+	 * @augments orion.editor.Ruler
+	 * @class This objects implements an overview ruler.
+	 *
+	 * <p><b>See:</b><br/>
+	 * {@link orion.editor.AnnotationRuler} <br/>
+	 * {@link orion.editor.Ruler} 
+	 * </p>
+	 * @name orion.editor.OverviewRuler
+	 */
+	var ZoomRuler = function(rulerLocation, rulerStyle) {
+		BaseRuler.call(this, rulerLocation, "fixed", rulerStyle); //$NON-NLS-0$
+	};
+	
+	ZoomRuler.prototype = objects.mixin(new BaseRuler(), {
+		setView: function (view) {
+			this._destroy();
+			BaseRuler.prototype.setView.call(this, view);
+			this._create();
+		},
+		_create: function() {
+			var textView = this.getView();
+			if (!textView) return;
+			function getOptions(options) {
+				var rulerTheme = "textviewZoom"; //$NON-NLS-0$
+				var theme = options.themeClass;
+				if (theme) {
+					theme = theme.replace(rulerTheme, "");
+					if (theme) { theme = " " + theme; } //$NON-NLS-0$
+					theme = rulerTheme + theme;
+				} else {
+					theme = rulerTheme;
+				}
+				options.themeClass = theme;
+				options.noScroll = true;
+				options.readonly = true;
+				return options;
+			}
+			var options = getOptions(textView.getOptions());
+			options.parent = this.node;
+			var zoomView = this._zoomView = new mTextView.TextView(options);
+			zoomView._clientDiv.contentEditable = false;
+			zoomView.setModel(textView.getModel());
+			var document = textView.getOptions("parent").ownerDocument; //$NON-NLS-0$
+			var windowDiv = this._windowDiv = util.createElement(document, "div"); //$NON-NLS-0$
+			windowDiv.className ="rulerZoomWindow"; //$NON-NLS-0$
+			this.node.appendChild(windowDiv);
+			var border = parseInt(textUtil.getNodeStyle(windowDiv, "border-top-width", 0)) + //$NON-NLS-0$
+					parseInt(textUtil.getNodeStyle(windowDiv, "border-bottom-width", 0)); //$NON-NLS-0$
+			var that = this;
+			function updateWindow(scroll, p) {
+				var top = scroll.y * p.zoomFactor;
+				var height = p.clientHeight * p.zoomFactor;
+				that.top = top;
+				that.bottom = top + height;
+				top = zoomView.convert({y: top}, "document", "page").y; //$NON-NLS-1$ //$NON-NLS-0$
+				top = top - that.node.getBoundingClientRect().top;
+				windowDiv.style.top = top + "px"; //$NON-NLS-0$
+				windowDiv.style.height = (height - border) + "px"; //$NON-NLS-0$
+			}
+			function getProps() {
+				var padding = textView._metrics.viewPadding;
+				var zoomPadding = textView._metrics.viewPadding;
+				var lineHeight = textView.getLineHeight();
+				var zoomLineHeight = zoomView.getLineHeight();
+				var lineCount = textView.getModel().getLineCount();
+				var documentHeight = textView._lineHeight ? textView._scrollHeight : lineCount * lineHeight;
+				var zoomDocumentHeight = zoomView._lineHeight ? zoomView._scrollHeight : lineCount * zoomLineHeight;
+				var zoomFactor = zoomDocumentHeight / documentHeight;
+				var clientHeight = textView.getClientArea().height + padding.top + padding.bottom;
+				var zoomClientHeight = zoomView.getClientArea().height + zoomPadding.top + zoomPadding.bottom;
+				var windowHeight = clientHeight * zoomFactor;
+				var scrollWidth = textView._metrics.scrollWidth;
+				return {
+					zoomFactor: zoomFactor,
+					documentHeight: documentHeight,
+					zoomDocumentHeight: zoomDocumentHeight,
+					clientHeight: clientHeight,
+					zoomClientHeight: zoomClientHeight,
+					scrollWidth: scrollWidth,
+					windowHeight: windowHeight,
+					padding: padding
+				};
+			}
+			function toZoom(scroll, p) {
+				return scroll.y * (p.zoomFactor + (p.windowHeight - p.clientHeight - p.scrollWidth) / p.documentHeight);
+			}
+			function updateScroll(scroll) {
+				scroll = scroll || {y: textView.getTopPixel()};
+				var p = getProps();
+				var y = toZoom(scroll, p);
+				zoomView.setTopPixel(y);
+				updateWindow(scroll, p);
+			}
+			function updateWidth(options) {
+				var width;
+				if (options.wrapMode && !options.wrapOffset && textView._metrics.charWidth) {
+					var div1 = util.createElement(document, "div"); //$NON-NLS-0$
+					div1.style.position = "fixed"; //$NON-NLS-0$
+					div1.style.left = "-1000px"; //$NON-NLS-0$
+					zoomView._clientDiv.appendChild(div1);
+					div1.innerHTML = new Array(Math.ceil(textView.getClientArea().width / textView._metrics.charWidth) + 1).join("a"); //$NON-NLS-0$
+					var rect1 = div1.getBoundingClientRect();
+					width = Math.min(150, Math.ceil(rect1.right - rect1.left)) + "px"; //$NON-NLS-0$
+				} else {
+					width = "";
+				}
+				var oldWidth = that.node.style.width;
+				that.node.style.width = width;
+				return oldWidth !== width;
+			}
+			textView.addEventListener("Scroll", this._scrollListener = function(event) { //$NON-NLS-0$
+				updateScroll(event.newValue);
+			});
+			textView.addEventListener("Resize", this._resizeListener = function() { //$NON-NLS-0$
+				updateWidth(zoomView.getOptions());
+				updateScroll();
+			});
+			textView.addEventListener("Redraw", this._redrawListener = function(event) { //$NON-NLS-0$
+				if (!event.ruler) {
+					zoomView.redrawLines(event.startLine, event.endLine);
+				}
+			});
+			textView.addEventListener("Options", this._optionsListener = function(event) { //$NON-NLS-0$
+				var options = getOptions(event.options);
+				zoomView.setOptions(options);
+				updateWidth(zoomView.getOptions());
+			});
+			zoomView.addEventListener("LineStyle", this._lineListener = function(e) { //$NON-NLS-0$
+				textView.onLineStyle(e);
+			});
+			function down(event, clientY, touch) {
+				if (touch || (that.top <= event.y && event.y <= that.bottom)) {
+					that.mouseDown = true;
+					that.delta = clientY - windowDiv.getBoundingClientRect().top + that.node.getBoundingClientRect().top;
+				} else {
+					var offset = zoomView.getOffsetAtLocation(event.x, event.y);
+					textView.setSelection(offset, offset, 0.5, function() {});
+				}
+			}
+			function up() {
+				that.mouseDown = false;
+			}
+			function move(clientY) {
+				if (that.mouseDown) {
+					var p = getProps();
+					var thumbPos = Math.min(p.zoomClientHeight - p.windowHeight, Math.max(0, clientY - that.delta));
+					textView.setTopPixel(thumbPos * (p.documentHeight - p.clientHeight) / Math.min(p.zoomDocumentHeight, p.zoomClientHeight - p.windowHeight));
+				}
+			}
+			function stop(event) {
+				event.preventDefault();
+			}
+			if (util.isIOS || util.isAndroid) {
+				windowDiv.addEventListener("touchstart", function(event) { //$NON-NLS-0$
+					var touches = event.touches;
+					if (touches.length === 1) {
+						down(event, event.touches[0].clientY, true);
+						event.preventDefault();
+					}
+				});
+				windowDiv.addEventListener("touchend", function(event) { //$NON-NLS-0$
+					var touches = event.touches;
+					if (touches.length === 0) {
+						up(event);
+					}
+				});
+				windowDiv.addEventListener("touchmove", function(event) { //$NON-NLS-0$
+					var touches = event.touches;
+					if (touches.length === 1) {
+						move(event.touches[0].clientY);
+					}
+				});
+				zoomView.addEventListener("TouchStart", function(event) { //$NON-NLS-0$
+					if (event.touchCount === 1) {
+						down(event, event.event.touches[0].clientY);
+						stop(event);
+					}
+				});
+//				windowDiv.style.pointerEvents = "none"; //$NON-NLS-0$
+//				zoomView.addEventListener("TouchEnd", function(event) { //$NON-NLS-0$
+//					if (event.touchCount === 0) {
+//						up(event);
+//					}
+//				});
+//				zoomView.addEventListener("TouchMove", function(event) { //$NON-NLS-0$
+//					if (event.touchCount === 1) {
+//						move(event.event.touches[0].clientY);
+//					}
+//				});
+			} else {
+				windowDiv.style.pointerEvents = "none"; //$NON-NLS-0$
+				zoomView.addEventListener("MouseDown", function(event) { //$NON-NLS-0$
+					var e = event.event;
+					if (e.which ? e.button === 0 : e.button === 1) {
+						down(event, e.clientY);
+					}
+					stop(event);
+				});
+				zoomView.addEventListener("MouseUp", function(event) { //$NON-NLS-0$
+					up(event);
+					stop(event);
+				});
+				zoomView.addEventListener("MouseMove", function(event) { //$NON-NLS-0$
+					move(event.event.clientY);
+					stop(event);
+				});
+			}
+			(document.defaultView || document.parentWindow).setTimeout(function() {
+				updateScroll();
+			}, 0);
+		},
+		_destroy: function() {
+			var textView = this.getView();
+			if (textView) {
+				textView.removeEventListener("Scroll", this._scrollListener); //$NON-NLS-0$
+				this._scrollListener = null;
+				textView.removeEventListener("Resize", this._resizeListener); //$NON-NLS-0$
+				this._resizeListener = null;
+				textView.removeEventListener("Redraw", this._redrawListener); //$NON-NLS-0$
+				this._redrawListener = null;
+				textView.removeEventListener("Options", this._optionsListener); //$NON-NLS-0$
+				this._optionsListener = null;
+			}
+			var zoomView = this._zoomView;
+			if (zoomView) {
+				zoomView.removeEventListener("LineStyle", this._lineListener); //$NON-NLS-0$
+				zoomView.setModel(null);
+				zoomView.destroy();
+				this._zoomView = null;
+			}
+		}
+	});
+	
 	return {
+		BaseRuler: BaseRuler,
 		Ruler: Ruler,
 		AnnotationRuler: AnnotationRuler,
 		LineNumberRuler: LineNumberRuler,
 		OverviewRuler: OverviewRuler,
-		FoldingRuler: FoldingRuler
+		FoldingRuler: FoldingRuler,
+		ZoomRuler: ZoomRuler,
 	};
 });
 
@@ -12529,8 +13013,7 @@ define("orion/editor/rulers", ['i18n!orion/editor/nls/messages', 'orion/editor/a
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/undoStack", [], function() { //$NON-NLS-0$
 
 	/** 
@@ -12647,13 +13130,13 @@ define("orion/editor/undoStack", [], function() { //$NON-NLS-0$
 			for (var i=this.changes.length - 1; i >= 0; i--) {
 				this.changes[i].undo(view, false);
 			}
-			if (this.changes.length > 1 && view) {
-				view.setRedraw(true);
-			}
 			if (select && view) {
 				var start = this.startSelection.start;
 				var end = this.startSelection.end;
 				view.setSelection(this.startCaret ? start : end, this.startCaret ? end : start);
+			}
+			if (this.changes.length > 1 && view) {
+				view.setRedraw(true);
 			}
 			var owner = this.owner;
 			if (owner && owner.undo) {
@@ -13039,8 +13522,7 @@ define("orion/editor/undoStack", [], function() { //$NON-NLS-0$
  *		Silenio Quarti (IBM Corporation) - initial API and implementation
  ******************************************************************************/
  
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/textDND", ['orion/util'], function(util) { //$NON-NLS-1$ //$NON-NLS-0$
 
 	function TextDND(view, undoStack) {
@@ -13187,78 +13669,6 @@ define("orion/editor/textDND", ['orion/util'], function(util) { //$NON-NLS-1$ //
 
 /*******************************************************************************
  * @license
- * Copyright (c) 2013 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials are made 
- * available under the terms of the Eclipse Public License v1.0 
- * (http://www.eclipse.org/legal/epl-v10.html), and the Eclipse Distribution 
- * License v1.0 (http://www.eclipse.org/org/documents/edl-v10.html). 
- * 
- * Contributors: IBM Corporation - initial API and implementation
- ******************************************************************************/
-/*global define*/
-define('orion/objects',[], function() {
-	function mixin(target/*, source..*/) {
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
-		for (var j = 1, len = arguments.length; j < len; j++) {
-			var source = arguments[j];
-			for (var key in source) {
-				if (hasOwnProperty.call(source, key)) {
-					target[key] = source[key];
-				}
-			}
-		}
-		return target;
-	}
-
-	/**
-	 * @name orion.objects
-	 * @class Object-oriented helpers.
-	 */
-	return {
-		/**
-		 * Creates a shallow clone of the given <code>object</code>.
-		 * @name orion.objects.clone
-		 * @function
-		 * @static
-		 * @param {Object|Array} object The object to clone. Must be a "normal" Object or Array. Other built-ins,
-		 * host objects, primitives, etc, will not work.
-		 * @returns {Object|Array} A clone of <code>object</code>.
-		 */
-		clone: function(object) {
-			if (Array.isArray(object)) {
-				return Array.prototype.slice.call(object);
-			}
-			var clone = Object.create(Object.getPrototypeOf(object));
-			mixin(clone, object);
-			return clone;
-		},
-		/**
-		 * Mixes all <code>source</code>'s own enumerable properties into <code>target</code>. Multiple source objects
-		 * can be passed as varags.
-		 * @name orion.objects.mixin
-		 * @function
-		 * @static
-		 * @param {Object} target
-		 * @param {Object} source
-		 */
-		mixin: mixin,
-		/**
-		 * Wraps an object into an Array if necessary.
-		 * @name orion.objects.toArray
-		 * @function
-		 * @static
-		 * @param {Object} obj An object.
-		 * @returns {Array} Returns <code>obj</code> unchanged, if <code>obj</code> is an Array. Otherwise returns a 1-element Array
-		 * whose sole element is <code>obj</code>.
-		 */
-		toArray: function(o) {
-			return Array.isArray(o) ? o : [o];
-		}
-	};
-});
-
-/*******************************************************************************
- * @license
  * Copyright (c) 2009, 2014 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
  * available under the terms of the Eclipse Public License v1.0 
@@ -13268,8 +13678,7 @@ define('orion/objects',[], function() {
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
  
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/editor", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/editor/eventTarget', //$NON-NLS-0$
@@ -13523,11 +13932,13 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 	 * @param {Object} options.domNode
 	 * @param {Object} options.keyBindingFactory
 	 * @param {Object} options.lineNumberRulerFactory
+	 * @param {Object} options.zoomRulerFactory
 	 * @param {Object} options.foldingRulerFactory
 	 * @param {Object} options.statusReporter
 	 * @param {Object} options.textViewFactory
 	 * @param {Object} options.undoStackFactory
 	 * @param {Object} options.textDNDFactory
+	 * @param {Object} options.hoverFactory
 	 */
 	function Editor(options) {
 		options = options || {};
@@ -13536,16 +13947,19 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 		this._undoStackFactory = options.undoStackFactory;
 		this._textDNDFactory = options.textDNDFactory;
 		this._annotationFactory = options.annotationFactory;
+		this._zoomRulerFactory = options.zoomRulerFactory;
 		this._foldingRulerFactory = options.foldingRulerFactory;
 		this._lineNumberRulerFactory = options.lineNumberRulerFactory;
 		this._contentAssistFactory = options.contentAssistFactory;
 		this._keyBindingFactory = options.keyBindingFactory;
+		this._hoverFactory = options.hoverFactory;
 		
 		this._annotationStyler = null;
 		this._annotationModel = null;
 		this._annotationRuler = null;
 		this._lineNumberRuler = null;
 		this._overviewRuler = null;
+		this._zoomRuler = null;
 		this._foldingRuler = null;
 		this._contentAssist = null;
 	}
@@ -13558,7 +13972,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			BaseEditor.prototype.destroy.call(this);
 			this._textViewFactory = this._undoStackFactory = this._textDNDFactory = 
 			this._annotationFactory = this._foldingRulerFactory = this._lineNumberRulerFactory = 
-			this._contentAssistFactory = this._keyBindingFactory = null;
+			this._contentAssistFactory = this._keyBindingFactory = this._hoverFactory = this._zoomRulerFactory = null;
 		},
 		/**
 		 * Returns the annotation model of the editor. 
@@ -13607,6 +14021,14 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 		 */
 		getLineNumberRuler: function() {
 			return this._lineNumberRuler;
+		},
+		/**
+		 * Returns the zoom ruler of the editor. 
+		 *
+		 * @returns {orion.editor.LineNumberRuler}
+		 */
+		getZoomRuler: function() {
+			return this._zoomRuler;
 		},
 		/**
 		 * Returns the base text model of this editor.
@@ -13751,6 +14173,22 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 				textView.removeRuler(this._overviewRuler);
 			}
 		},
+		/**
+		 * Sets whether the zoom ruler is visible.
+		 *
+		 * @param {Boolean} visible <code>true</code> to show ruler, <code>false</code> otherwise
+		 */
+		setZoomRulerVisible: function(visible, force) {
+			if (this._zoomRulerVisible === visible && !force) { return; }
+			this._zoomRulerVisible = visible;
+			if (!this._zoomRuler) { return; }
+			var textView = this._textView;
+			if (visible) {
+				textView.addRuler(this._zoomRuler);
+			} else {
+				textView.removeRuler(this._zoomRuler);
+			}
+		},
 		
 		mapOffset: function(offset, parent) {
 			var textView = this._textView;
@@ -13825,7 +14263,10 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			}
 			textView.setCaretOffset(caretOffset, show, callback);
 		},
-	
+
+		/**
+		 * @private
+		 */
 		setText: function(text, start, end) {
 			var textView = this._textView;
 			var model = textView.getModel();
@@ -13887,14 +14328,27 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			offset = this.mapOffset(offset);
 			var annotations = annotationStyler.getAnnotationsByType(annotationModel, offset, offset + 1);
 			var rangeAnnotations = [];
+			var annotationMsgs = [];
 			for (var i = 0; i < annotations.length; i++) {
 				if (annotations[i].rangeStyle) {
 					rangeAnnotations.push(annotations[i]);
+					annotationMsgs.push(annotations[i].title);
 				}
 			}
-			if (rangeAnnotations.length === 0) { return null; }
+			
+			var deferredInfo = [];
+			if (this._hover) {
+				var context = {offset: offset, 
+								annotations: annotationMsgs};
+				deferredInfo = this._hover.computeHoverInfo(context);
+			}
+			
+			if (rangeAnnotations.length === 0 && deferredInfo.length === 0) {
+				return null;
+			}
 			var pt = textView.convert({x: x, y: y}, "document", "page"); //$NON-NLS-1$ //$NON-NLS-0$
 			var info = {
+				deferredInfo: deferredInfo,
 				contents: rangeAnnotations,
 				anchor: "left", //$NON-NLS-0$
 				x: pt.x + 10,
@@ -13957,6 +14411,10 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			if (this._contentAssistFactory) {
 				var contentAssistMode = this._contentAssistFactory.createContentAssistMode(this);
 				this._contentAssist = contentAssistMode.getContentAssist();
+			}
+			
+			if (this._hoverFactory) {
+				this._hover = this._hoverFactory.createHover(this);
 			}
 			
 			var editor = this, textView = this._textView;
@@ -14107,6 +14565,11 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 				this.setOverviewRulerVisible(this._overviewRulerVisible || this._overviewRulerVisible === undefined, true);
 			}
 			
+			if (this._zoomRulerFactory) {
+				this._zoomRuler = this._zoomRulerFactory.createZoomRuler(this._annotationModel);
+				this.setZoomRulerVisible(this._zoomRulerVisible || this._zoomRulerVisible === undefined, true);
+			}
+			
 			if (this._lineNumberRulerFactory) {
 				this._lineNumberRuler = this._lineNumberRulerFactory.createLineNumberRuler(this._annotationModel);
 				this._lineNumberRuler.addAnnotationType(AT.ANNOTATION_CURRENT_BLAME);
@@ -14147,10 +14610,10 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			}
 			this._textView = this._undoStack = this._textDND = this._contentAssist = 
 				this._listener = this._annotationModel = this._annotationStyler =
-				this._annotationRuler = this._overviewRuler = this._lineNumberRuler =
+				this._annotationRuler = this._overviewRuler = this._zoomRuler = this._lineNumberRuler =
 				this._foldingRuler = this._currentLineAnnotation = this._title = null;
 			this._dirty = false;
-			this._foldingRulerVisible = this._overviewRulerVisible =
+			this._foldingRulerVisible = this._overviewRulerVisible = this._zoomRulerVisible =
 				this._lineNumberRulerVisible = this._annotationRulerVisible = undefined;
 			
 			var textViewUninstalledEvent = {
@@ -14414,8 +14877,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define prompt window*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/find", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/keyBinding', //$NON-NLS-0$
@@ -15016,8 +15478,7 @@ define("orion/editor/find", [ //$NON-NLS-0$
  * Contributors: 
  *	IBM Corporation - initial API and implementation
  ******************************************************************************/
-/* globals define window */
-
+/*eslint-env browser, amd*/
 define('orion/editor/findUI',[
 	'i18n!orion/editor/nls/messages',
 	'orion/editor/find',
@@ -15211,8 +15672,7 @@ define('orion/editor/findUI',[
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define prompt */
-
+/*eslint-env browser, amd*/
 define("orion/editor/actions", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/keyBinding', //$NON-NLS-0$
@@ -15850,6 +16310,7 @@ define("orion/editor/actions", [ //$NON-NLS-0$
 			var editor = this.editor;
 			var textView = editor.getTextView();
 			if (textView.getOptions("readonly")) { return false; } //$NON-NLS-0$
+			if (textView.getOptions("singleMode")) { return false; } //$NON-NLS-0$
 			var selection = editor.getSelection();
 			if (selection.start === selection.end) {
 				var model = editor.getModel();
@@ -16086,6 +16547,14 @@ define("orion/editor/actions", [ //$NON-NLS-0$
 			 */
 			var proposal = event.data.proposal;
 
+			// If escapePosition is not provided, positioned the cursor at the end of the inserted text 
+			function escapePosition() {
+				if (typeof proposal.escapePosition === "number") { //$NON-NLS-0$
+					return proposal.escapePosition;
+				}
+				return event.data.start + proposal.proposal.length;
+			}
+
 			//if the proposal specifies linked positions, build the model and enter linked mode
 			if (proposal.positions && proposal.positions.length > 0 && this.linkedMode) {
 				var positionGroups = [];
@@ -16099,14 +16568,14 @@ define("orion/editor/actions", [ //$NON-NLS-0$
 				}
 				this.linkedMode.enterLinkedMode({
 					groups: positionGroups,
-					escapePosition: proposal.escapePosition
+					escapePosition: escapePosition()
 				});
 			} else if (proposal.groups && proposal.groups.length > 0 && this.linkedMode) {
 				this.linkedMode.enterLinkedMode({
 					groups: proposal.groups,
-					escapePosition: proposal.escapePosition
+					escapePosition: escapePosition()
 				});
-			} else if (proposal.escapePosition) {
+			} else if (typeof proposal.escapePosition === "number") { //$NON-NLS-0$
 				//we don't want linked mode, but there is an escape position, so just set cursor position
 				var textView = this.editor.getTextView();
 				textView.setCaretOffset(proposal.escapePosition);
@@ -16279,8 +16748,8 @@ define("orion/editor/actions", [ //$NON-NLS-0$
 				selEnd = selection.end + (l * (lastLine - firstLine + 1));
 			}
 			this.endUndo();
-			textView.setRedraw(true);
 			editor.setSelection(selStart, selEnd);
+			textView.setRedraw(true);
 			return true;
 		},
 		trimTrailingWhitespaces: function() {
@@ -16312,8 +16781,8 @@ define("orion/editor/actions", [ //$NON-NLS-0$
 				}
 			}
 			editor.getUndoStack().endCompoundChange();
-			editor.getTextView().setRedraw(true);
 			editor.setSelection(selection.start, selection.end, false);
+			editor.getTextView().setRedraw(true);
 		},
 		startUndo: function() {
 			if (this.undoStack) {
@@ -16392,8 +16861,7 @@ define("orion/editor/actions", [ //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/templates", [], function() { //$NON-NLS-0$
 
 	/** 
@@ -16635,8 +17103,7 @@ define("orion/editor/templates", [], function() { //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/linkedMode", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/keyBinding', //$NON-NLS-0$
@@ -16899,7 +17366,7 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 				contentAssist.removeEventListener("Activating", this.linkedModeListener.onActivating); //$NON-NLS-0$
 				contentAssist.offset = undefined;
 				this.editor.reportStatus(messages.linkedModeExited, null, true);
-				if (escapePosition) {
+				if (escapePosition && typeof model.escapePosition === "number") { //$NON-NLS-0$
 					editor.setCaretOffset(model.escapePosition, false);
 				}
 			}
@@ -16999,7 +17466,7 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 				this._getModelPositions(all, model);
 				// Add escape position for all models
 				while (model) {
-					if (model.escapePosition !== undefined) {
+					if (typeof model.escapePosition === "number") { //$NON-NLS-0$
 						all.push({
 							escape: true,
 							model: model,
@@ -17047,6 +17514,7 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 				for (var i = 0; i < positions.length; i++) {
 					var position = positions[i];
 					if (position.model !== model) { continue; }
+					if (position.escape) { continue; }
 					var type = mAnnotations.AnnotationType.ANNOTATION_LINKED_GROUP;
 					if (position.group === model.selectedGroupIndex) {
 						if (position.index === 0) {
@@ -17079,16 +17547,16 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/factories", [ //$NON-NLS-0$
 	'orion/editor/actions', //$NON-NLS-0$
 	'orion/editor/undoStack', //$NON-NLS-0$
 	'orion/editor/rulers', //$NON-NLS-0$
 	'orion/editor/annotations', //$NON-NLS-0$
 	'orion/editor/textDND', //$NON-NLS-0$
-	'orion/editor/linkedMode' //$NON-NLS-0$
-], function(mActions, mUndoStack, mRulers, mAnnotations, mTextDND, mLinkedMode) {
+	'orion/editor/linkedMode', //$NON-NLS-0$
+	'orion/util' //$NON-NLS-0$
+], function(mActions, mUndoStack, mRulers, mAnnotations, mTextDND, mLinkedMode, util) {
 
 	var exports = {};
 	
@@ -17140,6 +17608,15 @@ define("orion/editor/factories", [ //$NON-NLS-0$
 	};
 	exports.FoldingRulerFactory = FoldingRulerFactory;
 	
+	function ZoomRulerFactory() {
+	}
+	ZoomRulerFactory.prototype = {
+		createZoomRuler: function(annotationModel) {
+			return new mRulers.ZoomRuler(util.isIOS || util.isAndroid ? "right" : "innerRight", {styleClass: "ruler zoom"}); //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+		}
+	};
+	exports.ZoomRulerFactory = ZoomRulerFactory;
+	
 	function AnnotationFactory() {
 	}
 	AnnotationFactory.prototype = {
@@ -17180,8 +17657,7 @@ define("orion/editor/factories", [ //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  ******************************************************************************/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/editorFeatures", [ //$NON-NLS-0$
 	'orion/editor/factories', //$NON-NLS-0$
 	'orion/editor/actions', //$NON-NLS-0$
@@ -17201,8 +17677,7 @@ define("orion/editor/editorFeatures", [ //$NON-NLS-0$
  * 
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
-/*global exports module define setTimeout process document MutationObserver*/
-
+/*eslint-env browser, amd, node*/
 (function(root, factory) { // UMD
     if (typeof define === "function" && define.amd) { //$NON-NLS-0$
         define('orion/Deferred',factory);
@@ -17609,9 +18084,7 @@ define("orion/editor/editorFeatures", [ //$NON-NLS-0$
  * 
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
-/*global console window define document*/
-/*jslint regexp:false*/
-
+/*eslint-env browser, amd*/
 define('orion/webui/littlelib',["orion/util"], function(util) {
 	/**
 	 * @name orion.webui.littlelib
@@ -17962,7 +18435,23 @@ define('orion/webui/littlelib',["orion/util"], function(util) {
 		INSERT: 45,
 		DEL: 46
 	};
-		
+	/**
+	 * Maps a <code>keyCode</code> to <tt>KEY</tt> name. This is the inverse of {@link orion.webui.littlelib.KEY}.
+	 * @private
+	 */
+	var KEY_CODE = Object.create(null);
+	Object.keys(KEY).forEach(function(name) {
+		KEY_CODE[KEY[name]] = name;
+	});
+
+	/**
+	 * @param {Number} keyCode
+	 * @returns The name of the <code>lib.KEY</code> entry for keyCode, or null.
+	 */
+	function keyName(keyCode) {
+		return KEY_CODE[keyCode] || null;
+	}
+
 	//return module exports
 	return {
 		$: $,
@@ -17980,7 +18469,8 @@ define('orion/webui/littlelib',["orion/util"], function(util) {
 		addAutoDismiss: addAutoDismiss,
 		setFramesEnabled: setFramesEnabled,
 		removeAutoDismiss: removeAutoDismiss,
-		KEY: KEY
+		keyName: keyName,
+		KEY: KEY,
 	};
 });
 
@@ -17995,9 +18485,7 @@ define('orion/webui/littlelib',["orion/util"], function(util) {
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global console define */
-/*jslint browser:true */
-
+/*eslint-env browser, amd*/
 define("orion/editor/contentAssist", [ //$NON-NLS-0$
 	'i18n!orion/editor/nls/messages', //$NON-NLS-0$
 	'orion/keyBinding', //$NON-NLS-0$
@@ -18154,7 +18642,11 @@ define("orion/editor/contentAssist", [ //$NON-NLS-0$
 			}
 			
 			if (proposal.overwrite) {
-				start = this.getPrefixStart(model, mapStart);
+			    if(typeof proposal.prefix === 'string') {
+			        start = mapStart-proposal.prefix.length;
+			    } else {
+				    start = this.getPrefixStart(model, mapStart);
+				}
 			}
 
 			var data = {
@@ -18351,8 +18843,8 @@ define("orion/editor/contentAssist", [ //$NON-NLS-0$
 					model = model.getBaseModel();
 				}
 				var prefixStart = this.getPrefixStart(model, this._initialCaretOffset);
-				var prefixText = this.textView.getText(prefixStart, this._initialCaretOffset);
-				
+				var defaultPrefix = this.textView.getText(prefixStart, this._initialCaretOffset);
+				var prefixText = defaultPrefix;
 				// filter proposals based on prefixes and _filterText
 				var proposals = []; //array of arrays of proposals
 				this._computedProposals.forEach(function(proposalArray) {
@@ -18361,7 +18853,11 @@ define("orion/editor/contentAssist", [ //$NON-NLS-0$
 							if (!proposal) {
 								return false;
 							}
-							
+							if(typeof proposal.prefix === 'string') {
+							    prefixText = proposal.prefix;
+							} else {
+							    prefixText = defaultPrefix;
+							}
 							if ((STYLES[proposal.style] === STYLES.hr)
 								|| (STYLES[proposal.style] === STYLES.noemphasis_title)) {
 								return true;
@@ -19304,11 +19800,37 @@ define("orion/editor/contentAssist", [ //$NON-NLS-0$
 			var document = this.parentNode.ownerDocument;
 			var viewportWidth = document.documentElement.clientWidth,
 			    viewportHeight =  document.documentElement.clientHeight;
-			if (caretLocation.y + this.parentNode.offsetHeight > viewportHeight) {
-				this.parentNode.style.top = (caretLocation.y - this.parentNode.offsetHeight - this.textView.getLineHeight()) + "px"; //$NON-NLS-0$
+			    
+			var spaceBelow = viewportHeight - caretLocation.y;			    
+			if (this.parentNode.offsetHeight > spaceBelow) {
+				// Check if div is too large to fit above
+				var spaceAbove = caretLocation.y - this.textView.getLineHeight();
+				if (this.parentNode.offsetHeight > spaceAbove){
+					// Squeeze the div into the larger area
+					if (spaceBelow > spaceAbove) {
+						this.parentNode.style.maxHeight = spaceBelow + "px"; //$NON-NLS-0$
+					} else {
+						this.parentNode.style.maxHeight = spaceAbove + "px"; //$NON-NLS-0$
+						this.parentNode.style.top = "0"; //$NON-NLS-0$
+					}
+				} else {
+					// Put the div above the line
+					this.parentNode.style.top = (caretLocation.y - this.parentNode.offsetHeight - this.textView.getLineHeight()) + "px"; //$NON-NLS-0$
+					this.parentNode.style.maxHeight = spaceAbove + "px"; //$NON-NLS-0$
+				}
+			} else {
+				this.parentNode.style.maxHeight = spaceBelow + "px"; //$NON-NLS-0$
 			}
+			
 			if (caretLocation.x + this.parentNode.offsetWidth > viewportWidth) {
-				this.parentNode.style.left = (viewportWidth - this.parentNode.offsetWidth) + "px"; //$NON-NLS-0$
+				var leftSide = viewportWidth - this.parentNode.offsetWidth;
+				if (leftSide < 0) {
+					leftSide = 0;
+				}
+				this.parentNode.style.left = leftSide + "px"; //$NON-NLS-0$
+				this.parentNode.style.maxWidth = viewportWidth - leftSide;
+			} else {
+				this.parentNode.style.maxWidth = viewportWidth + caretLocation.x + "px"; //$NON-NLS-0$
 			}
 		},
 		_removeCloneNode: function(){
@@ -19336,8 +19858,7 @@ define("orion/editor/contentAssist", [ //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
 	return {
 		id: "orion.lib", //$NON-NLS-0$
@@ -19369,16 +19890,16 @@ define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
 					name: "punctuation.section.parens.end" //$NON-NLS-0$
 				},
 				doc_block: {
-					begin: {match: "/\\*\\*", literal: "/**"}, //$NON-NLS-0$
-					end: {match: "\\*/", literal: "*/"}, //$NON-NLS-0$
+					begin: {match: "/\\*\\*", literal: "/**"}, //$NON-NLS-1$ //$NON-NLS-0$
+					end: {match: "\\*/", literal: "*/"}, //$NON-NLS-1$ //$NON-NLS-0$
 					name: "comment.block.documentation", //$NON-NLS-0$
 					patterns: [
 						{
 							match: "@(?:(?!\\*/)\\S)*", //$NON-NLS-0$
-							name: "keyword.other.documentation.tag" //$NON-NLS-0$
+							name: "meta.documentation.annotation" //$NON-NLS-0$
 						}, {
 							match: "\\<\\S*\\>", //$NON-NLS-0$
-							name: "keyword.other.documentation.markup" //$NON-NLS-0$
+							name: "meta.documentation.tag" //$NON-NLS-0$
 						}, {
 							match: "(\\b)(TODO)(\\b)(((?!\\*/).)*)", //$NON-NLS-0$
 							name: "meta.annotation.task.todo", //$NON-NLS-0$
@@ -19418,7 +19939,7 @@ define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
 			id: "orion.c-like", //$NON-NLS-0$
 			repository: {
 				comment_singleLine: {
-					match: {match: "//.*", literal: "//"}, //$NON-NLS-0$
+					match: {match: "//.*", literal: "//"}, //$NON-NLS-1$ //$NON-NLS-0$
 					name: "comment.line.double-slash", //$NON-NLS-0$
 					patterns: [
 						{
@@ -19427,8 +19948,8 @@ define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
 					]
 				},
 				comment_block: {
-					begin: {match: "/\\*", literal: "/*"}, //$NON-NLS-0$
-					end: {match: "\\*/", literal: "*/"}, //$NON-NLS-0$ 
+					begin: {match: "/\\*", literal: "/*"}, //$NON-NLS-1$ //$NON-NLS-0$
+					end: {match: "\\*/", literal: "*/"}, //$NON-NLS-1$ //$NON-NLS-0$ 
 					name: "comment.block", //$NON-NLS-0$
 					patterns: [
 						{
@@ -19458,8 +19979,7 @@ define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/stylers/text_css/syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) { //$NON-NLS-1$ //$NON-NLS-0$
 	var keywords = [
 		"alignment-adjust", "alignment-baseline", "animation-delay", "animation-direction", "animation-duration", "animation-iteration-count", //$NON-NLS-5$ //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
@@ -19532,7 +20052,7 @@ define("orion/editor/stylers/text_css/syntax", ["orion/editor/stylers/lib/syntax
 			},
 			{			
 				match: "(?:-webkit-|-moz-|-ms-|-o-|\\b)(?:" + keywords.join("|") + ")\\b", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-				name: "keyword.control.css" //$NON-NLS-0$
+				name: "support.type.propertyName.css" //$NON-NLS-0$
 			}
 		],
 		repository: {
@@ -19560,8 +20080,7 @@ define("orion/editor/stylers/text_css/syntax", ["orion/editor/stylers/lib/syntax
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("webtools/cssContentAssist", [ //$NON-NLS-0$
 	'orion/editor/templates', //$NON-NLS-0$
 	'orion/editor/stylers/text_css/syntax' //$NON-NLS-0$
@@ -19667,6 +20186,55 @@ define("webtools/cssContentAssist", [ //$NON-NLS-0$
 			"inherit" //$NON-NLS-0$
 		]
 	};
+	var csslintRules = {
+		type: "link", //$NON-NLS-0$
+		values: [
+			"adjoining-classes", //$NON-NLS-0$
+			"box-model", //$NON-NLS-0$
+			"box-sizing", //$NON-NLS-0$
+			"bulletproof-font-face", //$NON-NLS-0$
+			"compatible-vendor-prefixes", //$NON-NLS-0$
+			"display-property-grouping", //$NON-NLS-0$
+			"duplicate-background-images", //$NON-NLS-0$
+			"duplicate-properties", //$NON-NLS-0$
+			"empty-rules", //$NON-NLS-0$
+			"fallback-colors", //$NON-NLS-0$
+			"floats", //$NON-NLS-0$
+			"font-faces", //$NON-NLS-0$
+			"font-sizes", //$NON-NLS-0$
+			"gradients", //$NON-NLS-0$
+			"ids", //$NON-NLS-0$
+			"import", //$NON-NLS-0$
+			"important", //$NON-NLS-0$
+			"known-properties", //$NON-NLS-0$
+			"outline-none", //$NON-NLS-0$
+			"overqualified-elements", //$NON-NLS-0$
+			"qualified-headings", //$NON-NLS-0$
+			"regex-selectors", //$NON-NLS-0$
+			"rules-count", //$NON-NLS-0$
+			"selector-max-approaching", //$NON-NLS-0$
+			"selector-max", //$NON-NLS-0$
+			"shorthand", //$NON-NLS-0$
+			"star-property-hack", //$NON-NLS-0$
+			"text-indent", //$NON-NLS-0$
+			"underscore-property-hack", //$NON-NLS-0$
+			"unique-headings", //$NON-NLS-0$
+			"universal-selector", //$NON-NLS-0$
+			"unqualified-attributes", //$NON-NLS-0$
+			"vendor-prefix", //$NON-NLS-0$
+			"zero-units" //$NON-NLS-0$
+		],
+	};
+	var severityValues = {
+		type: "link", //$NON-NLS-0$
+		values: [
+			"false", //$NON-NLS-0$
+			"true", //$NON-NLS-0$
+			"0", //$NON-NLS-0$
+			"1", //$NON-NLS-0$
+			"2" //$NON-NLS-0$
+		]
+	};
 	
 	function fromJSON(o) {
 		return JSON.stringify(o).replace("}", "\\}"); //$NON-NLS-1$ //$NON-NLS-0$
@@ -19704,11 +20272,17 @@ define("webtools/cssContentAssist", [ //$NON-NLS-0$
 			template: "rgb(${red},${green},${blue});" //$NON-NLS-0$
 		},
 		{
-			prefix: "@", //$NON-NLS-0$
+			prefix: "@import", //$NON-NLS-0$
 			description: "import - import style sheet",
 			template: "@import \"${uri}\";" //$NON-NLS-0$
+		},
+		{
+			prefix: "csslint", //$NON-NLS-0$
+			description: "csslint - add embedded rule severity", //$NON-NLS-0$
+			template: "\/*csslint ${:" + fromJSON(csslintRules) + "}: ${a:" + fromJSON(severityValues) + "} *\/" //$NON-NLS-0$  // Template suggestions use colon location to separate positions making the 'a' necessary
 		}
 	];
+	
 	var valuesProperties = [
 		{prop: "display", values: displayValues}, //$NON-NLS-0$
 		{prop: "overflow", values: overflowValues}, //$NON-NLS-0$
@@ -19795,7 +20369,7 @@ define("webtools/cssContentAssist", [ //$NON-NLS-0$
 		while (index && /[A-Za-z\-\@]/.test(buffer.charAt(index - 1))) {
 			index--;
 		}
-		return index ? buffer.substring(index, offset) : "";
+		return index >= 0 ? buffer.substring(index, offset) : "";
 	};
 
 	return {
@@ -19814,8 +20388,7 @@ define("webtools/cssContentAssist", [ //$NON-NLS-0$
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define */
-
+/*eslint-env amd */
 define("webtools/htmlContentAssist", ['orion/editor/templates'], function(mTemplates) { //$NON-NLS-1$ //$NON-NLS-0$
 
 	var simpleDocTemplate = new mTemplates.Template("", "Simple HTML document", //$NON-NLS-0$
@@ -19838,7 +20411,7 @@ define("webtools/htmlContentAssist", ['orion/editor/templates'], function(mTempl
 			prefix: "<img", //$NON-NLS-0$
 			name: "<img>", //$NON-NLS-0$
 			description: " - HTML image element", //$NON-NLS-0$
-			template: "<img src=\"${cursor}\" alt=\"${Image}\"/>" //$NON-NLS-0$
+			template: "<img src=\"${URI}\" alt=\"${Image}\"/>" //$NON-NLS-0$
 		},
 		{
 			prefix: "<a", //$NON-NLS-0$
@@ -19988,8 +20561,7 @@ define("webtools/htmlContentAssist", ['orion/editor/templates'], function(mTempl
  * 
  * Contributors: IBM Corporation - initial API and implementation 
  ******************************************************************************/
-/*jslint browser:true regexp:true*/
-/*global console define*/
+/*eslint-env browser, amd*/
 define("orion/editor/AsyncStyler", ['i18n!orion/editor/nls/messages', 'orion/editor/annotations'], function(messages, mAnnotations) {
 	var SERVICE_NAME = "orion.edit.highlighter";
 	var HIGHLIGHT_ERROR_ANNOTATION = "orion.annotation.highlightError";
@@ -20292,8 +20864,7 @@ define("orion/editor/AsyncStyler", ['i18n!orion/editor/nls/messages', 'orion/edi
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-/*global define console*/
-/*jslint browser:true forin:true*/
+/*eslint-env browser, amd*/
 define("orion/editor/mirror", ["i18n!orion/editor/nls/messages", "orion/editor/eventTarget", "orion/editor/annotations"], function(messages, mEventTarget, mAnnotations) {
 	// TODO this affects indentation, which we don't support. Should be a parameter.
 	var tabSize = 4;
@@ -21106,9 +21677,7 @@ define("orion/editor/mirror", ["i18n!orion/editor/nls/messages", "orion/editor/e
  * Contributors: IBM Corporation - initial API and implementation 
  ******************************************************************************/
 
-/*jslint regexp:false laxbreak:true*/
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/textMateStyler", ['orion/regex' ], function(mRegex) {
 
 var RegexUtil = {
@@ -22496,9 +23065,7 @@ var RegexUtil = {
  * Contributors: IBM Corporation - initial API and implementation 
  ******************************************************************************/
 
-/*jslint */
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/htmlGrammar", [], function() {
 
 	/**
@@ -22591,8 +23158,7 @@ define("orion/editor/htmlGrammar", [], function() {
  *               Alex Lakatos - fix for bug#369781
  ******************************************************************************/
 
-/*global define */
-
+/*eslint-env browser, amd*/
 define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eventTarget'], function(mAnnotations, mEventTarget) { //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 
 	/*
@@ -22662,7 +23228,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			while (matches.length > 0) {
 				var current = matches[0];
 				matches.splice(0,1);
-	
+
 				if (endIndex < current.result.index) {
 					break;
 				}
@@ -22926,7 +23492,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					this._updateMatch(current, text, matches, index);
 					continue;
 				}
-	
+
 				/* apply the style */
 				var start = current.result.index;
 				var end, result;
@@ -22958,13 +23524,13 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					}
 					this._mergeStyles(tokenStyle, substyles, _styles);
 				} else {	/* pattern defined by a "begin/end" pair */
-					/* 
+					/*
 					 * If the end match contains a capture reference (eg.- "\1") then update
 					 * its regex with the resolved capture values from the begin match.
 					 */
 					var endRegex = current.pattern.regexEnd;
 					endRegex = this._substituteCaptureValues(endRegex, current.result);
-	
+
 					result = this._findMatch(endRegex, text, current.result.index + current.result[0].length);
 					if (!result) {
 						this._eolRegex.lastIndex = 0;
@@ -22981,7 +23547,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				regex.lastIndex = regex.oldLastIndex;
 			});
 		},
-		setStyler: function(/*styler*/) {	
+		setStyler: function(/*styler*/) {
 		},
 		verifyBlock: function(baseModel, text, ancestorBlock, changeCount) {
 			var result = null;
@@ -23072,11 +23638,11 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			 * significantly faster than exec().  If a match is found then the regex's lastIndex is reverted to
 			 * its pre-test() value, and exec() is then invoked on it in order to get the match details.
 			 */
-	
+
 			var index = startIndex;
 			var initialLastIndex = regex.lastIndex;
 			this._linebreakRegex.lastIndex = startIndex;
-	
+
 			var currentLine = this._linebreakRegex.exec(text);
 			/*
 			 * Processing of the first line is treated specially, as it may not start at the beginning of a logical line, but
@@ -23131,7 +23697,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				_styles.push({start: offset, end: offset + result[0].length, style: captures[0].name});
 				return;
 			}
-	
+
 			var stringIndex = 0;
 			for (var i = 1; i < result.length; i++) {
 				if (result[i]) {
@@ -23349,7 +23915,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 		if (initFn) {
 			initFn(this);
 		}
-		this._subBlocks = styler.computeBlocks(model, model.getText(this.start, this.end), this, this.start, null, null, null);
+		this._subBlocks = styler.computeBlocks(model, model.getText(this.contentStart, this.end), this, this.contentStart, null, null, null);
 	}
 	Block.prototype = {
 		adjustBounds: function(index, value) {
@@ -23392,7 +23958,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 	};
 
 	function TextStyler(view, annotationModel, stylerAdapter) {
-		this._whitespacesVisible = this._spacesVisible = this._tabsVisible = false;
+		this._whitespacesVisible = false;
 		this._highlightCaretLine = false;
 		this._foldingEnabled = true;
 		this._detectTasks = true;
@@ -23447,6 +24013,11 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 		view.redrawLines();
 	}
 	TextStyler.prototype = {
+		addAnnotationProvider: function(value) {
+			if (typeof value === "function") { //$NON-NLS-0$
+				this._annotationProviders.push(value);
+			}
+		},
 		computeBlocks: function(model, text, block, offset, startIndex, endIndex, maxBlockCount) {
 			return this._stylerAdapter.computeBlocks(model, text, block, offset, startIndex, endIndex, maxBlockCount);
 		},
@@ -23497,6 +24068,15 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			}
 			return result;
 		},
+		removeAnnotationProvider: function(value) {
+			if (typeof value !== "function") { //$NON-NLS-0$
+				return;
+			}
+			var index = this._annotationProviders.indexOf(value);
+			if (index !== -1) {
+				this._annotationProviders.splice(index, 1);
+			}
+		},
 		setDetectHyperlinks: function() {
 		},
 		setDetectTasks: function(enabled) {
@@ -23507,18 +24087,6 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 		},
 		setHighlightCaretLine: function(highlight) {
 			this._highlightCaretLine = highlight;
-		},
-		setSpacesVisible: function(visible) {
-			if (this._spacesVisible === visible) { return; }
-			this._spacesVisible = visible;
-			this.setWhitespacesVisible(this._tabsVisible || this._spacesVisible, false);
-			this._view.redraw();
-		},
-		setTabsVisible: function(visible) {
-			if (this._tabsVisible === visible) { return; }
-			this._tabsVisible = visible;
-			this.setWhitespacesVisible(this._tabsVisible || this._spacesVisible, false);
-			this._view.redraw();
 		},
 		setWhitespacesVisible: function(visible, redraw) {
 			if (this._whitespacesVisible === visible) { return; }
@@ -23597,10 +24165,12 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				if (offset < blockStart) {
 					this._stylerAdapter.parse(text.substring(offset - start, blockStart - start), offset, block, styles);
 					styles.forEach(function(current) {
-						if (current.style.indexOf(bracketMatch.beginName) === 0) {
-							result.push(current.start + 1);
-						} else if (current.style.indexOf(bracketMatch.endName) === 0) {
-							result.push(-(current.start + 1));
+						if (current.style) {
+							if (current.style.indexOf(bracketMatch.beginName) === 0) {
+								result.push(current.start + 1);
+							} else if (current.style.indexOf(bracketMatch.endName) === 0) {
+								result.push(-(current.start + 1));
+							}
 						}
 					});
 					styles = [];
@@ -23625,7 +24195,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			var lineIndex = model.getLineAtOffset(offset);
 			var lineEnd = model.getLineEnd(lineIndex);
 			var text = model.getText(offset, lineEnd);
-			
+
 			var bracketMatch = this._stylerAdapter.getBracketMatch(block, text);
 			if (!bracketMatch) { return -1; }
 
@@ -23783,7 +24353,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			return styles;
 		},
 		_isRenderingWhitespace: function() {
-			return this._whitespacesVisible && (this._tabsVisible || this._spacesVisible);
+			return this._whitespacesVisible;
 		},
 		_onDestroy: function() {
 			this.destroy();
@@ -23799,12 +24369,8 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				}
 			});
 			if (this._isRenderingWhitespace()) {
-				if (this._spacesVisible) {
-					this._spliceStyles(this._spacePattern, e.ranges, e.lineText, e.lineStart);
-				}
-				if (this._tabsVisible) {
-					this._spliceStyles(this._tabPattern, e.ranges, e.lineText, e.lineStart);
-				}
+				this._spliceStyles(this._spacePattern, e.ranges, e.lineText, e.lineStart);
+				this._spliceStyles(this._tabPattern, e.ranges, e.lineText, e.lineStart);
 			}
 		},
 		_onModelChanged: function(e) {
@@ -23830,7 +24396,12 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				 * text whose styling may be affected by this model change.
 				 */
 				if (!blockExtended && parentBlock) {
-					/* verify that ancestorBlock's start and end matches are not affected by this change */
+					/* verify that ancestorBlock's start and end bounds are not affected by this change */
+					if (changeCount < 0 && ancestorBlock.end - start <= -changeCount) {
+						/* the end bound has definitely been affected, no verifyBlock() required, move up to the parent */
+						ancestorBlock = parentBlock;
+						continue;
+					}
 					text = baseModel.getText(ancestorBlock.start, Math.min(charCount, ancestorBlock.end + changeCount + 1));
 					if (!this._stylerAdapter.verifyBlock(baseModel, text, ancestorBlock, changeCount)) {
 						ancestorBlock = parentBlock;
@@ -23891,7 +24462,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 					/*
 					 * ancestorBlock's end match is no longer valid because it is being spanned by a block from
-					 * within.  Attempt to find a subsequent sibling block with the same type, as its end match 
+					 * within.  Attempt to find a subsequent sibling block with the same type, as its end match
 					 * will serve as the end match for this spanning block as well.
 					 */
 					if (newBlocks.length && this._stylerAdapter.blockSpansBeyondEnd(newBlocks[newBlocks.length - 1])) {
@@ -23925,7 +24496,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					}
 				}
 
-				/* 
+				/*
 				 * The end block's end bound is spanned by a block from within, so move up to the ancestor
 				 * block, or extend end to the end of the content if already at the root-level block.
 				 */
@@ -23962,15 +24533,15 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 			if (!blocks.length && !newBlocks.length) {
 				this.dispatchEvent({
-					type: "BlocksChanged",
-					old: [ancestorBlock],
-					"new": [ancestorBlock]
+					type: "BlocksChanged", //$NON-NLS-0$
+					oldBlocks: [ancestorBlock],
+					newBlocks: [ancestorBlock]
 				});
 			} else {
 				this.dispatchEvent({
-					type: "BlocksChanged",
-					old: blocks.slice(blockStart, blockEnd),
-					"new": newBlocks
+					type: "BlocksChanged", //$NON-NLS-0$
+					oldBlocks: blocks.slice(blockStart, blockEnd),
+					newBlocks: newBlocks
 				});
 			}
 
@@ -24035,6 +24606,13 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				if (this._detectTasks) {
 					this._computeTasks(ancestorBlock, baseModel, add, ts, te);
 				}
+				this._annotationProviders.forEach(function(current) {
+					var providerRemove = [];
+					var providerAdd = [];
+					current(this._annotationModel, baseModel, ancestorBlock, ts, te, providerRemove, providerAdd);
+					remove = remove.concat(providerRemove);
+					add = add.concat(providerAdd);
+				}.bind(this));
 				this._annotationModel.replaceAnnotations(remove, add);
 			}
 		},
@@ -24152,6 +24730,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				}.bind(this));
 			}
 		},
+		_annotationProviders: [],
 		_caretLineStyle: {styleClass: "meta annotation currentLine"}, //$NON-NLS-0$
 		_spacePattern: {regex: /[ ]/g, style: {styleClass: "punctuation separator space", unmergeable: true}}, //$NON-NLS-0$
 		_tabPattern: {regex: /\t/g, style: {styleClass: "punctuation separator tab", unmergeable: true}} //$NON-NLS-0$
@@ -24177,26 +24756,38 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
+/*eslint-env browser, amd*/
 
 define("orion/editor/stylers/application_javascript/syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) { //$NON-NLS-1$ //$NON-NLS-0$
 	var keywords = [
-		"break", //$NON-NLS-0$
-		"case", "class", "catch", "continue", "const", //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-		"debugger", "default", "delete", "do", //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-		"else", "enum", "export", "extends", //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-		"false", "finally", "for", "function", //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
-		"if", "implements", "import", "in", "instanceof", "interface", //$NON-NLS-5$ //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+		"class", "const", //$NON-NLS-1$ //$NON-NLS-0$
+		"debugger", "delete", //$NON-NLS-1$ //$NON-NLS-0$
+		"enum", "export", "extends", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+		"function", //$NON-NLS-0$
+		"implements", "import", "in", "instanceof", "interface", //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 		"let", //$NON-NLS-0$
-		"new", "null", //$NON-NLS-1$ //$NON-NLS-0$
-		"package", "private", "protected", "public", //$NON-NLS-0$ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"new", //$NON-NLS-0$
+		"package", "private", "protected", "public", //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+		"static", "super", //$NON-NLS-1$ //$NON-NLS-0$
+		"typeof", //$NON-NLS-0$
+		"var", "void", //$NON-NLS-1$ //$NON-NLS-0$
+		"with" //$NON-NLS-0$
+	];
+	var controlKeywords = [
+		"break", //$NON-NLS-0$
+		"case", "catch", "continue", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+		"default", "do", //$NON-NLS-1$ //$NON-NLS-0$
+		"else", //$NON-NLS-0$
+		"finally", "for", //$NON-NLS-1$ //$NON-NLS-0$
+		"if", //$NON-NLS-0$
 		"return", //$NON-NLS-0$
-		"static", "super", "switch", //$NON-NLS-0$ //$NON-NLS-1$ //$NON-NLS-2$
-		"this", "throw", "true", "try", "typeof", //$NON-NLS-0$ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		"undefined", //$NON-NLS-0$
-		"var", "void", //$NON-NLS-0$ //$NON-NLS-1$
-		"while", "with", //$NON-NLS-0$ //$NON-NLS-1$
+		"switch", //$NON-NLS-0$
+		"throw", "try", //$NON-NLS-1$ //$NON-NLS-0$
+		"while", //$NON-NLS-0$
 		"yield" //$NON-NLS-0$
+	];
+	var constants = [
+		"false", "null", "true", "undefined" //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 	];
 
 	var grammars = mLib.grammars;
@@ -24222,6 +24813,7 @@ define("orion/editor/stylers/application_javascript/syntax", ["orion/editor/styl
 			},
 			{include: "orion.lib#doc_block"}, //$NON-NLS-0$
 			{include: "orion.c-like#comment_block"}, //$NON-NLS-0$
+			{include: "#jsFunctionDef"}, //$NON-NLS-0$
 			{include: "orion.lib#brace_open"}, //$NON-NLS-0$
 			{include: "orion.lib#brace_close"}, //$NON-NLS-0$
 			{include: "orion.lib#bracket_open"}, //$NON-NLS-0$
@@ -24232,14 +24824,49 @@ define("orion/editor/stylers/application_javascript/syntax", ["orion/editor/styl
 			{include: "orion.lib#number_hex"}, //$NON-NLS-0$
 			{
 				match: "\\b(?:" + keywords.join("|") + ")\\b", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+				name: "keyword.operator.js" //$NON-NLS-0$
+			},
+			{
+				match: "\\b(?:" + controlKeywords.join("|") + ")\\b", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 				name: "keyword.control.js" //$NON-NLS-0$
+			},
+			{
+				match: "\\b(?:" + constants.join("|") + ")\\b", //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
+				name: "constant.language.js" //$NON-NLS-0$
+			},
+			{
+				match: "\\bthis\\b", //$NON-NLS-0$
+				name: "variable.language.js" //$NON-NLS-0$
+			},
+		],
+		repository: {
+			jsFunctionDef: {
+				/*
+				 * http://stackoverflow.com/questions/2008279/validate-a-javascript-function-name/2008444#2008444
+				 * was referenced in the composition of the "begin" pattern below.
+				 */
+				begin: "(function)(\\s+[_$a-zA-Z\\xA0-\\uFFFF][_$a-zA-Z0-9\\xA0-\\uFFFF]*)?\\s*\\(", //$NON-NLS-0$
+				end: "\\)", //$NON-NLS-0$
+				captures: {
+					1: {name: "keyword.operator.js"}, //$NON-NLS-0$
+					2: {name: "entity.name.function.js"} //$NON-NLS-0$
+				},
+				patterns: [
+					{include: "orion.c-like#comment_singleLine"}, //$NON-NLS-0$
+					{include: "orion.c-like#comment_block"}, //$NON-NLS-0$
+					{
+						match: "[^\\s,]+", //$NON-NLS-0$
+						name: "variable.parameter.js" //$NON-NLS-0$
+					}
+				]
 			}
-		]
+		}
 	});
+
 	return {
 		id: grammars[grammars.length - 1].id,
 		grammars: grammars,
-		keywords: keywords
+		keywords: keywords.concat(controlKeywords)
 	};
 });
 
@@ -24254,7 +24881,7 @@ define("orion/editor/stylers/application_javascript/syntax", ["orion/editor/styl
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
+/*eslint-env browser, amd*/
 
 define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) { //$NON-NLS-1$ //$NON-NLS-0$
 
@@ -24294,7 +24921,7 @@ define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib
 				end: ">", //$NON-NLS-0$
 				name: "meta.tag.doctype.xml", //$NON-NLS-0$
 				captures: {
-					0: {name: "entity.name.tag.doctype.xml"}, //$NON-NLS-0$
+					0: {name: "meta.tag.doctype.xml"}, //$NON-NLS-0$
 				},
 				patterns: [
 					{include: "#comment"}, //$NON-NLS-0$
@@ -24306,7 +24933,7 @@ define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib
 				begin: "</?[A-Za-z0-9]+", //$NON-NLS-0$
 				end: "/?>", //$NON-NLS-0$
 				captures: {
-					0: {name: "entity.name.tag.xml"}, //$NON-NLS-0$
+					0: {name: "meta.tag.xml"}, //$NON-NLS-0$
 				},
 				name: "meta.tag.xml", //$NON-NLS-0$
 				patterns: [
@@ -24319,7 +24946,7 @@ define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib
 				begin: "<\\?xml", //$NON-NLS-0$
 				end: "\\?>", //$NON-NLS-0$
 				captures: {
-					0: {name: "entity.name.tag.declaration.xml"}, //$NON-NLS-0$
+					0: {name: "meta.tag.declaration.xml"}, //$NON-NLS-0$
 				},
 				patterns: [
 					{include: "#comment"}, //$NON-NLS-0$
@@ -24348,8 +24975,7 @@ define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib
  * Contributors: IBM Corporation - initial API and implementation
  ******************************************************************************/
 
-/*global define*/
-
+/*eslint-env browser, amd*/
 define("orion/editor/stylers/text_html/syntax", ["orion/editor/stylers/lib/syntax", "orion/editor/stylers/application_javascript/syntax", "orion/editor/stylers/text_css/syntax", "orion/editor/stylers/application_xml/syntax"], //$NON-NLS-4$ //$NON-NLS-3$ //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-0$
 	function(mLib, mJS, mCSS, mXML) {
 
@@ -24362,8 +24988,8 @@ define("orion/editor/stylers/text_html/syntax", ["orion/editor/stylers/lib/synta
 				begin: "(?i)(<style)([^>]*)(>)", //$NON-NLS-0$
 				end: "(?i)(</style>)", //$NON-NLS-0$
 				captures: {
-					1: {name: "entity.name.tag.html"}, //$NON-NLS-0$
-					3: {name: "entity.name.tag.html"} //$NON-NLS-0$
+					1: {name: "meta.tag.html"}, //$NON-NLS-0$
+					3: {name: "meta.tag.html"} //$NON-NLS-0$
 				},
 				contentName: "source.css.embedded.html", //$NON-NLS-0$
 				patterns: [
@@ -24373,7 +24999,7 @@ define("orion/editor/stylers/text_html/syntax", ["orion/editor/stylers/lib/synta
 				begin: "(?i)<script\\s*>|<script\\s.*?(?:language\\s*=\\s*(['\"])javascript\\1|type\\s*=\\s*(['\"])(?:text|application)/(?:javascript|ecmascript)\\2).*?>", //$NON-NLS-0$
 				end: "(?i)</script>", //$NON-NLS-0$
 				captures: {
-					0: {name: "entity.name.tag.html"} //$NON-NLS-0$
+					0: {name: "meta.tag.html"} //$NON-NLS-0$
 				},
 				contentName: "source.js.embedded.html", //$NON-NLS-0$
 				patterns: [
@@ -24405,8 +25031,7 @@ define("orion/editor/stylers/text_html/syntax", ["orion/editor/stylers/lib/synta
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
  
-/*globals define Node */
-
+/*eslint-env browser, amd*/
 define('orion/editor/edit', [ //$NON-NLS-0$
 	"require", //$NON-NLS-0$
 
@@ -24575,6 +25200,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 	 * @property {Boolean} [showAnnotationRuler=true] whether or not the annotation ruler is shown.
 	 * @property {Boolean} [showOverviewRuler=true] whether or not the overview ruler is shown.
 	 * @property {Boolean} [showFoldingRuler=true] whether or not the folding ruler is shown.
+	 * @property {Boolean} [showZoomRuler=false] whether or not the zoom ruler is shown.
 	 * @property {Boolean} [noFocus=false] whether or not to focus the editor on creation.
 	 * @property {Number} [firstLineIndex=1] the line index displayed for the first line of text.
 	 */
@@ -24677,10 +25303,19 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 				var annotationModel = editor.getAnnotationModel();
 				if (contentType) {
 					contentType = contentType.replace(/[*|:/".<>?+]/g, '_');
-					require(["./stylers/" + contentType + "/syntax"], function(grammar) { //$NON-NLS-1$ //$NON-NLS-0$
-						var stylerAdapter = new mTextStyler.createPatternBasedAdapter(grammar.grammars, grammar.id);
-						this.styler = new mTextStyler.TextStyler(textView, annotationModel, stylerAdapter);
-					});
+					require(["./stylers/" + contentType + "/syntax"], //$NON-NLS-1$ //$NON-NLS-0$
+						function(grammar) {
+							var stylerAdapter = new mTextStyler.createPatternBasedAdapter(grammar.grammars, grammar.id);
+							this.styler = new mTextStyler.TextStyler(textView, annotationModel, stylerAdapter);
+						},
+						function(error) {
+							/*
+							 * A grammar file was not found for the specified contentType, so syntax styling will
+							 * not be shown (the editor will still work fine otherwise).  requireJS has already
+							 * written an error message to the console regarding the missing grammar file.
+							 */
+						}
+					);
 				}
 				if (contentType === "text/css") { //$NON-NLS-0$
 					editor.setFoldingRulerVisible(options.showFoldingRuler === undefined || options.showFoldingRuler);
@@ -24727,6 +25362,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 		editor.setLineNumberRulerVisible(options.showLinesRuler === undefined || options.showLinesRuler);
 		editor.setAnnotationRulerVisible(options.showAnnotationRuler === undefined || options.showFoldingRuler);
 		editor.setOverviewRulerVisible(options.showOverviewRuler === undefined || options.showOverviewRuler);
+		editor.setZoomRulerVisible(options.showZoomRuler === undefined || options.showZoomRuler);
 		editor.setFoldingRulerVisible(options.showFoldingRuler === undefined || options.showFoldingRuler);
 		editor.setInput(options.title, null, contents, false, options.noFocus);
 		
@@ -24764,5 +25400,6 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 	
 	return edit;
 });
+
 
  define(['orion/editor/edit'], function(edit) {return edit;});
