@@ -130,7 +130,7 @@ public class OrionEditorExtension {
      * @param scriptElement the element to attach
      */
     private static native void nativeAttachToHead(Node element) /*-{
-    $doc.getElementsByTagName("head")[0].appendChild(element);
+        $doc.getElementsByTagName("head")[0].appendChild(element);
     }-*/;
 
     private void requireOrion() {
