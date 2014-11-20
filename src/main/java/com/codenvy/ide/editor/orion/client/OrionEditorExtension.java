@@ -28,6 +28,8 @@ import com.codenvy.ide.jseditor.client.editortype.EditorTypeRegistry;
 import com.codenvy.ide.jseditor.client.requirejs.ModuleHolder;
 import com.codenvy.ide.jseditor.client.requirejs.RequireJsLoader;
 import com.codenvy.ide.jseditor.client.requirejs.RequirejsErrorHandler.RequireError;
+import com.codenvy.ide.jseditor.client.texteditor.AbstractEditorModule.EditorInitializer;
+import com.codenvy.ide.jseditor.client.texteditor.AbstractEditorModule.InitializerCallback;
 import com.codenvy.ide.jseditor.client.texteditor.ConfigurableTextEditor;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
 import com.codenvy.ide.util.loging.Log;
@@ -35,6 +37,7 @@ import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.dom.client.Node;
@@ -52,34 +55,56 @@ public class OrionEditorExtension {
     private final ModuleHolder           moduleHolder;
     private final EditorTypeRegistry     editorTypeRegistry;
     private final RequireJsLoader        requireJsLoader;
+    private final OrionEditorModule      editorModule;
 
     private final OrionTextEditorFactory orionTextEditorFactory;
 
     private final OrionResource          orionResource;
+
+    private boolean initFailedWarnedOnce = false;
+
 
     @Inject
     public OrionEditorExtension(final EditorTypeRegistry editorTypeRegistry,
                                 final ModuleHolder moduleHolder,
                                 final NotificationManager notificationManager,
                                 final RequireJsLoader requireJsLoader,
+                                final OrionEditorModule editorModule,
                                 final OrionTextEditorFactory orionTextEditorFactory,
                                 final OrionResource orionResource) {
         this.notificationManager = notificationManager;
         this.moduleHolder = moduleHolder;
         this.editorTypeRegistry = editorTypeRegistry;
+        this.editorModule = editorModule;
         this.requireJsLoader = requireJsLoader;
         this.orionTextEditorFactory = orionTextEditorFactory;
         this.orionResource = orionResource;
 
-        injectOrion();
-        // no need to delay
+        editorModule.setEditorInitializer(new EditorInitializer() {
+            @Override
+            public void initialize(final InitializerCallback callback) {
+                // add code-splitting of the whole orion editor
+                GWT.runAsync(new RunAsyncCallback() {
+                    @Override
+                    public void onSuccess() {
+                        injectOrion(callback);
+                    }
+                    @Override
+                    public void onFailure(final Throwable reason) {
+                        callback.onFailure(reason);
+                    }
+                });
+            }
+        });
+        // must not be delayed
+        registerEditor();
         KeyMode.init();
     }
 
-    private void injectOrion() {
+    private void injectOrion(final InitializerCallback callback) {
         // styler scripts are loaded on-demand by orion
         final String[] scripts = new String[]{
-                "orion-6.0/built-editor-amd",
+                "orion-6.0/built-editor-amd.min",
                 "orion/emacs",
                 "orion/vi",
         };
@@ -87,7 +112,7 @@ public class OrionEditorExtension {
         this.requireJsLoader.require(new Callback<Void, Throwable>() {
             @Override
             public void onSuccess(final Void result) {
-                requireOrion();
+                requireOrion(callback);
             }
 
             @Override
@@ -103,14 +128,10 @@ public class OrionEditorExtension {
                         if (modules != null) {
                             message += modules.join(",");
                         }
-                        Log.error(OrionEditorExtension.class, message);
+                        Log.debug(OrionEditorExtension.class, message);
                     }
-                } else {
-                    Log.error(OrionEditorExtension.class, "Unable to inject Orion", e);
                 }
-                initializationFailed("Unable to inject CodeMirror main script");
-                LOG.log(Level.SEVERE, "Unable to inject Orion", e);
-                initializationFailed("Unable to inject Orion");
+                initializationFailed(callback, "Unable to inject Orion", e);
             }
         }, scripts, new String[0]);
 
@@ -133,27 +154,27 @@ public class OrionEditorExtension {
         $doc.getElementsByTagName("head")[0].appendChild(element);
     }-*/;
 
-    private void requireOrion() {
+    private void requireOrion(final InitializerCallback callback) {
         this.requireJsLoader.require(new Callback<Void, Throwable>() {
 
             @Override
             public void onFailure(final Throwable reason) {
                 LOG.log(Level.SEVERE, "Unable to initialize Orion ", reason);
-                initializationFailed("Unable to initialize Orion.");
+                initializationFailed(callback, "Unable to initialize Orion.", reason);
             }
 
             @Override
             public void onSuccess(final Void result) {
-                endConfiguration();
+                endConfiguration(callback);
             }
         },
          new String[]{"orion/editor/edit", "orion/editor/emacs", "orion/editor/vi", "orion/keyBinding"},
          new String[]{"OrionEditor", "OrionEmacs", "OrionVi", "OrionKeyBinding"});
     }
 
-    private void endConfiguration() {
-        registerEditor();
+    private void endConfiguration(final InitializerCallback callback) {
         defineDefaultTheme();
+        callback.onSuccess();
     }
 
     private void registerEditor() {
@@ -162,7 +183,7 @@ public class OrionEditorExtension {
 
             @Override
             public ConfigurableTextEditor buildEditor() {
-                final EmbeddedTextEditorPresenter editor = orionTextEditorFactory.createTextEditor();
+                final EmbeddedTextEditorPresenter<OrionEditorWidget> editor = orionTextEditorFactory.createTextEditor();
                 editor.initialize(new DefaultTextEditorConfiguration(), notificationManager);
                 return editor;
             }
@@ -175,8 +196,15 @@ public class OrionEditorExtension {
         OrionTextThemeOverlay.setDefaultTheme("orionCodenvy", "orion-codenvy.css");
     }
 
-    private void initializationFailed(final String errorMessage) {
+    private void initializationFailed(final InitializerCallback callback, final String errorMessage, Throwable e) {
+        if (this.initFailedWarnedOnce ) {
+            return;
+        }
+        this.initFailedWarnedOnce = true;
+
         this.notificationManager.showNotification(new Notification(errorMessage, Type.ERROR));
         this.notificationManager.showNotification(new Notification("Orion editor is not available", Type.WARNING));
+        LOG.log(Level.SEVERE, errorMessage + " - ", e);
+        callback.onFailure(e);
     }
 }
