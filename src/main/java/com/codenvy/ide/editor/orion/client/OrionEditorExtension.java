@@ -36,6 +36,7 @@ import com.codenvy.ide.util.loging.Log;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.dom.client.Document;
@@ -109,9 +110,9 @@ public class OrionEditorExtension {
                 "orion/vi",
         };
 
-        this.requireJsLoader.require(new Callback<Void, Throwable>() {
+        this.requireJsLoader.require(new Callback<JavaScriptObject[], Throwable>() {
             @Override
-            public void onSuccess(final Void result) {
+            public void onSuccess(final JavaScriptObject[] result) {
                 requireOrion(callback);
             }
 
@@ -155,7 +156,7 @@ public class OrionEditorExtension {
     }-*/;
 
     private void requireOrion(final InitializerCallback callback) {
-        this.requireJsLoader.require(new Callback<Void, Throwable>() {
+        this.requireJsLoader.require(new Callback<JavaScriptObject[], Throwable>() {
 
             @Override
             public void onFailure(final Throwable reason) {
@@ -164,7 +165,7 @@ public class OrionEditorExtension {
             }
 
             @Override
-            public void onSuccess(final Void result) {
+            public void onSuccess(final JavaScriptObject[] result) {
                 endConfiguration(callback);
             }
         },
