@@ -10,10 +10,15 @@
  *******************************************************************************/
 package com.codenvy.ide.editor.orion.client.inject;
 
+
 import com.codenvy.ide.api.extension.ExtensionGinModule;
+import com.codenvy.ide.editor.orion.client.OrionEditorModule;
+import com.codenvy.ide.editor.orion.client.OrionEditorPresenter;
 import com.codenvy.ide.editor.orion.client.OrionEditorWidget;
-import com.codenvy.ide.editor.orion.client.OrionTextEditorViewFactory;
+import com.codenvy.ide.jseditor.client.texteditor.EditorModule;
 import com.codenvy.ide.jseditor.client.texteditor.EditorWidgetFactory;
+import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
+import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenterFactory;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.assistedinject.GinFactoryModuleBuilder;
 import com.google.inject.TypeLiteral;
@@ -24,8 +29,12 @@ public class OrionEditorGinModule extends AbstractGinModule {
     @Override
     protected void configure() {
         // Bind the Orion EditorWidget factory
-        install(new GinFactoryModuleBuilder().build(new TypeLiteral<EditorWidgetFactory<OrionEditorWidget>>() {
-        }));
-        bind(OrionTextEditorViewFactory.class);
+        install(new GinFactoryModuleBuilder().build(new TypeLiteral<EditorWidgetFactory<OrionEditorWidget>>() {}));
+        bind(new TypeLiteral<EditorModule<OrionEditorWidget>>() {}).to(OrionEditorModule.class);
+
+
+        install(new GinFactoryModuleBuilder()
+            .implement(new TypeLiteral<EmbeddedTextEditorPresenter<OrionEditorWidget>>() {}, OrionEditorPresenter.class)
+            .build(new TypeLiteral<EmbeddedTextEditorPresenterFactory<OrionEditorWidget>>() {}));
     }
 }

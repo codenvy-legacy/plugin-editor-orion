@@ -12,18 +12,23 @@ package com.codenvy.ide.editor.orion.client;
 
 import javax.inject.Inject;
 
+import com.codenvy.ide.jseditor.client.texteditor.EditorWidget;
+import com.codenvy.ide.jseditor.client.texteditor.EditorWidgetFactory;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenter;
 import com.codenvy.ide.jseditor.client.texteditor.EmbeddedTextEditorPresenterFactory;
 
+/** Editor presenter factory that produces orion-based editors. */
 public class OrionTextEditorFactory {
 
+    /** The {@link EditorWidget} factory. */
     @Inject
-    private OrionTextEditorViewFactory         viewFactory;
+    private EditorWidgetFactory<OrionEditorWidget> editorWidgetFactory;
 
+    /** The base {@link EmbeddedTextEditorPresenter} factory. */
     @Inject
-    private EmbeddedTextEditorPresenterFactory presenterFactory;
+    private EmbeddedTextEditorPresenterFactory<OrionEditorWidget> presenterFactory;
 
-    public EmbeddedTextEditorPresenter createTextEditor() {
-        return this.presenterFactory.createTextEditor(this.viewFactory);
+    public EmbeddedTextEditorPresenter<OrionEditorWidget> createTextEditor() {
+        return this.presenterFactory.createTextEditor(this.editorWidgetFactory);
     }
 }

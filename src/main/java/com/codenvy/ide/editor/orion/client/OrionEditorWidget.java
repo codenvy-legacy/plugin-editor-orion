@@ -114,14 +114,17 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
                              final KeyModeInstances keyModeInstances,
                              final EventBus eventBus,
                              final KeymapPrefReader keymapPrefReader,
-                             @Assisted final String editorMode) {
+                             @Assisted final List<String> editorModes) {
         initWidget(UIBINDER.createAndBindUi(this));
 
         this.keymapPrefReader = keymapPrefReader;
 
         this.orionEditorModule = moduleHolder.getModule("OrionEditor");
 
-        setMode(editorMode);
+        // just first choice for the moment
+        if (editorModes != null && !editorModes.isEmpty()) {
+            setMode(editorModes.get(0));
+        }
 
         panel.getElement().setId("orion-parent-" + Document.get().createUniqueId());
         panel.getElement().addClassName(this.editorElementStyle.editorParent());
@@ -168,8 +171,7 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
         // TODO
     }
 
-    @Override
-    public void setMode(String modeName) {
+    public void setMode(final String modeName) {
         String mode = modeName;
         if (modeName.equals("text/x-java")) {
             mode = "text/x-java-source";
@@ -179,6 +181,7 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
         this.modeName = mode;
     }
 
+    @Override
     public String getMode() {
         return modeName;
     }
