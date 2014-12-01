@@ -485,6 +485,10 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
         return null;
     }
 
+    public void refresh() {
+        this.editorOverlay.getTextView().redraw();
+    }
+
     /**
      * UI binder interface for this component.
      *
