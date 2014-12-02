@@ -489,6 +489,11 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
         this.editorOverlay.getTextView().redraw();
     }
 
+
+    public void scrollToLine(int line) {
+        this.editorOverlay.getTextView().setTopIndex(line);
+    }
+
     /**
      * UI binder interface for this component.
      *
