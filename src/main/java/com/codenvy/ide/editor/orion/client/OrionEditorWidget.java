@@ -436,30 +436,9 @@ public class OrionEditorWidget extends CompositeEditorWidget implements HasChang
         return this.undoRedo;
     }
 
-    public void addGutterItem(final int line, String gutterId, final elemental.dom.Element element,
-                              final LineNumberingChangeCallback lineCallback) {
-        // not (yet) handled in orion editor
-    }
-
     public void addKeybinding(final Keybinding keybinding) {
         // not (yet) handled in orion editor
 
-    }
-    public void addGutterItem(final int line, final String gutterId, final elemental.dom.Element element) {
-        // not (yet) handled in orion editor
-    }
-
-    public void removeGutterItem(final int line, final String gutterId) {
-        // not (yet) handled in orion editor
-    }
-
-    public elemental.dom.Element getGutterItem(final int line, final String gutterId) {
-        // not (yet) handled in orion editor
-        return null;
-    }
-
-    public void clearGutter(final String gutterId) {
-        // not (yet) handled in orion editor
     }
 
     public MarkerRegistration addMarker(final TextRange range, final String className) {
