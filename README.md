@@ -1,4 +1,4 @@
 Orion Editor Plugin for Codenvy
 ===============================
 
-Plugin that allows the use of Orion Editor inside Codenvy.
+This repository is deprecated. Visit https://github.com/codenvy/che-plugins
